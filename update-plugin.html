@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Update your plugin | Fred Noseit</title><meta content="#0b1220" name="theme-color"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#0b1220;color:#e8eefc;font:400 16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:#2dd4bf}
+button,input,textarea{font:inherit;color:inherit}
+h1{font-family:Poppins,Inter,system-ui,sans-serif}
+/* ---------- page (Style B layout, Fred Noseit site colors) ---------- */
+.app{max-width:720px;width:100%;margin:0 auto;padding:34px 22px 48px;display:flex;flex-direction:column}
+.backrow{margin-bottom:26px}
+.backlink{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 4px;text-decoration:none;font-size:.92rem;color:#2dd4bf;font-weight:500}
+.headrow h1{margin:0;font-size:1.65rem;font-weight:700;letter-spacing:-.02em;color:#fff}
+.sub{margin:8px 0 0;color:#9fb0d3;font-size:.95rem;max-width:56ch}
+/* ---------- plugin switcher ---------- */
+.switcher{margin-top:26px;display:flex;flex-direction:column;gap:10px}
+.swlab{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9fb0d3}
+.swpills{display:flex;flex-wrap:wrap;gap:8px}
+.swpill{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid #263553;background:#101a30;color:#cbd5e1;font-size:.9rem;font-weight:600;cursor:pointer}
+.swpill:hover{border-color:#2dd4bf;color:#5eead4}
+.swpill.on{background:rgba(45,212,191,.16);border-color:#2dd4bf;color:#5eead4;font-weight:700}
+/* ---------- sections: cards, hairline borders, small-caps labels ---------- */
+.card{background:#101a30;border:1px solid #263553;border-radius:16px;padding:24px 22px;margin-top:22px;display:flex;flex-direction:column;gap:13px}
+.card .chd{display:flex;align-items:baseline;gap:10px}
+.card .chd h2{margin:0;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9fb0d3;flex:1}
+.editbtn{min-height:34px;padding:0 13px;border-radius:999px;border:1px solid #33456b;background:transparent;color:#cbd5e1;font-size:.83rem;font-weight:500;cursor:pointer;flex:none}
+.editbtn:hover{border-color:#2dd4bf;color:#5eead4}
+.hint{margin:0;font-size:.88rem;color:#93a6c9;line-height:1.55}
+/* plugin header — first block */
+.phead{margin-top:22px;flex-direction:row;align-items:center;gap:18px;flex-wrap:wrap}
+.phead .pic{width:64px;height:64px;border-radius:14px;background:#0b1220;border:1px solid #263553;display:grid;place-items:center;font-size:1.9rem;flex:none;overflow:hidden}
+.phead .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.phead .pw2{flex:1;min-width:200px}
+.phead .pw2 h2{margin:0;font-size:1.2rem;font-weight:700;font-family:Poppins,Inter,system-ui,sans-serif;letter-spacing:-.01em;color:#fff;line-height:1.3;text-transform:none}
+.phead .pw2 p{margin:3px 0 0;color:#9fb0d3;font-size:.9rem}
+.phead .pw2 p b{color:#e8eefc;font-weight:600}
+.pmeta{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex:none}
+.price{font-weight:700;font-size:1.25rem;color:#fff}
+.price small{font-weight:400;font-size:.8rem;color:#9fb0d3}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:26px;padding:0 11px;border-radius:999px;font-size:.78rem;font-weight:600}
+.pill.pub{background:rgba(45,212,191,.14);border:1px solid rgba(45,212,191,.45);color:#5eead4}
+.pill.draft{background:rgba(255,210,122,.10);border:1px solid rgba(255,210,122,.35);color:#ffd27a}
+/* directions */
+.dtext{white-space:pre-wrap;font-size:.96rem;line-height:1.7;color:#dbe4f5;padding:2px 0}
+textarea.ta{width:100%;min-height:180px;border-radius:8px;background:#0b1220;border:1px solid #2dd4bf;padding:13px 15px;font-size:.96rem;line-height:1.7;resize:vertical;outline:none;color:#e8eefc}
+textarea.ta[hidden]{display:none}
+.dtext[hidden]{display:none}
+/* outline */
+ol.outline{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;counter-reset:st}
+ol.outline li{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #1d2a47;font-size:.96rem;color:#dbe4f5}
+ol.outline li:last-child{border-bottom:0}
+ol.outline li::before{counter-increment:st;content:counter(st);color:#2dd4bf;font-weight:700;font-size:.96rem;flex:none;min-width:18px}
+ol.outline[hidden]{display:none}
+/* uploads */
+.frow{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid #1d2a47}
+.frow .fic{width:34px;height:34px;border-radius:8px;background:#0b1220;border:1px solid #263553;display:grid;place-items:center;font-size:1.05rem;flex:none}
+.frow .fw{flex:1;min-width:0}
+.frow .fw b{display:block;font-size:.93rem;font-weight:550;line-height:1.35;word-break:break-word;color:#e8eefc}
+.frow .fw small{color:#7e93ba;font-size:.78rem}
+.frow .rep{min-height:32px;padding:0 6px;border:0;background:none;color:#2dd4bf;font-size:.85rem;font-weight:500;cursor:pointer;flex:none}
+.upbtn{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 4px;border:0;background:none;color:#2dd4bf;font-size:.9rem;font-weight:550;cursor:pointer;align-self:flex-start;margin-top:6px}
+.noup{margin:0;font-size:.9rem;color:#93a6c9}
+/* joy + vera panels */
+.person{display:flex;gap:14px;align-items:flex-start}
+.person img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none;background:#0b1220}
+.joycard img{border:2px solid #ffd27a}
+.veracard img{border:2px solid #2dd4bf}
+.person .ptx{flex:1;min-width:0;display:flex;flex-direction:column;gap:9px}
+.person .ptx p{margin:0;font-size:.95rem;line-height:1.6;color:#dbe4f5}
+.smallprint{font-size:.8rem;color:#7e93ba;line-height:1.5}
+.joybtn{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#ffb020;color:#2a1a00;font-weight:700;font-size:.92rem;cursor:pointer;align-self:flex-start}
+.joybtn:hover{background:#ffd27a}
+/* save */
+.savewrap{display:flex;flex-direction:column;gap:12px;align-items:stretch;margin-top:22px}
+.savebtn{min-height:50px;border:0;border-radius:8px;background:#2dd4bf;color:#03251f;font-weight:700;font-size:1rem;cursor:pointer;letter-spacing:.01em}
+.savebtn:hover{background:#5eead4}
+.saveline{margin:0;text-align:center;font-size:.9rem;color:#5eead4}
+.saveline[hidden]{display:none}
+.foot{margin:30px 0 0;text-align:center;font-size:.8rem;color:#7186ad}
+.nopick{background:#101a30;border:1px solid #263553;border-radius:16px;margin-top:26px;padding:24px 22px;font-size:.96rem;color:#dbe4f5}
+@media(max-width:600px){
+ .app{padding:24px 18px 40px}
+ .card{padding:20px 18px}
+ .pmeta{align-items:flex-start;flex-direction:row;width:100%;justify-content:space-between}
+}
+</style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/>
+</head>
+<body>
+<nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" decoding="async" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t" href="plugin-market.html">Plugin Store</a><a class="t cur" href="my-plugins.html" aria-current="page">My Plugins</a><a class="t tin" href="signup.html">Sign in</a></div></nav>
+
+<div class="app">
+ <div class="backrow"><a class="backlink" href="my-plugins.html">← Back to My Plugins</a></div>
+
+ <div class="headrow"><h1>Update your plugin</h1></div>
+ <p class="sub">Everything your plugin is made of is on this one page — its directions, its outline, and your uploads. Change anything, then save.</p>
+
+ <div class="nopick" id="nopick" hidden>
+  <p>Pick a plugin in My Plugins first, then tap <b>Update your plugin</b>.</p>
+  <p><a href="my-plugins.html">← Back to My Plugins</a></p>
+ </div>
+
+ <div id="editor">
+ <!-- PLUGIN SWITCHER -->
+ <div class="switcher" id="switcher">
+  <span class="swlab">Your plugins</span>
+  <div class="swpills" id="swpills"></div>
+ </div>
+
+ <!-- PLUGIN HEADER -->
+ <section class="card phead" aria-label="Your plugin">
+  <div class="pic" id="p-pic" aria-hidden="true">🤖</div>
+  <div class="pw2">
+   <h2 id="p-name">Your plugin</h2>
+   <p id="p-by"></p>
+   <p id="p-earn"></p>
+  </div>
+  <div class="pmeta">
+   <span class="price" id="p-price"></span>
+   <span class="pill draft" id="p-status">● Draft</span>
+  </div>
+ </section>
+
+ <!-- DIRECTIONS -->
+ <section class="card" aria-label="Directions">
+  <div class="chd"><h2>📖 Directions</h2><button type="button" class="editbtn" id="ed-dir">✏️ Edit</button></div>
+  <p class="hint">These are the directions your plugin follows when it helps a buyer. This is your plugin's own content — buyers see the helper work this way.</p>
+  <div class="dtext" id="dirtext"></div>
+  <textarea class="ta" id="dirta" hidden aria-label="Edit the directions"></textarea>
+ </section>
+
+ <!-- OUTLINE -->
+ <section class="card" aria-label="Outline">
+  <div class="chd"><h2>🪜 Outline</h2><button type="button" class="editbtn" id="ed-out">✏️ Edit</button></div>
+  <p class="hint">The steps your plugin walks a buyer through, in order.</p>
+  <ol class="outline" id="outlist"></ol>
+  <textarea class="ta" id="outta" hidden aria-label="Edit the outline"></textarea>
+ </section>
+
+ <!-- UPLOADS -->
+ <section class="card" aria-label="Uploads">
+  <div class="chd"><h2>📎 Uploads</h2></div>
+  <p class="hint">The files and documents you gave your plugin. Buyers' helpers use these when they answer.</p>
+  <div id="uplist"></div>
+  <p class="noup" id="noup" hidden>No files yet.</p>
+  <button type="button" class="upbtn" id="upadd">＋ Upload a file</button>
+  <input type="file" id="upfile" hidden/>
+ </section>
+
+ <!-- JOY: PROMOTE -->
+ <section class="card joycard" aria-label="Promote with Joy">
+  <div class="chd"><h2>📣 Promote this plugin</h2></div>
+  <div class="person">
+   <img src="img/agents/joy.webp" alt="Joy the Promoter"/>
+   <div class="ptx">
+    <p>Hi, I'm Joy, your promoter. Once your plugin is published, I can promote it in the Plugin Store for $10/month.</p>
+    <div id="joyact"></div>
+    <p class="smallprint">Demo only: nothing is connected or posted, nothing is charged, and I can't promise sales or income.</p>
+   </div>
+  </div>
+ </section>
+
+ <!-- VERA: THE CHECKER -->
+ <section class="card veracard" aria-label="The Checker">
+  <div class="chd"><h2>✔ The Checker</h2></div>
+  <div class="person">
+   <img src="img/agents/reviewer.svg" alt="Vera the Reviewer"/>
+   <div class="ptx">
+    <p>Hi, I'm Vera, the Reviewer. I must check your plugin before it posts.</p>
+    <p>Save your changes below and they come to me first. Nothing shows in the store until I've checked it.</p>
+   </div>
+  </div>
+ </section>
+
+ <!-- SAVE -->
+ <div class="savewrap">
+  <button type="button" class="savebtn" id="savebtn">Save changes</button>
+  <p class="saveline" id="saveline" hidden>Saved. The Checker reviews updates before they show in the store.</p>
+ </div>
+ </div>
+
+ <p class="foot">Fred Noseit · Draft · Not legal or school-policy advice.</p>
+</div>
+
+<script src="plugin-data.js?v=1793242697"></script>
+<script src="plugx.js?v=1793242697"></script>
+<script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script>
+<script src="nav-tabs.js?v=1793242697" defer></script>
+<script>
+(function(){
+"use strict";
+function $(id){return document.getElementById(id)}
+function jget(k,d){try{var v=JSON.parse(localStorage.getItem(k)||"null");return v==null?d:v}catch(e){return d}}
+function jset(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function fmt$(v){v=Math.round(v*100)/100;return "$"+(v%1?v.toFixed(2):String(v))}
+
+/* Demo content per seed plugin: what each plugin shows until its owner edits it.
+   greg1 is the approved demo (2026-11-01); greg2/greg3 follow the same voice,
+   drawn from each plugin's own seed description (plugx.js Greg seed). */
+var DEMO={
+"greg1":{
+ dir:"Hi! I'm your Classroom Helper. Tell me your grade, your subject, and what you're teaching, and I'll build it with you.\n\nYou can ask me for a lesson plan, a warm-up activity, a quiz, or a note home to families. If you give me a standard or a page from your teacher guide, I'll line everything up to it.\n\nKeep it simple: one request at a time gets you the best result. I work best when you tell me how much time you have and what materials are in your room.",
+ outline:["Say hello, and tell me your grade and subject.","Tell me your topic or your standard.","Pick what you need: a lesson plan, an activity, a quiz, or a family note.","I draft it for you in plain teacher language.","Ask me for changes — shorter, easier, harder, or a Spanish version.","Copy your final version into your plans."],
+ uploads:[{i:"📄",n:"Classroom Helper Directions.pdf",m:"PDF · 212 KB"},{i:"📝",n:"Sample Lesson Plan - Grade 4 Math.docx",m:"Word doc · 148 KB"},{i:"❓",n:"Quiz Question Bank.docx",m:"Word doc · 96 KB"},{i:"✉️",n:"Family Note Templates.pdf",m:"PDF · 264 KB"},{i:"🎬",n:"Intro Video - Classroom Helper.mp4",m:"Video · 18.4 MB"}],
+ price:'$9 <small>one time</small>',earn:'You made <b>$36.80</b> of $46 — your 80%.'},
+"greg2":{
+ dir:"Hi! I'm your Clinical Supervisor Helper. Give me your observation notes, and I'll help you turn them into a clean write-up your candidate can learn from.\n\nYou can ask me for an observation write-up, feedback lines for a hard conversation, or a quick check of what each of your candidates still owes. Paste your notes in just as you wrote them — I'll sort out the strengths, the evidence, and one clear next step.\n\nKeep it simple: one candidate at a time gets you the best result. Tell me the school, the grade, and what you saw, and I'll draft it in plain, kind language you can read out loud.",
+ outline:["Tell me which candidate you observed, and where.","Paste in your observation notes, just as you wrote them.","Pick what you need: a write-up, feedback lines, or a progress check.","I draft it — strengths first, then one clear next step.","Ask me for changes — firmer, softer, shorter, or more detail.","Copy your final version into your records."],
+ uploads:[{i:"📄",n:"Observation Write-Up Guide.pdf",m:"PDF · 186 KB"},{i:"📝",n:"Feedback Lines for Candidates.docx",m:"Word doc · 92 KB"},{i:"📊",n:"Candidate Progress Tracker.xlsx",m:"Spreadsheet · 74 KB"},{i:"🎬",n:"Intro Video - Supervisor Helper.mp4",m:"Video · 15.2 MB"}],
+ price:'$7 <small>one time</small>',earn:'You made <b>$11.20</b> of $14 — your 80%.'},
+"greg3":{
+ dir:"Hi! I'm your Lesson Plan Helper. Tell me your grade and your topic, and I'll build the plan with you, step by step.\n\nEvery plan starts with a clear objective. Then we add the hook, the teaching steps, guided practice, and a quick check at the end that tells you who got it. If you give me a standard, I'll line the whole plan up to it.\n\nKeep it simple: one lesson at a time gets you the best result. Tell me how much time you have and what materials are in your room, and I'll keep the plan real.",
+ outline:["Tell me your grade, your topic, and your standard if you have one.","I write the objective — what students will be able to do.","We pick a hook that grabs them in the first two minutes.","We lay out the teaching steps, in order.","Add guided practice, then work on their own.","Finish with a quick exit check — then copy the plan into your book."],
+ uploads:[{i:"📄",n:"Lesson Plan Template.pdf",m:"PDF · 154 KB"},{i:"📝",n:"Sample Lesson Plan - Grade 4 Fractions.docx",m:"Word doc · 121 KB"},{i:"❓",n:"Exit Ticket Question Bank.docx",m:"Word doc · 88 KB"},{i:"🎬",n:"Intro Video - Lesson Plan Helper.mp4",m:"Video · 12.6 MB"}],
+ price:'$5 <small>one time</small>',earn:'You made <b>$4.00</b> of $5 — your 80%.'}
+};
+var GENERIC_OUTLINE=["Tell the helper what you need help with.","Answer its questions one at a time.","Ask for changes — shorter, easier, or harder.","Copy your final version."];
+
+var qs=new URLSearchParams(location.search),id=qs.get("id")||"";
+var isForm=(id==="form"),d=null,fd=null;
+if(isForm){fd=jget("aiedume_draft",null)||{}}
+else if(id&&window.PX){d=PX.get(id)}
+if(!isForm&&!d&&window.PX){var L0=PX.list();if(L0.length)d=L0[0]}
+if(!isForm&&!d){$("nopick").hidden=false;$("editor").hidden=true;return}
+if(!isForm)id=d.id;
+
+var dirty=false;
+var name=isForm?(fd.name||"Your plugin in progress"):(d.n||"Untitled plugin");
+var demo=isForm?null:(DEMO[d.id]||null);
+var hasSaved=!isForm&&d.dirs!=null;
+var dirs,outline,uploads;
+if(isForm){dirs=fd.desc||"";outline=GENERIC_OUTLINE.slice();uploads=[]}
+else if(hasSaved){dirs=d.dirs;outline=(d.outline||[]).slice();uploads=(d.uploads||[]).slice()}
+else if(demo){dirs=demo.dir;outline=demo.outline.slice();uploads=demo.uploads.slice()}
+else{
+ dirs=(d.r||d.wm||d.h||"");
+ outline=(d.outline&&d.outline.length?d.outline.slice():GENERIC_OUTLINE.slice());
+ uploads=(d.uploads&&d.uploads.length?d.uploads.slice():[]);
+}
+
+/* ---------- switcher ---------- */
+(function(){
+ var wrap=$("swpills");if(!wrap)return;
+ var items=window.PX?PX.list():[];
+ items.forEach(function(p){
+  var b=document.createElement("button");b.type="button";b.className="swpill"+(!isForm&&p.id===d.id?" on":"");
+  b.textContent=p.n||"Untitled plugin";b.setAttribute("data-id",p.id);
+  b.addEventListener("click",function(){
+   if(!isForm&&p.id===d.id)return;
+   if(dirty||!$("dirta").hidden||!$("outta").hidden)persist();
+   location.href="update-plugin.html?id="+encodeURIComponent(p.id);
+  });
+  wrap.appendChild(b);
+ });
+ if(isForm){
+  var fb=document.createElement("button");fb.type="button";fb.className="swpill on";
+  fb.textContent=name;wrap.appendChild(fb);
+ }
+ if(!wrap.children.length)$("switcher").hidden=true;
+})();
+
+/* ---------- header ---------- */
+$("p-name").textContent=name;
+var av="";try{av=localStorage.getItem("aiedume_avatar")||""}catch(e){}
+if(av)$("p-pic").innerHTML='<img alt="" src="'+av+'"/>';
+var user=window.PX?PX.user():null,byName=user&&user.name?user.name:"You";
+var FORMAP={par:"Families",para:"Support staff",teach:"Teachers",stu:"Grads"};
+var frTxt="",sold=0;
+if(!isForm){
+ if(d.fr&&d.fr.length)frTxt=FORMAP[d.fr[0]]||"";
+ var SS=jget("aiedume_seed_sales",{}),B=jget("aiedume_bought",[]);
+ sold=(SS["my-"+d.id]||0)+B.filter(function(s){return s==="my-"+d.id}).length;
+}
+$("p-by").innerHTML="By <b>"+esc(byName)+"</b>"+(frTxt?" · For "+esc(frTxt):"")+(sold?" · Sold <b>"+sold+" time"+(sold>1?"s":"")+"</b>":"");
+var priceHTML="",earnHTML="";
+if(!isForm){
+ var p=parseFloat(d.p);
+ if(!isNaN(p)&&p>0){priceHTML="$"+(p%1?p.toFixed(2):String(p));if(sold)earnHTML="You made <b>"+fmt$(sold*p*0.8)+"</b> of "+fmt$(sold*p)+" — your 80%."}
+ else if(demo&&demo.price){priceHTML=demo.price;earnHTML=demo.earn}
+ else if(!isNaN(p)&&p===0)priceHTML="Free";
+ else priceHTML='<small>Price not set yet</small>';
+}
+$("p-price").innerHTML=priceHTML;
+$("p-earn").innerHTML=earnHTML;
+var published=!isForm&&d.status==="published";
+$("p-status").textContent=published?"● Published":"● Draft";
+$("p-status").className="pill "+(published?"pub":"draft");
+
+/* ---------- directions + outline ---------- */
+$("dirtext").textContent=dirs;
+$("dirta").value=dirs;
+function renderOutline(){$("outlist").innerHTML=outline.map(function(s){return "<li>"+esc(s)+"</li>"}).join("")}
+function outlineText(){return outline.map(function(s,i){return (i+1)+". "+s}).join("\n")}
+function parseOutline(t){return t.split("\n").map(function(s){return s.replace(/^\s*\d+[.)]\s*/,"").trim()}).filter(Boolean)}
+renderOutline();$("outta").value=outlineText();
+function wireEdit(btnId,isDir){
+ var b=$(btnId),v=$(isDir?"dirtext":"outlist"),t=$(isDir?"dirta":"outta");
+ b.addEventListener("click",function(){
+  if(!t.hidden){
+   if(isDir)$("dirtext").textContent=t.value;else{outline=parseOutline(t.value);renderOutline()}
+   v.hidden=false;t.hidden=true;b.textContent="✏️ Edit";
+  }else{v.hidden=true;t.hidden=false;b.textContent="✔ Done";t.focus()}
+ });
+}
+wireEdit("ed-dir",true);
+wireEdit("ed-out",false);
+$("dirta").addEventListener("input",function(){dirty=true});
+$("outta").addEventListener("input",function(){dirty=true});
+
+/* ---------- uploads ---------- */
+function iconFor(n){var e=(n.split(".").pop()||"").toLowerCase();return e==="pdf"?"📄":(e==="doc"||e==="docx")?"📝":(e==="mp4"||e==="mov")?"🎬":"📎"}
+function metaFor(f){var kb=f.size/1024;var sz=kb>=1024?(kb/1024).toFixed(1)+" MB":Math.max(1,Math.round(kb))+" KB";var e=(f.name.split(".").pop()||"").toLowerCase();var kind=e==="pdf"?"PDF":(e==="doc"||e==="docx")?"Word doc":(e==="mp4"||e==="mov")?"Video":"File";return kind+" · "+sz}
+function renderUploads(){
+ var w=$("uplist");w.innerHTML="";
+ $("noup").hidden=uploads.length>0;
+ uploads.forEach(function(u,ix){
+  var row=document.createElement("div");row.className="frow";
+  row.innerHTML='<div class="fic" aria-hidden="true">'+(u.i||"📎")+'</div><div class="fw"><b></b><small></small></div><button type="button" class="rep">Replace</button>';
+  row.querySelector("b").textContent=u.n;row.querySelector("small").textContent=u.m||"";
+  row.querySelector(".rep").addEventListener("click",function(){upTarget=ix;$("upfile").click()});
+  w.appendChild(row);
+ });
+}
+var upTarget=-1;
+$("upadd").addEventListener("click",function(){upTarget=-1;$("upfile").click()});
+$("upfile").addEventListener("change",function(){
+ var f=this.files&&this.files[0];this.value="";if(!f)return;
+ var rec={i:iconFor(f.name),n:f.name,m:metaFor(f)};
+ if(upTarget>=0)uploads[upTarget]=rec;else uploads.push(rec);
+ dirty=true;
+ renderUploads();
+});
+renderUploads();
+
+/* ---------- persist (shared by Save and by the switcher, so edits
+   always land on the plugin they were made on — never on another) ---------- */
+function persist(){
+ if(!$("dirta").hidden){$("dirtext").textContent=$("dirta").value;$("dirta").hidden=true;$("dirtext").hidden=false;$("ed-dir").textContent="✏️ Edit"}
+ if(!$("outta").hidden){outline=parseOutline($("outta").value);renderOutline();$("outta").hidden=true;$("outlist").hidden=false;$("ed-out").textContent="✏️ Edit"}
+ var dirsNow=$("dirtext").textContent;
+ if(isForm){fd.desc=dirsNow;jset("aiedume_draft",fd)}
+ else{d.dirs=dirsNow;d.outline=outline;d.uploads=uploads;PX.save(d)}
+ dirty=false;
+}
+
+/* ---------- Joy: promote (same demo store as My Plugins' Joy flow) ---------- */
+function joySubbed(){try{return!!JSON.parse(localStorage.getItem("aiedume_demo_marketing")||"null")}catch(e){return false}}
+function joyStart(){try{localStorage.setItem("aiedume_demo_marketing",JSON.stringify({paid:true,demo:true,item:"marketing-helper",amount:10,plan:"monthly",ts:Date.now()}))}catch(e){}}
+function renderJoy(){
+ var act=$("joyact");act.innerHTML="";
+ if(joySubbed()){var p=document.createElement("p");p.textContent="Your promotion is already started (demo). $10/month.";act.appendChild(p)}
+ /* joywire 2026-11-01: the Joy button opens Joy's own page, picked plugin in the URL */
+ var a=document.createElement("a");a.className="joybtn";a.style.display="inline-flex";a.style.alignItems="center";a.style.textDecoration="none";
+ a.textContent="\uD83D\uDCE3 Promote it with Joy";
+ a.href="joy-promoter.html"+((!isForm&&id)?("?plugin="+encodeURIComponent(id)):"");
+ act.appendChild(a);
+ var note=document.createElement("p");note.textContent="Joy's page opens with this plugin picked \u2014 she writes the posts and walks you through sharing them.";act.appendChild(note);
+}
+renderJoy();
+
+/* ---------- save ---------- */
+$("savebtn").addEventListener("click",function(){
+ persist();
+ var sl=$("saveline");sl.hidden=false;sl.scrollIntoView({block:"nearest"});
+});
+})();
+</script>
+</body></html>

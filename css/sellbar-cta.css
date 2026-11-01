@@ -1,0 +1,11 @@
+/* Plugin Store call-to-action bar (replaces the plain yellow sell bar) */
+html body a.sellbar.sellbar{display:flex!important;align-items:center;justify-content:center;gap:14px;flex-wrap:nowrap;max-width:1240px;margin:10px auto;padding:9px 12px 9px 20px;border-radius:14px;background:linear-gradient(90deg,#ffd21f 0%,#ffb020 60%,#ff9a1f 100%);color:#1a1200!important;font-weight:800;font-size:1.08rem;line-height:1.2;text-align:center;text-decoration:none;box-shadow:0 3px 0 #b86e00,0 8px 20px rgba(255,160,20,.28);border:2px solid #fff3b0;transition:transform .12s,box-shadow .12s}
+html body a.sellbar.sellbar:hover{background:linear-gradient(90deg,#ffe066,#ffc040 60%,#ffab3a);transform:translateY(-1px)}
+html body a.sellbar.sellbar:focus-visible{outline:3px solid #fff!important;outline-offset:3px}
+a.sellbar .sb-hook{min-width:0}
+a.sellbar .sb-hook b{font-family:Poppins,Inter,system-ui,sans-serif;font-weight:800;font-size:1.12em;letter-spacing:-.01em}
+a.sellbar .sb-go{flex:none;background:#1a1200;color:#ffd21f;border-radius:999px;padding:7px 16px;font-weight:800;font-size:.95rem;white-space:nowrap}
+html body:has(.secwrap)>a.sellbar.sellbar,html body:has(main.pack)>a.sellbar.sellbar{flex:0 0 auto;margin:0 auto 6px!important;padding:5px 10px 5px 18px!important;font-size:.98rem!important;width:calc(100% - 40px);max-width:1240px;box-sizing:border-box;min-height:0!important}
+html body:has(.secwrap)>a.sellbar.sellbar .sb-go,html body:has(main.pack)>a.sellbar.sellbar .sb-go{padding:5px 14px}
+@media(max-width:800px){html body a.sellbar.sellbar{gap:8px;padding:7px 8px 7px 12px;font-size:.88rem;margin:8px}a.sellbar .sb-go{padding:6px 11px;font-size:.84rem}html body:has(.secwrap)>a.sellbar.sellbar,html body:has(main.pack)>a.sellbar.sellbar{width:calc(100% - 16px);padding:5px 8px 5px 12px!important;font-size:.82rem!important}a.sellbar .sb-hook .sb-x{display:none}}
+@media(max-height:700px){html body:has(.secwrap)>a.sellbar.sellbar,html body:has(main.pack)>a.sellbar.sellbar{padding:3px 8px 3px 14px!important;font-size:.9rem!important;margin-bottom:4px!important;box-shadow:0 2px 0 #b86e00}html body:has(.secwrap)>a.sellbar.sellbar .sb-go,html body:has(main.pack)>a.sellbar.sellbar .sb-go{padding:3px 12px;font-size:.85rem}}

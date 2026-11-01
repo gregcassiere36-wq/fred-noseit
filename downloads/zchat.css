@@ -1,0 +1,117 @@
+:root{--bg:#0b0f17;--bg2:#111827;--card:#151c2b;--card2:#1b2436;--line:#263247;--ink:#e8edf5;--mute:#a7b2c5;--acc:#2dd4bf;--acc2:#5eead4;--warm:#fbbf24;--r:18px;--f:Inter,Poppins,system-ui,-apple-system,sans-serif}
+/* Fred chat styling for the printable pages (extracted from style.css; printables do not load the site stylesheet) */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pextra .pcard li .zopen{text-align: left; text-decoration: underline; border: 0px; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-weight: 700; cursor: pointer; display: inline !important; width: auto !important; min-height: 0px !important; padding: 2px 0px !important; margin: 0px !important; background: none !important; color: rgb(255, 215, 106) !important;}
+.ziprow{display: flex; gap: 8px; margin-top: 6px;}
+.ziprow input{flex: 1 1 0%; font-size: 1.1rem; padding: 10px; border-radius: 10px; border: 0px;}
+.ziprow button{font-size: 1.1rem; padding: 10px 18px; border-radius: 10px; border: 0px; background: rgb(200, 23, 74); color: rgb(255, 255, 255); font-weight: 700;}
+.ziplist{columns: 2;}
+@media (max-width: 700px){.ziplist{columns: 1;}}
+.ztry{background: rgb(42, 47, 85); color: rgb(255, 215, 106); border: 1px solid rgb(255, 215, 106); border-radius: 999px; padding: 6px 12px; font: inherit; cursor: pointer; min-height: 44px; text-align: left;}
+.zcan,.zmore1{font-size: 0.92em; opacity: 0.95;}
+.zctx{font-size: 0.9em; color: rgb(159, 232, 214);}
+.zbox.zdrop{outline-offset: -6px; outline: rgb(255, 79, 139) dashed 4px !important; background: rgba(255, 79, 139, 0.133) !important;}
+.zbox.zdrop::after{content: "Drop your file here"; position: absolute; inset: auto 0px 50%; text-align: center; font: 800 1.4rem sans-serif; color: rgb(255, 79, 139); pointer-events: none;}
+.zbox.zdrop:not(.zfull):not(.float){position: relative;}
+.zfull .zhome{position: fixed; top: 10px; left: 12px; z-index: 3;}
+.zhome{display: inline-flex; align-items: center; min-height: 44px; padding: 0px 14px; border-radius: 22px; background: rgb(51, 65, 85); color: rgb(255, 255, 255); text-decoration: none; font-weight: 800;}
+.zfu{font-size: 0.85rem; opacity: 0.85; margin: 0.3rem 0px;}
+aside.zbox.zfull .zbody > .zq,aside.zbox.zfull .zbody > .zvid{display: none !important;}
+.zsug{flex: 1 1 100%; display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.3rem 0px;}
+.zsug button{font-size: 0.8rem; padding: 0.25rem 0.6rem; border-radius: 999px; min-height: 44px;}
+.zsug[hidden]{display: none !important;}
+.zlinks2{font-size: 0.85rem;}
+.zmore2 summary{cursor: pointer; font-size: 0.85rem; opacity: 0.8;}
+.zbox:not(.zfull) .zmore{display: none;}
+.zbox .zbody > .zq > button:nth-child(n+3){display: none;}
+.zbox .zf{flex-wrap: wrap !important;}
+.zbox .zf #zin{min-width: 0px; flex: 1 1 100% !important; width: 100% !important;}
+.zagents.z4{max-width: 360px !important;}
+.zsteps h2{font-size: 1.15rem !important;}
+.zsteps li{padding: 6px 10px !important; font-size: 0.92rem !important;}
+.zsteps li b{width: 30px !important; height: 30px !important;}
+.zsteps ol{list-style: none; margin: 0px; padding: 0px; display: grid; gap: 8px;}
+@media (min-width: 700px){.zsteps ol{grid-template-columns: repeat(3, 1fr);}}
+.zsteps li{display: flex; gap: 10px; align-items: center; background: var(--card); border-radius: 14px; padding: 10px 14px; line-height: 1.3; font-size: 1rem !important;}
+.zsteps li b{flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--acc); color: rgb(0, 0, 0);}
+.zbox{background: rgb(15, 21, 34); color: rgb(232, 238, 247); border: 1px solid rgb(42, 52, 70); border-radius: 18px; box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 40px;}
+.zdock{display: flex; align-items: center; gap: 8px; min-height: 52px; padding: 4px 14px 4px 6px; border-radius: 26px; border: 2px solid rgb(45, 212, 191); background: rgb(15, 21, 34); color: rgb(232, 238, 247); font-weight: 800; font-size: 1rem; cursor: pointer;}
+.zdock img{width: 40px; height: 50px; object-fit: contain;}
+.zbody{padding: 12px; display: flex; flex-direction: column; gap: 8px;}
+.zwho{display: flex; gap: 10px; align-items: flex-start;}
+.zwho img{width: 84px; height: auto; flex: 0 0 auto;}
+.zwho h2{font-size: 1.05rem; margin: 0px 0px 4px;}
+.zwho p{margin: 0px; font-size: 0.95rem; line-height: 1.4;}
+.zspk,.zact button,.zact a.zgo{min-height: 44px; padding: 0px 14px; border-radius: 12px; border: 0px; background: rgb(45, 212, 191); color: rgb(7, 16, 20); font-weight: 800; cursor: pointer; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center;}
+.zact{border: 1px solid rgb(45, 212, 191); border-radius: 14px; padding: 10px;}
+.zact h3{margin: 0px 0px 6px; font-size: 1.05rem;}
+.zact .zrow{display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;}
+.zact button.alt{background: rgb(24, 32, 47); color: rgb(232, 238, 247); border: 1px solid rgb(42, 52, 70);}
+.zvid video{width: 100%; border-radius: 12px; background: rgb(0, 0, 0);}
+.zmore summary{min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700;}
+.zlost ol{padding-left: 1.2em;}
+.zlost pre,.zact pre{white-space: pre-wrap; background: rgb(11, 15, 23); border: 1px solid rgb(42, 52, 70); border-radius: 10px; padding: 8px; font-size: 0.9rem;}
+.zbox.dock,.zbox.float{position: fixed; left: 10px; bottom: 84px; z-index: 61; max-width: min(400px, -20px + 100vw); background: transparent; border: 0px; box-shadow: none;}
+.zbox.dock .zbody,.zbox.float .zbody{display: none;}
+.zbox.open .zbody{display: flex; background: rgb(15, 21, 34); border: 1px solid rgb(42, 52, 70); border-radius: 18px; max-height: min(68vh, 620px); overflow: auto; margin-top: 6px; box-shadow: rgba(0, 0, 0, 0.6) 0px 10px 40px;}
+@media (min-width: 1024px){.zbox.float{bottom: 20px;}.secwrap .zagents{margin-bottom: 18px;}.secwrap > .zbox{order: -1;}@media (min-width: 900px){.secwrap > .zbox{order: 2;}}.secwrap > .zbox{position: sticky; top: 80px; max-height: calc(-100px + 100vh); overflow: auto;}.secwrap > .zbox .zdock{display: none;}.secwrap > .zbox .zbody{display: flex;}}
+.ztile{display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px; min-height: 150px; padding: 14px 10px; border-radius: 18px; color: rgb(255, 255, 255); text-decoration: none; box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 14px; transition: transform 0.15s;}
+.ztile:hover,.ztile:focus-visible{transform: translateY(-3px); outline: rgb(255, 255, 255) solid 3px; outline-offset: 2px;}
+.ztile .te{font-size: 2.4rem; line-height: 1;}
+.ztile b{font-size: 1rem; line-height: 1.25; color: rgb(255, 255, 255);}
+.ztile.sel{outline: rgb(45, 212, 191) solid 3px; outline-offset: 3px;}
+.hero0 .zvid{max-width: 640px; margin: 10px auto;}
+.zlog{overflow: auto; padding: 10px 12px; flex: 1 1 0%;}
+.zlog p{margin: 0.4em 0px; line-height: 1.45;}
+.zu{text-align: right; color: rgb(159, 232, 220);}
+.za a{color: rgb(125, 211, 252);}
+.za ol{margin: 0.4em 0px; padding-left: 1.3em;}
+.za li{margin: 0.25em 0px; line-height: 1.4;}
+.zprompt{background: rgb(11, 18, 32); border: 1px dashed rgb(45, 212, 191); border-radius: 8px; padding: 8px; font-size: 0.92rem;}
+.zcopy,.zread,.zsbtn{min-height: 40px; padding: 6px 12px; border-radius: 20px; border: 2px solid rgb(45, 212, 191); background: rgb(15, 21, 34); color: rgb(232, 238, 247); font-weight: 700; cursor: pointer; margin: 4px 4px 4px 0px;}
+.zsbtn{width: 100%; background: rgb(19, 78, 74);}
+.zsmart{padding: 6px 12px;}
+.zsstat{font-size: 0.85rem; color: rgb(182, 194, 209); margin: 0.3em 0px;}
+.zsmart-a{border-top: 1px solid rgb(42, 58, 80); margin-top: 8px; padding-top: 4px;}
+.zst{white-space: pre-wrap;}
+.zf{position: sticky; top: 0px; z-index: 3; display: flex; gap: 6px; align-items: center; background: rgb(17, 24, 39); padding: 8px; border: 2px solid rgb(45, 212, 191); border-radius: 14px; margin: 8px 0px;}
+.zf input{flex: 1 1 0%; min-width: 0px; min-height: 48px; font-size: 1.05rem; padding: 8px 12px; border-radius: 10px; border: 1px solid rgb(71, 85, 105); background: rgb(11, 18, 32); color: rgb(255, 255, 255);}
+.zsend{min-height: 48px; min-width: 84px; font-size: 1.05rem; font-weight: 800; border-radius: 10px; border: 0px; background: rgb(45, 212, 191); color: rgb(4, 32, 28); cursor: pointer;}
+.zup{min-height: 48px; min-width: 48px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; border-radius: 10px; border: 1px solid rgb(71, 85, 105); cursor: pointer; background: rgb(11, 18, 32);}
+.znote{font-size: 0.85rem; color: rgb(182, 194, 209); margin: 0px 0px 6px;}
+.zdoc{display: block; margin-top: 4px; color: rgb(232, 238, 247);}
+.zx{background: none; border: 0px; color: rgb(252, 165, 165); cursor: pointer; min-height: 32px; min-width: 32px;}
+.zagents{display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin: 6px 0px;}
+.zah2{grid-column: 1 / -1; margin: 0.2em 0px; font-weight: 800;}
+.zagent,.zhand{display: flex; gap: 8px; align-items: center; text-align: left; padding: 6px 8px; min-height: 52px; border-radius: 12px; border: 2px solid rgb(51, 65, 85); background: rgb(15, 21, 34); color: rgb(232, 238, 247); cursor: pointer;}
+.zhand{border-color: rgb(45, 212, 191); margin-top: 4px;}
+.zagent small{display: block; color: rgb(182, 194, 209); font-size: 0.78rem;}
+.zface{display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgb(30, 41, 59); border: 2px dashed rgb(71, 85, 105); font-size: 1.6rem; overflow: hidden; flex: 0 0 auto;}
+.zface img{width: 100%; height: 100%; object-fit: cover;}
+.zahead{border: 2px solid rgb(45, 212, 191); border-radius: 14px; padding: 8px 10px; margin: 6px 0px; background: rgb(15, 26, 36);}
+.zah{display: flex; gap: 10px; align-items: center;}
+.zah h3{margin: 0px;}
+.zarea{margin: 0px; color: rgb(159, 232, 220);}
+.zintro{margin: 0.4em 0px;}
+.zback{min-height: 40px; padding: 6px 12px; border-radius: 20px; border: 2px solid rgb(100, 116, 139); background: rgb(15, 21, 34); color: rgb(232, 238, 247); cursor: pointer;}
+.zlinks{display: flex; flex-wrap: wrap; gap: 6px; align-items: center;}
+.zlink{display: inline-block; padding: 6px 10px; border-radius: 16px; border: 1px solid rgb(45, 212, 191); text-decoration: none; min-height: 36px;}
+.zrub{border-collapse: collapse; width: 100%; font-size: 0.9rem;}
+.zrub td,.zrub th{border: 1px solid rgb(51, 65, 85); padding: 4px; text-align: left;}
+.zq{display: flex; flex-wrap: wrap; gap: 6px; padding: 0px 12px 8px;}
+.zq button{min-height: 44px; padding: 0px 10px; border-radius: 12px; border: 1px solid rgb(42, 52, 70); background: rgb(24, 32, 47); color: rgb(232, 238, 247); cursor: pointer;}
+.zf{display: flex; gap: 6px; padding: 8px 12px 12px;}
+.zf input{flex: 1 1 0%; min-height: 44px; border-radius: 10px; border: 1px solid rgb(42, 52, 70); background: rgb(11, 15, 23); color: rgb(232, 238, 247); padding: 0px 10px; font-size: 16px;}
+.zf button{min-height: 44px; min-width: 60px; border-radius: 10px; border: 0px; background: rgb(45, 212, 191); color: rgb(7, 16, 20); font-weight: 800;}
+@media print{.zbox{display: none !important;}}
+.zres ul{margin: 0.3em 0px 0px 1.1em; padding: 0px; columns: 220px 2;}
+.zres li{margin: 0.15em 0px; break-inside: avoid;}
+.znote{white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.85rem; margin: 0.3em 0px;}
+html body #zbox#zbox.zchat:not(.zfull):not(.float) #zbody .zwho img[src*="fred-k5-v17"],html body #zbox#zbox.zchat:not(.zfull):not(.float) #zbody .zwho img[src*="fred-68-v17"],html body #zbox#zbox.zchat:not(.zfull):not(.float) #zbody .zwho img[src*="fred-912-v19"],html body #zbox#zbox.zchat.float.open #zbody .zwho img[src*="fred-k5-v17"],html body #zbox#zbox.zchat.float.open #zbody .zwho img[src*="fred-68-v17"],html body #zbox#zbox.zchat.float.open #zbody .zwho img[src*="fred-912-v19"]{box-sizing: border-box; width: 84px !important; height: 84px !important; border-radius: 16px !important; border: 2px solid rgba(255, 255, 255, 0.55) !important; background: rgb(22, 34, 47) !important; object-fit: cover !important; object-position: 50% 10% !important;}
+html body #zbox#zbox.zchat .zface:has(img[src*="fred-k5-v17"]),html body #zbox#zbox.zchat .zface:has(img[src*="fred-68-v17"]),html body #zbox#zbox.zchat .zface:has(img[src*="fred-912-v19"]){min-width: 44px; box-sizing: border-box; width: 44px !important; height: 44px !important; border-radius: 12px !important; border: 2px solid rgba(255, 255, 255, 0.55) !important; background: rgb(22, 34, 47) !important;}
+html body #zbox#zbox.zchat .zface img[src*="fred-k5-v17"],html body #zbox#zbox.zchat .zface img[src*="fred-68-v17"],html body #zbox#zbox.zchat .zface img[src*="fred-912-v19"]{object-fit: cover !important; object-position: 50% 10% !important; border-radius: 0px !important;}
+html body #zbox#zbox.zchat:not(.zfull):not(.float) #zbody .zwho img[src*="fred-v81"],html body #zbox#zbox.zchat:not(.zfull):not(.float) #zbody .zwho img[src*="fred-v81"],html body #zbox#zbox.zchat:not(.zfull):not(.float) #zbody .zwho img[src*="fred-v81"],html body #zbox#zbox.zchat.float.open #zbody .zwho img[src*="fred-v81"],html body #zbox#zbox.zchat.float.open #zbody .zwho img[src*="fred-v81"],html body #zbox#zbox.zchat.float.open #zbody .zwho img[src*="fred-v81"]{box-sizing: border-box; width: 84px !important; height: 84px !important; border-radius: 16px !important; border: 2px solid rgba(255, 255, 255, 0.55) !important; background: rgb(22, 34, 47) !important; object-fit: contain !important; object-position: 50% 50% !important;}
+html body #zbox#zbox.zchat .zface:has(img[src*="fred-v81"]),html body #zbox#zbox.zchat .zface:has(img[src*="fred-v81"]),html body #zbox#zbox.zchat .zface:has(img[src*="fred-v81"]){min-width: 44px; box-sizing: border-box; width: 44px !important; height: 44px !important; border-radius: 12px !important; border: 2px solid rgba(255, 255, 255, 0.55) !important; background: rgb(22, 34, 47) !important;}
+html body #zbox#zbox.zchat .zface img[src*="fred-v81"],html body #zbox#zbox.zchat .zface img[src*="fred-v81"],html body #zbox#zbox.zchat .zface img[src*="fred-v81"]{object-fit: contain !important; object-position: 50% 50% !important; border-radius: 0px !important;}
+#zbox,#zbox *{box-sizing:border-box}
+@media print{#zbox,.zaskp{display:none!important}}

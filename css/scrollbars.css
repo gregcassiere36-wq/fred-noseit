@@ -1,0 +1,9 @@
+/* v17 visible scrollbars: ~14px, bright teal thumb on a dark track (all scrollable areas) */
+*{scrollbar-width:auto;scrollbar-color:#2dd4bf #0b1424}
+@supports selector(::-webkit-scrollbar){*{scrollbar-width:auto;scrollbar-color:auto}
+*::-webkit-scrollbar{width:14px;height:14px}
+*::-webkit-scrollbar-track{background:#0b1424;border-radius:999px;box-shadow:inset 0 0 0 1px #24405a}
+*::-webkit-scrollbar-thumb{background:#2dd4bf;border-radius:999px;border:2px solid #0b1424;min-height:44px;min-width:44px}
+*::-webkit-scrollbar-thumb:hover{background:#5eead4}
+*::-webkit-scrollbar-thumb:active{background:#99f6e4}
+*::-webkit-scrollbar-corner{background:#0b1424}}

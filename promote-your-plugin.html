@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Marketing Helper: $10/month (demo) | Fred Noseit</title><meta name="description" content="Marketing Helper for plugin creators. $10/month. Helps share your plugin to social media, LinkedIn, or anywhere you connect. Demo only, no promises about sales."/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon.png" rel="icon" type="image/png"/><meta content="#0f172a" name="theme-color"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#0b1220;color:#e8eefc;font:500 16px/1.3 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}button,input,textarea{font:inherit;color:inherit}
+.app{height:100vh;height:100dvh;display:flex;flex-direction:column;max-width:900px;margin:0 auto;padding:8px 14px 10px;gap:8px}
+.top{display:flex;align-items:center;gap:10px;flex:none}
+.brand{display:flex;align-items:center;gap:8px;font:800 1.05rem Poppins,Inter,system-ui,sans-serif}.brand img{width:34px;height:34px;border-radius:9px}
+.top h1{margin:0;font:800 1.2rem Poppins,Inter,system-ui,sans-serif;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 14px;border-radius:12px;border:1px solid #2dd4bf;background:rgba(45,212,191,.12);color:#9ff5e6;font-weight:700;cursor:pointer;white-space:nowrap}
+.demo{flex:none;font-size:.88rem;font-weight:800;color:#ffd27a;background:rgba(255,176,32,.18);border:2px dashed #ffb020;padding:5px 12px;border-radius:10px;line-height:1.25}
+.card{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:16px;background:#101a30;border:1px solid #263553;overflow:hidden}
+.card h2{margin:0;font:800 1.25rem Poppins,Inter,sans-serif}
+.price{display:inline-block;background:#ffd21f;color:#3b2a00;font-weight:800;padding:2px 10px;border-radius:99px;font-size:.95rem;vertical-align:middle}
+.lst{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.go{min-height:52px;border:0;border-radius:14px;background:linear-gradient(180deg,#34e0cc,#1fbfab);color:#05302a;font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 5px 16px rgba(45,212,191,.25);padding:0 18px}
+.fine{margin:0;font-size:.8rem;color:#9fb0d3;line-height:1.3}.fine b{color:#ffd27a}
+.bot{display:none;flex:1;min-height:0;flex-direction:column;gap:8px}.on-paid .bot{display:flex}.on-paid .offer{display:none}
+.offer{display:flex;flex-direction:column;gap:8px;min-height:0;overflow:auto}
+.chips{display:flex;flex-wrap:wrap;gap:6px;flex:none}
+.chip{min-height:36px;padding:0 12px;border-radius:99px;border:1px solid #2dd4bf;background:rgba(45,212,191,.1);color:#bff8ee;font-weight:700;cursor:pointer}
+.log{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:6px;background:#0b1220;border:1px solid #263553;border-radius:12px;padding:8px}
+.m{max-width:92%;padding:7px 10px;border-radius:12px;line-height:1.35;font-size:.95rem}.m.b{background:#16294a;border:1px solid #2b4372}.m.u{align-self:flex-end;background:#2dd4bf;color:#062a26;font-weight:600}
+.m ul{margin:4px 0 0;padding-left:18px}
+.ask{display:flex;gap:8px;flex:none}.ask input{flex:1;min-width:0;height:44px;border-radius:12px;background:#0b1220;border:2px solid #2dd4bf;padding:0 12px}
+.ask button{min-height:44px;border:0;border-radius:12px;background:#2dd4bf;color:#062a26;font-weight:800;padding:0 16px;cursor:pointer}
+.paid{display:none;flex:none;font-size:.85rem;color:#7ef0c5;font-weight:800}.on-paid .paid{display:block}
+.mm{position:fixed;inset:0;z-index:20;background:rgba(3,7,15,.8);display:flex;align-items:center;justify-content:center;padding:10px}.mm[hidden]{display:none}
+.md{width:min(440px,100%);background:#0f1a2f;border:2px solid #2dd4bf;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:calc(100dvh - 20px);overflow:auto}
+.md h3{margin:0;font:800 1.15rem Poppins,Inter,sans-serif}
+.ord{display:flex;justify-content:space-between;gap:10px;border:1px solid #263553;border-radius:10px;padding:8px 10px;background:#0d1628}
+.tot{display:flex;justify-content:space-between;font-weight:800;font-size:1.1rem}
+.btns{display:flex;gap:8px}.btns .go{flex:1}.btns .pill{min-height:52px}
+@media(max-width:700px){.hm{display:none}.app{padding:6px 8px 8px;gap:6px}.top h1{font-size:1rem}.brand span{display:none}.demo{font-size:.8rem}.card{padding:10px 12px;gap:6px}.card h2{font-size:1.1rem}.go{min-height:48px}.m{font-size:.9rem}.chip{min-height:34px;padding:0 10px;font-size:.88rem}}
+@media(max-height:700px) and (min-width:701px){.app{gap:6px}.card{gap:6px;padding:10px 14px}.go{min-height:44px}.pill{min-height:34px}.demo{padding:3px 10px}.fine{font-size:.76rem}}
+.conn{margin:8px 0;padding:8px 10px;border:1px dashed #ffd27a;border-radius:12px}.conn>b{display:block;margin-bottom:6px}.conn .go{margin-top:6px}.chip.sel{border-color:#7ef0c5;background:#16322f}</style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/></head>
+<body>
+<nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" decoding="async" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t" href="plugin-market.html">Plugin Store</a><a class="t" href="my-plugins.html">My Plugins</a><a class="t tin" href="signup.html">Sign in</a></div></nav><div class="app" id="app">
+ <h1 class="vh">Marketing Helper</h1>
+ <div class="demo" role="note"><b>Demo only.</b> No real card and no real charge. Your purchase is saved in this browser only.</div>
+ <main class="card">
+  <h2>📣 Marketing Helper <span class="price">$10/month</span></h2>
+  <section class="offer" id="offer">
+   <p style="margin:0">A friendly helper that shares your plugin for you. Connect your social media, LinkedIn, or any place you want to share, and give it access. It drafts the posts and gets your plugin in front of people.</p>
+   <ul class="lst">
+    <li><b>$10/month.</b> Demo only: nothing is charged.</li><li>You choose where it can share (social media, LinkedIn, anywhere you connect) and you give it access. You can take access away at any time.</li>
+    <li>Drafts a one-line pitch, a short demo video idea, and posts for each place you connect.</li>
+    <li>Fits your plugin: it uses the name and subject you typed in the builder.</li>
+   </ul>
+   <button class="go" id="buy" type="button">Start $10/month (demo checkout)</button>
+   <p class="fine"><b>No promises.</b> We can't promise sales, followers or income. Creators set their own price. When a plugin sells, the creator keeps 80% and Fred Noseit keeps 20%.</p>
+   <p class="fine" id="bn" hidden></p>
+  </section>
+  <section class="bot" id="bot" aria-label="Marketing Helper chat">
+   <p class="paid">✅ On (demo). Marketing Helper: $10/month. <a href="#" id="reset" style="text-decoration:underline;color:#9fb0d3;font-weight:600">Reset demo</a></p>
+   <div class="conn" id="conn"><b>Where should I share? (demo)</b><div class="chips" id="cchips"></div><button class="go" id="draft" type="button">✍️ Draft my share post</button></div><div class="chips" id="chips"></div>
+   <div class="log" id="log" aria-live="polite"></div>
+   <form class="ask" id="ask"><input id="q" maxlength="120" placeholder="Ask a promotion question…" aria-label="Ask a promotion question" autocomplete="off"/><button type="submit">Ask</button></form>
+   <p class="fine">Demo only. Nothing is connected or posted. No promises about sales or income.</p>
+  </section>
+ </main>
+</div>
+<div class="mm" id="mm" hidden><div class="md" role="dialog" aria-modal="true" aria-labelledby="mt">
+ <h3 id="mt">Demo checkout</h3>
+ <div class="demo" role="note"><b>Demo only.</b> No card needed. Nothing is charged.</div>
+ <div class="ord"><span>📣 Marketing Helper: $10/month</span><b>$10.00</b></div>
+ <div class="tot"><span>Total today</span><span>$10.00</span></div>
+ <p class="fine">One-time payment (demo). Nothing is really charged or posted.</p>
+ <div class="btns"><button class="pill" id="mx" type="button">Cancel</button><button class="go" id="mok" type="button">Start demo payment</button></div>
+</div></div>
+<script>
+(function(){var $=function(i){return document.getElementById(i)},K="aiedume_demo_marketing",app=$("app");
+var d={};try{d=JSON.parse(localStorage.getItem("aiedume_draft")||"{}")||{}}catch(e){}
+var nm=(d.name||"").toString().slice(0,60)||"your plugin",sj=(d.subject||"").toString().slice(0,40);
+function paid(){try{return!!JSON.parse(localStorage.getItem(K)||"null")}catch(e){return false}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var N=esc(nm),S=esc(sj||"your class");
+var T={
+pitch:["One-line pitch",'<ul><li>“Meet <b>'+N+'</b>: a quick helper for '+S+'. Tell it what you need and get something ready to use.”</li><li>Add who it is for: grade, subject, and the one job it does.</li><li>End with an easy ask: “Try it and tell me what you think.”</li></ul>'],
+video:["Demo video",'<ul><li>Record about 60 seconds. Show <b>one</b> real task from start to finish.</li><li>Say who it is for in the first 5 seconds.</li><li>Show the result on screen. Keep it simple.</li><li>Never show student names, faces or grades.</li></ul>'],
+share:["Where to share",'<ul><li>Your grade-level or subject team chat.</li><li>Your school newsletter (ask first).</li><li>Parent or teacher groups you already belong to.</li><li>Follow each group\'s rules. Share once, then be helpful. Don\'t spam.</li></ul>'],
+name:["Name & description",'<ul><li>Start the name with the job: “Exit Ticket Maker”.</li><li>Description: one line. What goes in, what comes out.</li><li>Use plain words a busy teacher or parent understands.</li></ul>'],
+reviews:["Reviews",'<ul><li>Ask your first few users for an honest review. Send a quick thank-you with the link.</li><li>Never write or buy fake reviews.</li><li>Reply kindly to feedback and improve your plugin.</li></ul>'],
+price:["Price",'<ul><li>You choose the price, and free is allowed.</li><li>A low price or free can help you get your first reviews. You can change it later.</li><li>When it sells, you keep 80% and Fred Noseit keeps 20%. We can\'t promise how many sales you will get.</li></ul>'],
+safe:["Stay safe",'<ul><li>Never post student names, photos, grades or school details.</li><li>Be honest about what your plugin can and can\'t do.</li><li>Check each tool\'s age rules.</li></ul>']};
+var KW={pitch:["pitch","blurb","tagline","describe","say"],video:["video","demo","record","youtube"],share:["share","where","post","social","facebook","group","newsletter","tell"],name:["name","title","description","listing"],reviews:["review","rating","star","feedback"],price:["price","cost","charge","free","sell","money","earn","income"],safe:["safe","privacy","student","kid","child"]};
+function add(c,h){var e=document.createElement("div");e.className="m "+c;e.innerHTML=h;$("log").appendChild(e);$("log").scrollTop=1e9}
+function tip(k){add("u",esc(T[k][0]));add("b",T[k][1])}
+function ans(q){q=q.toLowerCase();for(var k in KW)for(var i=0;i<KW[k].length;i++)if(q.indexOf(KW[k][i])>-1){tip(k);return}add("b","I can help with: a one-line pitch, a demo video, where to share, your name and description, reviews, price and staying safe. Tap a button above. I can't promise sales or income.")}
+function show(){app.classList.add("on-paid");if(!$("log").children.length)add("b","Hi! I'm Joy, your Marketing Helper. I'll help share <b>"+N+"</b>. First tap a place below to connect it (demo), then tap Draft my share post. Or tap a topic for tips. (Demo only. No promises about sales.)")}
+var ch="";Object.keys(T).forEach(function(k){ch+='<button type="button" class="chip" data-k="'+k+'">'+esc(T[k][0])+'</button>'});$("chips").innerHTML=ch;
+$("chips").onclick=function(e){var b=e.target.closest("button");if(b)tip(b.dataset.k)};
+$("ask").onsubmit=function(e){e.preventDefault();var v=$("q").value.trim();if(!v)return;add("u",esc(v));$("q").value="";ans(v)};
+function open_(){$("mm").hidden=false;$("mok").focus()}function close_(){$("mm").hidden=true;$("buy").focus()}
+$("buy").onclick=open_;$("mx").onclick=close_;$("mm").addEventListener("click",function(e){if(e.target===this)close_()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("mm").hidden)close_()});
+$("mok").onclick=function(){try{localStorage.setItem(K,JSON.stringify({paid:true,demo:true,item:"marketing-helper",amount:10,plan:"once",ts:Date.now()}))}catch(e){}$("mm").hidden=true;show()};
+$("reset").onclick=function(e){e.preventDefault();try{localStorage.removeItem(K)}catch(x){}app.classList.remove("on-paid");$("log").innerHTML=""};
+var CN={social:"📱 Social media",li:"💼 LinkedIn",other:"🌐 Another site or group"},on={};
+var cc="";Object.keys(CN).forEach(function(k){cc+='<button type="button" class="chip" data-c="'+k+'" aria-pressed="false">'+CN[k]+'</button>'});$("cchips").innerHTML=cc;
+$("cchips").onclick=function(e){var b=e.target.closest("button");if(!b)return;var k=b.dataset.c;on[k]=!on[k];b.setAttribute("aria-pressed",on[k]);b.textContent=(on[k]?"✅ ":"")+CN[k]+(on[k]?" (connected, demo)":"");b.className=on[k]?"chip sel":"chip";if(on[k])add("b","Connected "+esc(CN[k].replace(/^\S+ /,""))+" (demo). In the real version you would sign in there and choose what I'm allowed to do. You can remove access any time. Nothing is connected now.")};
+$("draft").onclick=function(){var ks=Object.keys(on).filter(function(k){return on[k]});if(!ks.length){add("b","Tap a place above first, then I'll draft a post for it.");return}add("u","Draft my share post");ks.forEach(function(k){var t={social:"New: <b>"+N+"</b>, a quick helper for "+S+". Built from my own classroom routine. Try it and tell me what you think!",li:"I built <b>"+N+"</b> from what I do in my work with "+S+". Here is how it can save you time. I'd love your feedback.",other:"Sharing <b>"+N+"</b> with this group. It's a helper for "+S+" made from my own tips. Happy to answer questions."}[k];add("b","<b>"+esc(CN[k].replace(/^\S+ /,""))+"</b> draft:<br>"+t+"<br><small>Demo only. Nothing was posted. In the real version you'd review and approve each post.</small>")})};
+var P=new URLSearchParams(location.search);
+if(P.get("from")==="builder"){var b=$("bn");b.hidden=false;b.innerHTML="Added from the plugin builder for <b>"+N+"</b>. Finish your $10/month demo payment below."}
+if(paid())show();else if(P.get("buy")==="1")open_();
+})();
+</script>
+<script src="buildcta.js?v=1793242697" defer></script><script src="nav-tabs.js?v=1793242697" defer></script></body></html>

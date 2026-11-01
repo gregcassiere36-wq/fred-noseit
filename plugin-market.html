@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Plugin Store | Fred Noseit</title><meta name="description" content="A sample plugin store. Nothing here is for sale yet."/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon.png" rel="icon" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><meta content="#0f172a" name="theme-color"/><link href="manifest.json" rel="manifest"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="yes" name="mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="Fred Noseit" name="apple-mobile-web-app-title"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#0b1220;color:#e8eefc;font:500 16px/1.3 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+.app{height:100vh;height:100dvh;display:flex;flex-direction:column;max-width:1240px;margin:0 auto;padding:8px 14px 10px;gap:8px}
+.top{display:flex;align-items:center;gap:10px;flex:none}
+.brand{display:flex;align-items:center;gap:8px;font:800 1.05rem Poppins,Inter,system-ui,sans-serif}
+.brand img{width:34px;height:34px;border-radius:9px}
+.top h1{margin:0;font:800 1.25rem Poppins,Inter,system-ui,sans-serif;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:12px;border:1px solid #2dd4bf;background:rgba(45,212,191,.12);color:#9ff5e6;font-weight:700;cursor:pointer;white-space:nowrap}
+.banner{flex:none;align-self:flex-start;font-size:.8rem;font-weight:700;color:#ffd27a;background:rgba(255,176,32,.12);border:1px dashed rgba(255,176,32,.6);padding:3px 10px;border-radius:8px}
+.body{flex:1;min-height:0;display:flex;gap:12px}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;min-height:0}
+.search{flex:none;display:flex;align-items:center;gap:10px;height:54px;padding:0 16px;border-radius:14px;background:#111b30;border:2px solid #2dd4bf}
+.search span{font-size:1.4rem}
+.search input{flex:1;min-width:0;height:100%;background:transparent;border:0;outline:0;font-size:1.15rem}
+.search input::placeholder{color:#8da0c4}
+.filters{flex:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.filters label{display:flex;flex-direction:column;gap:2px;font-size:.72rem;font-weight:800;color:#9fb0d3;text-transform:uppercase;letter-spacing:.03em}.filters select{height:44px;border-radius:12px;border:2px solid #263553;background:#111b30;color:#e8eefc;font:700 .95rem Inter,system-ui,sans-serif;padding:0 10px;min-width:0}.filters select:focus{border-color:#2dd4bf;outline:0}.f2b{display:inline-flex;align-items:center;gap:6px;font:800 .78rem Inter,sans-serif;color:#062a26;background:#7ef0c5;border-radius:999px;padding:4px 12px;white-space:nowrap}.iap{font:700 .68rem Inter,sans-serif;color:#ffe08a;background:rgba(255,210,122,.12);border:1px solid rgba(255,210,122,.4);border-radius:999px;padding:1px 8px;align-self:flex-start}
+.prc{font:800 .8rem Inter,sans-serif;color:#7ef0c5;background:#223458;border:1px solid #2dd4bf;border-radius:999px;padding:2px 10px;align-self:flex-start}
+.prc.free{color:#2dd4bf;background:rgba(45,212,191,.12)}
+.arearow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.9rem;color:#9fb0d3;font-weight:700}
+.arearow select{height:38px;border-radius:10px;border:2px solid #263553;background:#111b30;color:#e8eefc;font:700 .9rem Inter,system-ui,sans-serif;padding:0 8px}
+.arearow .anote{color:#7d8fb3;font-size:.8rem;font-weight:600}
+#fbox{position:fixed;right:14px;bottom:14px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;max-width:calc(100vw - 28px)}
+#fpanel{box-sizing:border-box;width:284px;max-width:calc(100vw - 28px);background:#101a30;border:1px solid #2dd4bf;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.5);padding:10px}
+#fpanel .fh{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.95rem;color:#e8eefc}#fpanel .fh span{min-width:0}
+#fpanel .fh img{width:38px;height:38px;object-fit:contain;object-position:50% 50%;background:#16222f;border-radius:10px;border:2px solid #2dd4bf}
+#fpanel form{display:flex;gap:6px;margin-top:8px}
+#fpanel input{flex:1;min-width:0;height:40px;border-radius:10px;background:#0b1220;border:2px solid #2dd4bf;padding:0 10px;color:#e8eefc;font:inherit;font-size:.9rem}
+#fpanel button{height:40px;padding:0 12px;border-radius:10px;border:0;background:#2dd4bf;color:#062a26;font-weight:800;cursor:pointer}
+#fpanel{display:none}
+#fbox.open #fpanel{display:block;margin-bottom:8px}
+/* fredoverlapfix 2026-10-30: the open quick-Fred panel stacked on top of the store guide and covered its ask bar (two chat boxes on top of each other). One Fred at a time: while the quick panel is open, the guide steps aside - its place in the layout and its chat are kept - and it returns the moment the panel closes. */
+body:has(#fbox.open) #guide{visibility:hidden}
+/* sendavatarfix 2026-10-31: the other direction of the same overlap - while the store guide is open, its ask bar sits at the bottom-right and the floating Fred button (a framed full-body Fred portrait) landed on top of the guide's Send button and covered it (Greg's screenshot, 2026-10-31). One Fred at a time, mirrored: while the guide is open, the floating button steps aside and returns the moment the guide closes. The open quick panel keeps priority (rule above). */
+body:has(#guide.on) #fbox:not(.open){visibility:hidden}
+#fbtn{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:10px;border:2px solid #2dd4bf;background:#101a30;cursor:pointer;padding:0}
+#fbtn img{width:48px;height:48px;border-radius:8px;object-fit:contain;object-position:50% 50%;background:#16222f}
+@media (max-width:699px){
+#fbox{bottom:84px}
+}@media(max-width:700px){.brow .banner{display:none}.f2b{white-space:normal;font-size:.7rem;padding:3px 10px}.filters{grid-template-columns:1fr}.filters label{flex-direction:row;align-items:center;gap:8px}.filters label span{width:46px;flex:none}.filters select{flex:1;height:38px}}
+.g{min-height:48px;border-radius:12px;border:2px solid #263553;background:#111b30;font-weight:800;font-size:1rem;cursor:pointer;padding:2px 6px;line-height:1.1}
+.g:hover{border-color:#2dd4bf}
+.g[aria-pressed=true]{background:#2dd4bf;border-color:#2dd4bf;color:#062a26}
+.bar{flex:none;display:flex;align-items:center;gap:10px;font-size:.9rem;color:#9fb0d3}
+.bar b{color:#e8eefc}
+.bar label{margin-left:auto;display:flex;align-items:center;gap:8px;font-weight:700}
+.bar select{height:38px;border-radius:10px;background:#111b30;border:2px solid #263553;padding:0 8px;font-weight:700}
+.bar .gbtn{display:none}
+.grid{flex:1;min-height:0;overflow-y:scroll;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:auto;gap:10px;align-content:start;padding:2px 4px 6px 0;scrollbar-width:auto}
+.card{display:flex;flex-direction:column;gap:5px;height:312px;padding:10px;border-radius:14px;background:linear-gradient(180deg,#14213b,#101a30);border:1px solid #263553;min-width:0;overflow:hidden}
+.ch{display:flex;gap:10px;align-items:center;min-height:0;flex:none}
+.face{position:relative;flex:none;width:84px;height:84px}.face img{width:84px;height:84px;border-radius:12px;object-fit:cover;background:#12414d;border:2px solid #2dd4bf;display:block}.bd{position:absolute;left:3px;bottom:3px;right:3px;text-align:center;font-size:.58rem;font-weight:800;line-height:1.12;padding:3px 2px;border-radius:6px;background:rgba(6,30,38,.88);color:#ffd27a;white-space:normal}
+.nm{font:800 .95rem/1.15 Poppins,Inter,sans-serif;margin:0;min-width:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
+.ds{margin:0;font-size:.84rem;color:#b4c3e3;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;flex:none;min-height:2.5em}
+.cr{display:flex;align-items:center;gap:6px;font-size:.76rem;color:#9fb0d3;min-width:0}
+.cr img{width:24px;height:24px;border-radius:50%;object-fit:cover;object-position:top;flex:none;border:1px solid #3a4d78;background:#1b2a4a}
+.cr b{color:#e8eefc}.cr span{overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;line-height:1.15}
+.meta{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;font-size:.78rem;margin-top:auto}
+.tag{padding:2px 8px;border-radius:999px;background:#223458;color:#cfe0ff;font-weight:700;white-space:nowrap}
+.st{color:#ffc542;font-weight:700;white-space:nowrap}
+.pr{margin-left:auto;font-weight:800;color:#062a26;font-size:.9rem;background:#7ef0c5;border:0;cursor:pointer;padding:3px 10px;border-radius:999px;white-space:nowrap}.ch{color:inherit}
+.pr:hover{background:#a6f7d8}.ch:hover .nm{text-decoration:underline}
+.try{flex:none;min-height:40px;border-radius:10px;border:0;background:#2dd4bf;color:#062a26;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.empty{grid-column:1/-1;padding:20px;color:#9fb0d3;text-align:center}
+/* guide */
+.guide{flex:none;width:300px;display:flex;flex-direction:column;gap:8px;min-height:0;padding:10px;border-radius:14px;background:#101a30;border:1px solid #263553}
+.gh{display:flex;align-items:center;gap:8px;font-weight:800}
+.gh img{width:44px;height:54px;object-fit:cover;object-position:top;border-radius:10px}
+.gh small{display:block;font-weight:600;color:#9fb0d3}
+.gx{margin-left:auto;display:none}
+.log{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:6px}
+.b{padding:8px 10px;border-radius:12px;font-size:.9rem;max-width:92%;line-height:1.3}
+.b.f{background:#1b2a4a;border-bottom-left-radius:4px}
+.b.u{background:#2dd4bf;color:#062a26;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
+.gi{flex:none;display:flex;gap:6px}
+.gi input{flex:1;min-width:0;height:44px;border-radius:10px;background:#0b1220;border:2px solid #2dd4bf;padding:0 10px}
+.gi button{height:44px;padding:0 14px;border-radius:10px;border:0;background:#2dd4bf;color:#062a26;font-weight:800;cursor:pointer}
+@media(max-width:1180px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){
+ .guide{display:none;position:fixed;left:8px;right:8px;bottom:8px;top:auto;height:min(60vh,420px);width:auto;z-index:40;box-shadow:0 10px 40px #000a}
+ .guide.on{display:flex}
+ .gx{display:inline-flex}
+ .bar .gbtn{display:inline-flex;min-height:38px}
+}
+@media(max-width:700px){
+ .hm{display:none}.pill{padding:0 12px}
+ .app{padding:6px 8px 8px;gap:6px}
+ .top h1{font-size:1.05rem}
+ .brand span{display:none}
+ .search{height:46px}
+ .g{min-height:42px;font-size:.78rem;font-weight:800}
+ .grades{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .grid{gap:8px}.card{height:310px}
+ .ch{flex-direction:column;align-items:flex-start;gap:6px}.face,.face img{width:72px;height:72px}.bd{font-size:.52rem}
+ .nm{font-size:.84rem;-webkit-line-clamp:4;min-height:0}
+ .pr{padding:3px 8px;font-size:.82rem}.meta{gap:4px}.tag{padding:2px 5px;font-size:.68rem}.st{font-size:.74rem}.ds{display:none}.cr span{-webkit-line-clamp:3}
+ .bar{font-size:.8rem}
+ .bar #cnt{display:none}
+}
+@media(max-height:700px) and (min-width:701px){
+ .search{height:46px}.g{min-height:40px}.top h1{font-size:1.1rem}.pill{min-height:34px}.banner{padding:1px 8px}
+}
+
+.brow{flex:none;display:flex;align-items:center;gap:8px}.hbtn{display:none;min-height:34px;margin-left:auto}
+.how{flex:none;display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:12px;background:#0f1a2e;border:1px solid #263553}
+.how ol{margin:0;padding:0;list-style:none;display:flex;gap:6px;flex:1;min-width:0}
+.how li{flex:1;min-width:0;display:grid;grid-template-columns:auto auto 1fr;grid-template-rows:auto auto;column-gap:7px;align-items:center;padding:2px 4px}
+.how li i{grid-row:1/3;font-style:normal;width:22px;height:22px;border-radius:50%;background:#2dd4bf;color:#062a26;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.how li span{grid-row:1/3;font-size:1.3rem}
+.how li b{font-size:.92rem;line-height:1.05;align-self:end}
+.how li small{font-size:.72rem;color:#9fb0d3;line-height:1.1;align-self:start}
+.sell{flex:none;display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:38px;padding:3px 12px;border-radius:10px;border:1px solid #ffb020;background:rgba(255,176,32,.12);color:#ffd27a;font-size:.72rem;line-height:1.15;white-space:nowrap}.sell b{font-size:.9rem;color:#fff}
+.sell:hover{background:rgba(255,176,32,.24)}
+@media(max-width:1180px){.how li small{display:none}.how li{grid-template-rows:auto}.how li i,.how li span{grid-row:1}.how li b{align-self:center}}
+@media(max-width:700px){
+ .hbtn{display:inline-flex;padding:0 10px;font-size:.85rem;flex:none}.brow .banner{min-width:0;flex:1;font-size:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;align-self:center}
+ .how{display:none;position:fixed;left:8px;right:8px;top:100px;z-index:40;flex-direction:column;align-items:stretch;padding:10px;border:2px solid #2dd4bf;box-shadow:0 14px 40px rgba(0,0,0,.6);background:#12203a}
+ .how.on{display:flex}
+ .how ol{flex-direction:column}
+ .how li small{display:block}.how li{grid-template-rows:auto auto}.how li i,.how li span{grid-row:1/3}.how li b{align-self:end}
+ .sell{align-items:center;text-align:center}
+}
+.kid{flex:none;display:flex;align-items:center;gap:12px;padding:6px 12px 6px 6px;border-radius:14px;background:linear-gradient(90deg,#12304a,#101a30);border:1px solid #2dd4bf}
+.kid[hidden]{display:none}
+.kid img{flex:none;width:60px;height:60px;border-radius:14px;object-fit:cover;object-position:50% 10%;background:#16222f;border:2px solid rgba(255,255,255,.55)}
+.kid p{margin:0;font-size:.95rem;line-height:1.3;color:#e8eefc}.kid b{color:#7ef0c5}
+.gh img.kidimg{width:54px;height:54px;border-radius:12px;object-position:50% 10%;border:2px solid rgba(255,255,255,.5);background:#16222f}
+@media(max-width:700px){.kid{gap:8px;padding:5px 8px 5px 5px}.kid img{width:52px;height:52px;border-radius:12px}.kid p{font-size:.78rem;line-height:1.25}}
+@media(max-height:700px) and (min-width:701px){.kid img{width:46px;height:46px;border-radius:11px}.kid p{font-size:.86rem;line-height:1.22}.kid{padding:4px 10px 4px 4px}}
+.how{flex-wrap:wrap}.how .r75{flex:1 0 100%;margin:0;font-size:.84rem;color:#cfe0ff;border-top:1px dashed #263553;padding-top:5px}.how .r75 b{color:#7ef0c5}
+.st small{color:#9fb0d3;font-weight:600}
+@media(max-width:700px){.how .r75{font-size:.9rem}}
+@media(max-height:700px) and (min-width:701px){.how{padding:4px 10px}.how .r75{font-size:.78rem;padding-top:3px}}
+.how .r75 .mkt{color:#ffd27a;font-weight:800;text-decoration:underline;white-space:nowrap}@media(max-width:700px){.meta{gap:3px!important;font-size:.7rem!important}.meta .tag{display:none!important}.meta .pr{padding:3px 7px!important;font-size:.76rem!important;margin-left:auto}.meta .st small{font-size:.65rem}}</style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><style id="storetop">
+h1.ptitle{flex:none;margin:0;font:800 1.35rem Poppins,Inter,system-ui,sans-serif;color:#fff}
+.search{height:52px!important}
+.filters{gap:6px!important}
+.filters label{flex-direction:row!important;align-items:center;gap:6px!important;font-size:.7rem!important}
+.filters label span{flex:none}
+.filters select{height:34px!important;min-width:0;font-size:.85rem!important;border-radius:10px!important;padding:0 6px}
+.gh div{font-size:1.1rem}.gh small{display:none}
+.gh img{width:56px!important;height:56px!important;object-fit:contain!important;object-position:50% 50%!important;background:#16222f;border-radius:12px!important;border:2px solid #2dd4bf}
+@media(min-width:701px){.gx{display:none}}
+@media(max-width:700px){.filters{grid-template-columns:repeat(3,minmax(0,1fr))!important}.filters label{flex-direction:column!important;align-items:stretch;gap:1px!important;font-size:.62rem!important}h1.ptitle{font-size:1.1rem}}
+.arearow input{height:38px;width:118px;border-radius:10px;border:2px solid #263553;background:#111b30;color:#e8eefc;font:700 .9rem Inter,system-ui,sans-serif;padding:0 8px}
+.arearow input:focus{border-color:#2dd4bf;outline:0}
+.arearow button{height:38px;border-radius:10px;border:2px solid #2dd4bf;background:rgba(45,212,191,.12);color:#9ff5e6;font:700 .9rem Inter,system-ui,sans-serif;padding:0 14px;cursor:pointer}
+.ghead{grid-column:1/-1;font:800 1rem Poppins,Inter,sans-serif;color:#7ef0c5;padding:8px 2px 0}
+.zipc{font-weight:700;color:#9ff5e6;white-space:nowrap}
+.panels{flex:none;display:flex;gap:12px}
+.panel{padding:12px 14px;border-radius:14px;background:#101a30;border:1px solid #263553;display:flex;flex-direction:column;gap:10px;min-width:0}
+.panelL{flex:1.25}.panelR{flex:1}
+.panel h2{margin:0;font:800 1.02rem Poppins,Inter,system-ui,sans-serif;color:#7ef0c5}
+.panelL .filters{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+.panelL .filters select{flex:1;width:100%}
+.panelR p{margin:0;font-size:.95rem;line-height:1.35;color:#e8eefc}
+.panelR .zr{margin-top:auto}
+@media(max-width:700px){.panels{flex-direction:column}.panelL .filters{grid-template-columns:1fr!important}}
+</style><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/><link rel="stylesheet" href="mobile.css"/>
+</head>
+<body>
+<nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" decoding="async" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t cur" href="plugin-market.html" aria-current="page">Plugin Store</a><a class="t" href="my-plugins.html">My Plugins</a><a class="t tin" href="signup.html">Sign in</a></div></nav><div class="app">
+ <h1 class="ptitle">Plugin Store</h1>
+ <div class="kid" id="kid" hidden><img alt="" id="kidimg" src="media/fred-k5-v17.webp" width="60" height="60"/><p id="kidtxt"></p></div>
+ <div class="body">
+  <main class="main">
+   <label class="search"><span aria-hidden="true">🔎</span><input id="q" type="search" placeholder="Search plugins" autocomplete="off" aria-label="Search plugins"/></label>
+   <div class="panels">
+    <section class="panel panelL">
+     <h2>Find a plugin</h2>
+     <div class="filters" id="filters" role="group" aria-label="Filter plugins"><label><span>Grade</span><select id="fg" aria-label="Grade"></select></label><label><span>For</span><select id="ff" aria-label="Who it is for"></select></label><label><span>Topic</span><select id="ft" aria-label="Topic: what do you need it for"></select></label></div>
+    </section>
+    <section class="panel panelR">
+     <h2>Plugins near you</h2>
+     <p>Find plugins from teachers and parents in your area — enter your ZIP code.</p>
+     <div class="arearow zr"><label for="fzip">Your ZIP code:</label><input id="fzip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="e.g. 11223" aria-label="Your ZIP code"/><button type="button" id="zipsave">Save</button><span class="anote" id="anote" hidden></span></div>
+    </section>
+   </div>
+   <div class="bar"><span id="cnt"></span><button class="pill gbtn" id="gopen" type="button">🐕 Ask the guide</button><label>Sort <select id="sort" aria-label="Sort plugins"><option value="pop">Most popular</option><option value="new">Newest</option><option value="free">Free only</option></select></label></div>
+   <section class="grid" id="grid" aria-live="polite"></section>
+  </main>
+  <aside class="guide" id="guide" aria-label="Store guide">
+   <div class="gh"><img alt="" src="media/fred-v81.webp"/><div>Fred Noseit</div><button class="pill gx" id="gclose" type="button" aria-label="Close guide">✕</button></div>
+   <div class="log" id="log"><div class="b f">If you still need help, maybe I can find the right plugin for you.</div></div>
+   <form class="gi" id="gform"><input id="gq" placeholder="Example: 3rd grade reading help" aria-label="Tell Fred your grade and what you need" autocomplete="off"/><button type="submit">Send</button></form>
+  </aside>
+  <div id="fbox"><div id="fpanel"><div class="fh"><img alt="" src="media/fred-v81.webp"/><span>Fred Noseit — need help?</span></div><form id="ff2"><input id="fq2" placeholder="Ask Fred..." aria-label="Ask Fred" autocomplete="off"/><button type="submit">Send</button></form></div><button id="fbtn" type="button" aria-label="Ask Fred"><img alt="" src="media/fred-v81.webp"/></button></div>
+ </div>
+</div>
+<script src="plugin-data.js?v=1793242697"></script><script src="zstop.js?v=1793242697"></script><script src="plugx.js?v=1793242697"></script>
+<script>
+(function(){
+var GR=PX.GRADES;
+
+var GL={k5:"PreK-5th",68:"6th-8th",912:"9th-12th",adult:"Adult",par:"Families",para:"Support staff",teach:"Teachers"};
+var P=window.PLUGINS.map(function(x,i){x.i=i;return x});
+// parents/paras also see teacher plugins that fit
+var EXTRA={para:[12,13],par:[],k5:[],68:[],912:[]};
+var gr="",fo="",tp="",q="",so="pop",gf="",myzip="";
+try{myzip=localStorage.getItem("aiedume_zip")||"";if(!myzip){var _za=JSON.parse(localStorage.getItem("aiedume_demo_account")||"null");if(_za&&/^\d{5}$/.test(_za.zip||"")){myzip=_za.zip;localStorage.setItem("aiedume_zip",myzip)}}}catch(e){}
+var GRLIST=[["all","All grades"],["PreK","PreK"],["K","K"],["1st","1st"],["2nd","2nd"],["3rd","3rd"],["4th","4th"],["5th","5th"],["6th","6th"],["7th","7th"],["8th","8th"],["9th","9th"],["10th","10th"],["11th","11th"],["12th","12th"]];
+var $=function(s){return document.getElementById(s)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function rc(x){return Math.max(3,Math.round(x.pop/9))}
+function stars(r,x){if(x&&x.mine)return "★ New";return "★ "+r.toFixed(1)+(x?' <small>('+rc(x)+')</small>':"")}
+function match(x){
+ if(gr&&(x.gd||[x.g]).indexOf(gr)<0)return false;
+ if(fo&&(x.fo||[]).indexOf(fo)<0)return false;
+ if(tp&&(x.tp||[]).indexOf(tp)<0)return false;
+ if(gf&&(x.grades||[]).indexOf(gf)<0)return false;
+ if(so==="free"&&x.p>0)return false;
+ if(q){var t=(x.n+" "+x.d+" "+GL[x.g]+" "+x.role+" "+x.cn+" "+x.bd+" "+(x.tp||[]).join(" ")+" "+(x.fo||[]).join(" ")).toLowerCase();var w=q.toLowerCase().split(/\s+/).filter(Boolean);for(var k=0;k<w.length;k++)if(t.indexOf(w[k])<0)return false}
+ return true}
+function list(){
+ var L=P.filter(match);
+ var f={pop:function(a,b){return b.pop-a.pop},lo:function(a,b){return a.p-b.p||b.pop-a.pop},hi:function(a,b){return b.p-a.p||b.pop-a.pop},"new":function(a,b){return b.nw-a.nw},free:function(a,b){return b.pop-a.pop}}[so]||function(){return 0};
+ return L.sort(function(a,b){return (b.mine?1:0)-(a.mine?1:0)||f(a,b)})}
+function card(x){
+ return '<article class="card"><a class="ch" href="plugin-checkout.html?id='+x.slug+'" title="See this plugin"><div class="face"><img alt="Portrait of '+esc(x.cn)+'" loading="lazy" src="img/faces/'+x.f+'.webp"/><span class="bd">'+esc(x.bd)+'</span></div><h3 class="nm">'+esc(x.n)+'</h3></a><p class="ds">'+esc(x.d)+'</p><div class="cr"><span><b>'+esc(x.cn)+'</b> · '+esc(x.role)+(x.zip?' · <span class="zipc">📍 ZIP '+esc(x.zip)+'</span>':'')+'</span></div>'+'<span class="prc'+(x.p>0?'':' free')+'">'+(x.p>0?(window.priceLabel?priceLabel(x):'$'+x.p):'FREE')+'</span>'+(x.trial?'<span class="prc free">Free trial · '+x.trial+' chats</span>':'')+'<div class="meta"><span class="tag">'+(x.gd||[x.g]).map(function(g){return GL[g]}).slice(0,2).join(" · ")+'</span><span class="st" aria-label="Rating '+x.r+' of 5 from '+rc(x)+' sample reviews">'+stars(x.r,x)+'</span>'+(x.p>0?'<a class="pr" href="checkout.html?plugin='+x.slug+'" title="Buy this plugin">Get</a>':'<a class="pr" data-free="'+x.slug+'" href="my-plugins.html" title="Get this free plugin">Get</a>')+'</div><a class="try" href="'+(x.mine?"plugin-checkout.html?id="+x.slug:x.pg+".html#agent="+x.id)+'">'+(x.mine?"View":"Try it")+'</a></article>'}
+function draw(){
+ var L=list();$("cnt").innerHTML="<b>"+L.length+"</b> plugin"+(L.length==1?"":"s");
+ if(myzip&&L.length){var A=[],B=[];L.forEach(function(x){(x.zip&&(x.zip===myzip||x.zip.slice(0,3)===myzip.slice(0,3))?A:B).push(x)});
+  if(A.length&&B.length){$("grid").innerHTML='<div class="ghead">From your area (ZIP '+esc(myzip)+')</div>'+A.map(card).join("")+'<div class="ghead">Everywhere else</div>'+B.map(card).join("");$("grid").scrollTop=0;return}
+  if(A.length){$("grid").innerHTML='<div class="ghead">From your area (ZIP '+esc(myzip)+')</div>'+A.map(card).join("");$("grid").scrollTop=0;return}}
+ $("grid").innerHTML=L.length?L.map(card).join(""):'<div class="empty">No plugins match. Try another grade or word.</div>';
+ $("grid").scrollTop=0}
+window.AIEDUME_setZip=function(z){myzip=z||"";draw()};
+function opt(sel,arr,cur){sel.innerHTML=arr.map(function(o){return '<option value="'+(o[0]==="all"?"":o[0])+'"'+((o[0]==="all"?"":o[0])===cur?" selected":"")+'>'+o[1]+'</option>'}).join("")}
+function gbtns(){opt($("fg"),GRLIST,gf);opt($("ff"),PX.FORS,fo);opt($("ft"),[["all","All topics"]].concat(PX.TOPICS.map(function(t){return[t,t]})),tp)}
+$("fg").onchange=function(){gf=this.value;draw()};$("ff").onchange=function(){fo=this.value;draw()};$("ft").onchange=function(){tp=this.value;draw()};
+$("q").addEventListener("input",function(){q=this.value.trim();draw()});
+$("sort").addEventListener("change",function(){so=this.value;draw()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){$("guide").classList.remove("on")}});
+$("gopen").onclick=function(){$("guide").classList.add("on");$("gq").focus()};
+$("gclose").onclick=function(){$("guide").classList.remove("on")};
+/* guide: plain keyword helper, no outside calls */
+var GMAP=[[/\b(kinder|kindergarten|pre-?k|elementary|first|second|third|fourth|fifth|1st|2nd|3rd|4th|5th|k-?5)\b/,"k5"],[/\b(middle|sixth|seventh|eighth|6th|7th|8th|6-8)\b/,"68"],[/\b(high ?school|freshman|sophomore|junior|senior|ninth|tenth|eleventh|twelfth|9th|10th|11th|12th|9-12)\b/,"912"],[/\b(adult|college|career change)\b/,"adult"]];
+var FMAP=[[/\b(parent|mom|dad|homeschool|my (child|kid|son|daughter)|family|families)\b/,"par"],[/\b(student teach\w*|intern)\b/,"stu"],[/\b(para|paraprofessional|aide)\b/,"para"],[/\b(teacher|teach|classroom)\b/,"teach"]];
+var TMAP=[[/\b(read|reading|phonics|literacy)\b/,"Reading"],[/\b(math|algebra|fraction|ratio|number)\w*\b/,"Math"],[/\b(science|biology|lab|chemistry|physics)\b/,"Science"],[/\b(writ\w*|essay|ela|grammar|rubric)\b/,"Writing"],[/\b(iep|sped|special ed\w*|504|accommodation)\b/,"IEP & Special Ed"],[/\b(homework)\b/,"Homework Help"],[/\b(test|exam|praxis|study|prep)\b/,"Test Prep"],[/\b(behavior|management|para life|routine|discipline)\b/,"Classroom Management"],[/\b(lesson|plan|plans|planning|unit)\b/,"Lesson Planning"],[/\b(activity|activities|enrichment|music|art|song|fun)\b/,"Activities & Enrichment"],[/\b(career|degree|college|resume|job|certif\w*)\b/,"Career & Degrees"],[/\b(conference|parent talk|family talk|communicat\w*)\b/,"Parent & Family Talks"]];
+function say(t,u,h){var d=document.createElement("div");d.className="b "+(u?"u":"f");$("log").appendChild(d);if(u||!window.ZSTOP){if(h)d.innerHTML=t;else d.textContent=t}else ZSTOP.type(d,h?t:esc(t));$("log").scrollTop=1e5}
+$("gform").addEventListener("submit",function(e){
+ e.preventDefault();var t=$("gq").value.trim();if(!t)return;$("gq").value="";say(t,1);
+ var s=t.toLowerCase(),g="",f="",tt="",i;
+ for(i=0;i<GMAP.length;i++)if(GMAP[i][0].test(s)){g=GMAP[i][1];break}
+ for(i=0;i<FMAP.length;i++)if(FMAP[i][0].test(s)){f=FMAP[i][1];break}
+ for(i=0;i<TMAP.length;i++)if(TMAP[i][0].test(s)){tt=TMAP[i][1];break}
+ gr=g;fo=f;tp=tt;q="";so=so==="free"?"pop":so;
+ var L=list();
+ if(!L.length&&f){fo="";L=list()}
+ if(!L.length&&g){gr="";L=list()}
+ if(!L.length&&tt){tp="";L=list()}
+ $("q").value="";gbtns();draw();
+ if(!g&&!tt)say("Tell me a grade or a topic, like '4th grade math' or 'IEP help'.");
+ var rec=L.slice(0,3);
+ say(rec.length?("Here "+(rec.length>1?"are "+rec.length+" plugins":"is a plugin")+" that match"+(tt?" "+tt:"")+": "+rec.map(function(x){return '<a href="plugin-checkout.html?id='+x.slug+'"><b>'+esc(x.n)+'</b></a>'}).join(", ")+". The list is filtered for you too."):"I found nothing yet. Try a grade and one word, like 'math'.",0,1);
+ if(innerWidth<=900)setTimeout(function(){$("guide").classList.remove("on")},2200)});
+
+/* grade from the link (?grade=k5|6-8|9-12): pre-filter and show that grade's kid guide */
+var KID={k5:["Tim Noseit","PreK-5th","media/fred-k5-v17.webp","sec-k5.html","Hi, I'm Tim, Fred's little son! Pick a plugin, tap <b>Try it</b> to chat with it free, then <b>Get it</b>. Paste your key in the helper's chat!"],68:["Rebecca Noseit","6th-8th","media/fred-68-v17.webp","sec-6-8.html","Hi, I'm Rebecca, Fred's daughter! Find one, hit <b>Try it</b> to test it free, then <b>Get it</b>. Paste the key in the helper's chat and go."],912:["Ben Noseit","9th-12th","media/fred-912-v19.webp","sec-9-12.html","Hi, I'm Ben, Fred's teenage son. Find one, hit <b>Try it</b> first (obviously), then <b>Get it</b>. Paste the key in the helper's chat. Not hard."]};
+(function(){var m=(location.search.match(/[?&]grade=([^&#]*)/)||[])[1];if(!m)return;m=decodeURIComponent(m).toLowerCase().replace(/[^a-z0-9-]/g,"");var k=/^(k|pre|1-?5)/.test(m)?"k5":/^(6|68)/.test(m)?"68":/^(9|912)/.test(m)?"912":/^adult/.test(m)?"adult":"";if(!k)return;gr=k;var K=KID[k];if(!K){gbtns();return}
+ $("kid").hidden=false;$("kidimg").src=K[2];$("kidimg").alt=K[0];$("kidtxt").innerHTML="<b>"+K[0]+"</b> · "+K[1]+" guide: "+K[4];
+ var bk=document.querySelector('.top a.pill');if(bk){bk.href=K[3];bk.setAttribute("aria-label","Back to "+K[1]);bk.innerHTML='\u2190<span class="hm"> '+K[1]+'</span>'}
+ var gi=document.querySelector(".gh img");gi.src=K[2];gi.alt=K[0];gi.className="kidimg";var gd=document.querySelector(".gh div");gd.firstChild.nodeValue=K[0];
+ var f=document.querySelector("#log .b.f");f.innerHTML=K[4]+"<br/>Want help? Tell me what you need."})();
+gbtns();draw();
+})();
+</script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+function fire(el,t){el.dispatchEvent(new Event(t,{bubbles:true,cancelable:true}))}
+/* your ZIP code: remembered in this browser (localStorage aiedume_zip);
+   the store groups plugins from your area first */
+var fz=$("fzip"),an=$("anote");
+function zipnote(){var v=fz.value.trim();if(v&&/^\d{5}$/.test(v)){an.hidden=false;an.textContent="Plugins from your area (ZIP "+v+") show first."}else if(v){an.hidden=false;an.textContent="Type a 5-digit ZIP code."}else an.hidden=true}
+try{fz.value=localStorage.getItem("aiedume_zip")||""}catch(e){}
+zipnote();
+function savezip(){var v=fz.value.trim();if(v&&!/^\d{5}$/.test(v)){an.hidden=false;an.textContent="Please type a 5-digit ZIP code.";return}try{if(v)localStorage.setItem("aiedume_zip",v);else localStorage.removeItem("aiedume_zip")}catch(e){}zipnote();if(window.AIEDUME_setZip)window.AIEDUME_setZip(v)}
+$("zipsave").addEventListener("click",savezip);
+fz.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();savezip()}});
+/* Fred corner box: hands the question to the Store guide */
+var fb=$("fbox");
+$("fbtn").addEventListener("click",function(){fb.classList.toggle("open")});
+$("ff2").addEventListener("submit",function(e){e.preventDefault();var t=$("fq2").value.trim();if(!t)return;$("fq2").value="";$("gq").value=t;$("guide").classList.add("on");fb.classList.remove("open");fire($("gform"),"submit")});
+})();
+</script>
+<script src="buildcta.js?v=1793242697" defer></script><script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script>
+<script>
+/* Fred Noseit payment wiring (demo): free Gets are recorded as owned, and plugins
+   already in aiedume_bought show "Open" instead of "Get". */
+(function(){
+function jget(k,d){try{var v=JSON.parse(localStorage.getItem(k)||"null");return v==null?d:v}catch(e){return d}}
+function own(slug){var B=jget("aiedume_bought",[]);if(B.indexOf(slug)<0){B.push(slug);try{localStorage.setItem("aiedume_bought",JSON.stringify(B))}catch(e){}}try{localStorage.removeItem("aiedume_trial_"+slug)}catch(e){}}
+document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest("a.pr[data-free]"):null;if(a)own(a.getAttribute("data-free"))});
+function relabel(){var B=jget("aiedume_bought",[]);if(!B.length)return;Array.prototype.forEach.call(document.querySelectorAll("a.pr"),function(a){var s=a.getAttribute("data-free")||((a.getAttribute("href")||"").match(/checkout\.html\?plugin=([^"&]+)/)||[])[1];if(s&&B.indexOf(s)>-1){a.textContent="Open";a.setAttribute("href","my-plugins.html");a.removeAttribute("data-free");a.title="You have this plugin \u2014 open it"}})}
+var g=document.getElementById("grid");if(g)new MutationObserver(relabel).observe(g,{childList:true});relabel();
+})();
+</script>
+<script src="nav-tabs.js?v=1793242697" defer></script>
+<style id="zheadfix-css">/* zheadfix 2026-10-30: Greg — no X on panels like this. The store guide's X is hidden; its own "Ask the guide" button (script below) now opens AND closes it, and Escape still closes it. The floating Fred button (#fbtn) is the quick panel's own toggle and stays as-is. */#gclose{display:none!important}</style>
+<script>/* zheadfix 2026-10-30 */(function(){var b=document.getElementById("gopen"),g=document.getElementById("guide");if(!b||!g)return;b.onclick=function(){if(g.classList.contains("on")){g.classList.remove("on")}else{g.classList.add("on");var q=document.getElementById("gq");if(q)q.focus()}}})();</script>
+</body></html>

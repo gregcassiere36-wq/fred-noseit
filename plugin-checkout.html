@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Plugin | Fred Noseit</title><meta name="description" content="A plugin page on Fred Noseit. Demo checkout, no real payment, nothing is sold."/><meta name="robots" content="noindex"/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon.png" rel="icon" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><meta content="#0f172a" name="theme-color"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#0a101d;color:#e8eefc;font:500 16px/1.3 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+body{display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+:root{--teal:#2dd4bf;--mint:#7ef0c5;--gold:#ffd27a;--mut:#9fb0d3;--line:#263553}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.app{flex:1;min-height:0;display:flex;flex-direction:column;max-width:1240px;width:100%;margin:0 auto;padding:14px 16px 16px;gap:12px}
+.banner{flex:none;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.banner .demo{margin-left:auto;font-size:.92rem;font-weight:800;color:var(--gold);background:rgba(255,176,32,.2);border:2px solid #ffb020;padding:5px 12px;border-radius:8px}
+.banner .bkstore{min-height:40px;padding:0 18px;font-size:.95rem}
+.cols{flex:1;min-height:0;display:grid;grid-template-columns:2fr 1fr;gap:14px}
+#chatmount{display:flex;min-height:0;min-width:0}
+#chatmount .pchat{flex:1;min-height:0;min-width:0;margin:0;padding:0;display:flex;flex-direction:column;border:2px solid var(--teal);border-radius:18px;background:linear-gradient(180deg,#101c33,#0b1424);overflow:hidden}
+#chatmount .pchat[hidden]{display:none}
+#chatmount .pch{padding:13px 16px;border-bottom:1px solid var(--line);gap:12px}
+#chatmount .pch img{width:56px;height:56px;border-radius:14px;border:2px solid var(--teal);background:#12414d}
+#chatmount .pwho b{font:800 1.12rem Poppins,Inter,sans-serif}
+#chatmount .pwho small{font-size:.88rem}
+#chatmount .ptag{background:#24365e;color:#dceaff;font-size:.85rem;padding:7px 14px}
+#chatmount .px2{width:44px;height:44px;border-radius:10px}
+#chatmount .clog{flex:1;max-height:none;padding:20px;gap:10px}
+#chatmount .cb{font-size:1rem;padding:10px 14px}
+#chatmount .cb b{font-size:.8rem}
+#chatmount .clock{margin:0 16px 12px}
+#chatmount .cform{padding:14px 16px;border-top:1px solid var(--line);gap:10px}
+#chatmount .cform input{height:56px;border-radius:12px;padding:0 16px;font-size:1.05rem}
+#chatmount .cform button{height:56px;padding:0 24px;border-radius:12px;font-size:1.05rem;background:linear-gradient(180deg,#34e0cc,#1fbfab)}
+#chatmount .cmic{height:56px;border-radius:12px;background:#16223a}
+#chatmount .cmic.on{background:#ffd27a;border-color:#ffd27a;color:#2a1b00}
+.side{display:flex;flex-direction:column;gap:14px;min-height:0;min-width:0}
+.panel{border-radius:16px;background:linear-gradient(180deg,#14213b,#0f1a2f);border:1px solid var(--line);padding:16px}
+.pinfo{display:flex;flex-direction:column}
+.pinfo h2{margin:0;font:800 1.08rem/1.25 Poppins,Inter,sans-serif;order:1}
+.amt{order:2;font:800 1.7rem Poppins,Inter,sans-serif;color:var(--mint);margin:10px 0 2px}
+.amt small{font-size:.9rem;color:var(--mut);font-weight:700}
+.pinfo .getbtn{order:3;width:100%;min-height:52px;border-radius:12px;margin-top:12px;padding:0 16px;font-size:1.05rem;background:linear-gradient(180deg,#34e0cc,#1fbfab);box-shadow:0 6px 18px rgba(45,212,191,.25)}
+.pinfo .getbtn.tryfree{margin-left:0;box-shadow:none}
+#pnote{order:4;text-align:center;color:var(--mut);font-size:.86rem;margin-top:10px}
+.seller{display:flex;gap:12px;align-items:flex-start}
+.seller .sface{width:56px;height:56px;flex:none}
+.seller .sface img{width:56px;height:56px;border-radius:14px;object-fit:cover;border:2px solid var(--teal);background:#12414d;display:block}
+.seller .nm{font:800 1.02rem Poppins,Inter,sans-serif}
+.seller .rl{color:var(--mut);font-size:.86rem;margin-top:2px}
+.seller .one{color:#d6e1fa;font-size:.92rem;margin-top:8px;line-height:1.35}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 14px;border-radius:12px;border:1px solid var(--teal);background:rgba(45,212,191,.12);color:#9ff5e6;font-weight:700;cursor:pointer;white-space:nowrap}
+.nf{display:none;text-align:center;padding:30px 10px}
+.nf a{display:inline-flex;margin-top:12px}
+.err .cols{display:none}.err .nf{display:block}
+@media(max-width:900px){
+ html,body{height:auto;overflow:visible}
+ body{display:block}
+ .app{height:auto}
+ .cols{grid-template-columns:1fr}
+ #chatmount{min-height:70dvh}
+}
+@media(max-width:560px){
+ #chatmount .pch{flex-wrap:wrap}
+ #chatmount .pwho{flex:1 1 150px}
+ #chatmount .ptag{order:3;margin-left:auto}
+}
+@media(max-width:700px){
+ .app{padding:10px 10px 12px;gap:10px}
+ .banner .demo{font-size:.8rem}
+ #chatmount .pch{padding:11px 12px}
+ #chatmount .clog{padding:14px 12px}
+ #chatmount .cform{padding:12px}
+ #chatmount .cform button{padding:0 16px}
+}
+</style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/>
+</head>
+<body>
+<nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" decoding="async" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t" href="plugin-market.html">Plugin Store</a><a class="t" href="my-plugins.html">My Plugins</a><a class="t tin" href="signup.html">Sign in</a></div></nav><div class="app" id="app">
+ <h1 class="vh" id="h1">Plugin</h1>
+ <div class="banner"><span class="demo">Demo checkout, no real payment</span></div>
+ <div class="cols" id="cols">
+  <div id="chatmount" aria-label="Chat with this plugin's seller"></div>
+  <aside class="side">
+   <section class="panel pcard" aria-label="Price and buy">
+    <div class="prod"><div class="pinfo">
+     <h2 id="name"></h2>
+     <div class="amt" id="amt"></div>
+     <div class="note" id="pnote"></div>
+     <span id="rq" hidden></span>
+    </div></div>
+   </section>
+   <section class="panel scard" aria-label="About the seller">
+    <div class="seller">
+     <div class="sface"><img id="sface" alt=""/></div>
+     <div><div class="nm" id="sname2"></div><div class="rl" id="srole"></div><div class="one" id="sone"></div></div>
+    </div>
+   </section>
+  </aside>
+ </div>
+ <div class="nf"><h2>We could not find that plugin</h2><p>The link may be old. Pick one from the store.</p><a class="pill" href="plugin-market.html">← Back to the Plugin Store</a></div>
+</div>
+<script src="plugin-data.js?v=1793242697"></script><script src="plugx.js?v=1793242697"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var id=new URLSearchParams(location.search).get("id"),x=null;
+(window.PLUGINS||[]).forEach(function(p){if(p.slug===id)x=p});
+if(!x){$("app").classList.add("err");document.title="Plugin not found | Fred Noseit";return}
+document.title=x.n+" | Fred Noseit";
+$("h1").textContent=x.n;
+$("name").textContent=x.n;
+var amt=$("amt");
+if(x.p>0){var pl=window.priceLabel?priceLabel(x):"$"+x.p;var rest=pl.replace("$"+x.p,"").trim();
+amt.textContent="$"+x.p+(rest.charAt(0)==="/"?"":" ");var sm=document.createElement("small");sm.textContent=rest;amt.appendChild(sm)}
+else amt.textContent="Free";
+$("sface").src="img/faces/"+x.f+".webp";$("sface").alt="Portrait of "+x.cn+" (fictional)";
+$("sname2").textContent=x.cn;$("srole").textContent=x.role;$("sone").textContent=x.d||"";
+function jget(k,d){try{var v=JSON.parse(localStorage.getItem(k)||"null");return v==null?d:v}catch(e){return d}}
+var owned=jget("aiedume_bought",[]).indexOf(x.slug)>-1,note="";
+if(owned)note=x.p>0?"Yours · no limits":"Free plugin · yours";
+else if(x.p<=0)note="Free plugin";
+else if(x.trial>0){var left=jget("aiedume_trial_"+x.slug,null);if(typeof left!=="number"||left<0||left>x.trial)left=x.trial;note="Free sample · "+left+" chat"+(left===1?"":"s")+" left"}
+else note="Buy to chat · no limits once it is yours";
+$("pnote").textContent=note;
+})();
+</script>
+<script src="plugapp.js?v=1793242697"></script>
+<script src="buildcta.js?v=1793242697" defer></script><script src="nav-tabs.js?v=1793242697" defer></script></body></html>

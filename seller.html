@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Your sales | Fred Noseit</title><meta name="description" content="See who bought your plugins and how they are selling. Demo page: sample rows show how your sales will look."/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon.png" rel="icon" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><meta content="#0f172a" name="theme-color"/><link href="manifest.json" rel="manifest"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="yes" name="mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="Fred Noseit" name="apple-mobile-web-app-title"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#0b1220;color:#e8eefc;font:500 16px/1.35 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+.app{max-width:1500px;width:96%;margin:0 auto;padding:10px 14px 22px;display:flex;flex-direction:column;gap:10px}
+.bkstore{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:12px;border:2px solid #2dd4bf;background:#2dd4bf;color:#062a26;font:800 .9rem Inter,sans-serif;white-space:nowrap;text-decoration:none;align-self:flex-start}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top h1{margin:0;font:800 1.5rem Poppins,Inter,system-ui,sans-serif;flex:1}
+.demo{font-size:.88rem;font-weight:800;color:#ffd27a;background:rgba(255,176,32,.18);border:2px dashed #ffb020;padding:6px 12px;border-radius:10px;line-height:1.3}
+.f2b{display:inline-flex;font:800 .85rem Inter,sans-serif;color:#062a26;background:#7ef0c5;border-radius:999px;padding:6px 14px;align-self:flex-start}
+.fine{margin:0;font-size:.8rem;color:#9fb0d3;line-height:1.35}
+.scard{background:#101a30;border:1px solid #263553;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.scard.hl{border-color:#2dd4bf;box-shadow:0 0 0 3px rgba(45,212,191,.25)}
+.scard h2{margin:0;font:800 1.12rem Poppins,Inter,sans-serif}
+.meta2{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:.8rem;color:#9fb0d3}
+.st2{font-weight:800;border-radius:999px;padding:2px 10px;font-size:.72rem}.st2.draft{background:#3b3320;color:#ffd27a}.st2.pub{background:#143a34;color:#7ef0c5}
+.real{margin:0;font-size:.9rem;background:rgba(126,240,197,.12);border:1px solid #7ef0c5;border-radius:10px;padding:8px 10px}
+.noreal{margin:0;font-size:.85rem;color:#9fb0d3}
+.samp{border:2px dashed #ffb020;border-radius:12px;padding:10px;background:rgba(255,176,32,.06)}
+.samplbl{font:800 .78rem Inter,sans-serif;color:#ffd27a;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:6px 8px;border-bottom:1px solid #263553;text-align:left;vertical-align:top}
+th{font:800 .72rem Inter,sans-serif;color:#9fb0d3;text-transform:uppercase;letter-spacing:.05em}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.tot td{border-bottom:0;font-weight:800;color:#fff}
+.totline{margin:8px 0 0;font:800 1rem Poppins,Inter,sans-serif;color:#7ef0c5}
+.empty2{padding:18px;border:2px dashed #3d5a80;border-radius:16px;text-align:center}
+.empty2 a{color:#2dd4bf;font-weight:800;text-decoration:underline}
+@media(max-width:700px){table{font-size:.82rem}th,td{padding:5px 5px}.top h1{font-size:1.25rem}}
+.maxcard{position:fixed;right:14px;bottom:14px;z-index:60;width:min(348px,calc(100vw - 28px));background:#101a30;border:1px solid #2dd4bf;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.maxpicwrap{position:relative;flex:none;display:inline-block;line-height:0}
+.maxbadge{position:absolute;top:-7px;right:-12px;display:inline-flex;align-items:center;gap:4px;background:#0e2a1e;border:1px solid #22c55e;color:#7ef0c5;font:800 .62rem/1 Inter,sans-serif;padding:3px 7px;border-radius:999px;letter-spacing:.02em}
+.maxbadge[hidden]{display:none}
+.maxdot{width:7px;height:7px;border-radius:50%;background:#22c55e;flex:none}
+.slayout{padding-bottom:112px}
+@media(max-width:700px){.maxcard{right:10px;bottom:10px;width:calc(100vw - 20px)}}
+.app{transition:padding-right .25s ease}
+@media(min-width:701px){body.maxopen .app{padding-right:468px}}
+@media(max-width:700px){.maxcard.mxopen{max-height:85vh}.maxcard.mxopen .maxrow{flex:none}.maxcard.mxopen .maxchat{flex:1;min-height:0}.maxcard.mxopen .maxlog{flex:1;min-height:0;max-height:none}.maxcard.mxopen .maxin{flex:none}}
+@media(min-width:701px){.maxcard.mxopen{width:min(440px,calc(100vw - 28px));max-height:70vh}.maxcard.mxopen .maxrow{flex:none}.maxcard.mxopen .maxchat{flex:1;min-height:0}.maxcard.mxopen .maxlog{flex:1;min-height:0;max-height:none}.maxcard.mxopen .maxin{flex:none}}
+.maxrow{display:flex;align-items:center;gap:12px;background:none;border:0;padding:0;cursor:pointer;text-align:left;width:100%;color:inherit;font:inherit}
+.maxpic{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #2dd4bf;flex:none}
+.maxcol{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.maxbubble{background:#143a34;color:#e8eefc;font:700 .95rem Inter,sans-serif;border-radius:14px;border-bottom-left-radius:4px;padding:9px 13px}
+.maxname{font:800 .72rem Inter,sans-serif;color:#9fb0d3;text-transform:uppercase;letter-spacing:.05em}
+.maxchat{border-top:1px solid #263553;padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.maxchat[hidden]{display:none}
+.maxlog{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto}
+.mxm{font-size:.9rem;border-radius:12px;padding:8px 11px;max-width:92%;line-height:1.35}
+.mxm.bot{background:#143a34;align-self:flex-start}
+.mxm.me{background:#263553;align-self:flex-end}
+.maxin{display:flex;gap:8px}
+.maxin input{flex:1;min-width:0;background:#0b1220;border:1px solid #263553;border-radius:10px;color:#e8eefc;font:500 .9rem Inter,sans-serif;padding:9px 11px}
+.maxin button{background:#2dd4bf;color:#062a26;border:0;border-radius:10px;font:800 .9rem Inter,sans-serif;padding:9px 16px;cursor:pointer}
+.slayout{display:flex;gap:12px;align-items:flex-start;width:100%}
+.sside{width:205px;flex:none;display:flex;flex-direction:column;gap:10px}
+.smain{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.sscard{background:#101a30;border:1px solid #263553;border-radius:16px;padding:13px;text-align:center}
+.sscard .ahd{font:800 .78rem Inter,sans-serif;letter-spacing:.06em;color:#9fb0d3;text-align:left;margin-bottom:8px}
+.sscard img{width:112px;height:112px;border-radius:15px;object-fit:cover;border:2px solid #2dd4bf}
+.sscard img[hidden]{display:none}
+.ssph{width:112px;height:112px;border-radius:15px;border:2px solid #2dd4bf;background:linear-gradient(135deg,#2dd4bf,#ffd27a);display:grid;place-items:center;font-size:3.2rem;margin:0 auto}
+.ssph[hidden]{display:none}
+.ssnm{font:800 1rem Poppins,Inter,sans-serif;margin-top:7px;overflow-wrap:anywhere}
+.ssnav{display:flex;flex-direction:column;gap:8px}
+.ssbtn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:10px 12px;border-radius:12px;border:2px solid #2dd4bf;background:#2dd4bf;color:#062a26;font:800 .95rem Inter,sans-serif;text-decoration:none;cursor:pointer;width:100%;box-sizing:border-box}
+.ssbtn.ghost{background:transparent;color:#e8eefc;border-color:#3d5a80}
+.joycard{background:#101a30;border:1px solid #263553;border-radius:16px;padding:14px 13px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;text-decoration:none;color:inherit}
+.joycard:hover{border-color:#2dd4bf}
+.joypic{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #ffd27a;flex:none}
+.joytxt{display:flex;flex-direction:column;gap:6px;align-items:center}
+.joyname{font:800 1.06rem Poppins,Inter,sans-serif;color:#fff;line-height:1.15}
+.joyprice{display:inline-flex;font:800 .85rem Inter,sans-serif;color:#3b2a00;background:#ffd27a;border-radius:999px;padding:4px 14px}
+.joyline{font-size:.9rem;color:#c8d6f5;line-height:1.3}
+@media(max-width:700px){.slayout{flex-direction:column}.sside{width:100%}.sscard{display:flex;align-items:center;gap:12px;text-align:left}.sscard .ahd{display:none}.sscard img,.ssph{width:62px;height:62px;font-size:1.8rem;margin:0;flex:none}.ssnm{margin-top:0}.ssnav{flex-direction:row}.ssnav>*{flex:1}.joycard{flex-direction:row;text-align:left;justify-content:flex-start;gap:10px}.joypic{width:60px;height:60px}.joytxt{align-items:flex-start}}
+</style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/><link rel="stylesheet" href="mobile.css"/>
+</head>
+<body>
+<nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" decoding="async" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t" href="plugin-market.html">Plugin Store</a><a class="t cur" href="my-plugins.html" aria-current="page">My Plugins</a><a class="t tin" href="signup.html">Sign in</a></div></nav>
+<div class="app">
+<div class="slayout">
+ <aside class="sside" aria-label="Your side panel">
+  <div class="sscard">
+   <div class="ahd">YOUR AVATAR</div>
+   <img id="ssavimg" alt="Your avatar" hidden/>
+   <div class="ssph" id="ssavph" aria-hidden="true">👤</div>
+   <div class="ssnm" id="ssavname">Guest</div>
+  </div>
+  <nav class="ssnav" aria-label="Home and back">
+   <a class="ssbtn" href="index.html">🏠 Home page</a>
+   <button class="ssbtn ghost" id="ssprev" type="button">← Previous page</button>
+  </nav>
+  <a class="joycard" href="plugin-builder.html" aria-label="Joy the Promoter — open the Plugin Builder">
+   <img class="joypic" src="img/agents/joy.webp" alt="Joy the Promoter" width="80" height="80"/>
+   <span class="joytxt"><span class="joyname">Joy the Promoter</span><span class="joyprice">$10/month</span><span class="joyline">Joy promotes your plugin.</span></span>
+  </a>
+ </aside>
+ <div class="smain">
+ <div class="top"><a class="bkstore" href="plugin-market.html">← Back to the Plugin Store</a></div>
+ <h1 style="margin:0;font:800 1.5rem Poppins,Inter,system-ui,sans-serif">📈 Your sales</h1>
+ <div class="demo" role="note"><b>Demo only.</b> No real payments happen yet. Rows marked <b>Sample</b> are made-up examples of how your sales will look. A buy counted “in this browser” really happened in this browser's demo checkout — no money moved.</div>
+ <span class="f2b">💵 You keep 80% of every sale.</span>
+ <div id="slist" style="display:flex;flex-direction:column;gap:10px"></div>
+ <p class="fine">Seller page (demo). When the store goes live, real buyers appear here the same way: who bought, when, what they paid, and your 80% share. Payouts and refunds follow the seller rules in the store.</p>
+ <div class="maxcard" id="maxcard">
+  <button class="maxrow" id="maxopen" type="button" aria-expanded="false" aria-controls="maxchat">
+   <span class="maxpicwrap"><img class="maxpic" src="img/agents/max.webp" alt="Otto the beaver" width="52" height="52"/><span class="maxbadge" id="maxbadge" hidden><span class="maxdot"></span>Active</span></span>
+   <span class="maxcol"><span class="maxbubble">Hey, still need help?</span><span class="maxname">Otto the Builder · tap to chat</span></span>
+  </button>
+  <div class="maxchat" id="maxchat" hidden>
+   <div class="maxlog" id="maxlog" aria-live="polite"></div>
+   <form class="maxin" id="maxform">
+    <input id="maxq" type="text" placeholder="Ask Otto: payouts, refunds, updates..." autocomplete="off" aria-label="Ask Otto a seller question"/>
+    <button type="submit">Send</button>
+   </form>
+  </div>
+ </div>
+ </div>
+</div>
+</div>
+<script src="plugin-data.js?v=1793242697"></script>
+<script src="plugx.js?v=1793242697"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?"":s).replace(/[&<>\"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function fmt(v){v=Math.round(v*100)/100;return "$"+(v%1?v.toFixed(2):String(v))}
+function priceTxt(p,pk){if(window.priceLabel)return window.priceLabel({p:p,pk:pk||"once"});return p>0?"$"+p:"FREE"}
+var mine=[];
+try{(window.PX?PX.list():[]).forEach(function(d){mine.push({id:d.id,slug:"my-"+d.id,name:d.n||"Untitled plugin",p:parseFloat(d.p)||0,pk:d.pk||"once",status:d.status==="published"?"pub":"draft",statusTxt:d.status==="published"?"Published (demo)":"Draft"})})}catch(e){}
+try{var fd=JSON.parse(localStorage.getItem("aiedume_draft")||"null");
+ if(fd&&fd.name&&!mine.some(function(m){return m.name===fd.name}))mine.push({id:"formdraft",slug:"",name:fd.name,p:parseFloat(fd.price)||0,pk:fd.pk||"once",status:"draft",statusTxt:"Draft (from the form)"})}catch(e){}
+var B=[];try{B=JSON.parse(localStorage.getItem("aiedume_bought")||"[]")}catch(e){}
+function boughtCount(m){if(!m.slug)return 0;var n=0;B.forEach(function(s){if(s===m.slug)n++});return n}
+var NAMES=["Maria","James","Priya","Tom","Aisha","Elena","Marcus","Sofia","David","Grace"];
+var WHOS=["4th-grade teacher · Brooklyn","Parent · Queens","Para · the Bronx","6th-grade teacher · Staten Island","Parent · Manhattan","New teacher · Brooklyn","SPED teacher · Queens","Homeschool parent · Long Island","2nd-grade teacher · Manhattan","Parent · the Bronx"];
+function hash(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h}
+function samples(m){var seed=hash(m.id+"|"+m.name),rows=[],n=3+(seed%2);
+ for(var i=0;i<n;i++){var day=8+((seed+i*5)%19);rows.push({b:NAMES[(seed+i*3)%NAMES.length],w:WHOS[(seed+i*4)%WHOS.length],day:day,amt:m.p,share:Math.round(m.p*80)/100})}
+ rows.sort(function(a,b){return b.day-a.day});return rows}
+function card(m){
+ var cnt=boughtCount(m),rows=samples(m),ty=0,tx=0;
+ rows.forEach(function(r){ty+=r.amt;tx+=r.share});
+ var h='<article class="scard" id="sale-'+esc(m.id)+'">';
+ h+='<h2>'+esc(m.name)+'</h2>';
+ h+='<div class="meta2"><span class="st2 '+m.status+'">'+esc(m.statusTxt)+'</span><span>'+esc(priceTxt(m.p,m.pk))+'</span></div>';
+ if(cnt>0)h+='<p class="real">🛒 Bought <b>'+cnt+' time'+(cnt>1?"s":"")+'</b> in this browser (demo checkout). That activity is real on this device — the sample rows below are not real sales.</p>';
+ else h+='<p class="noreal">No buys in this browser yet.</p>';
+ h+='<div class="samp"><div class="samplbl">Sample — how your sales will look</div>';
+ h+='<table><thead><tr><th>Buyer</th><th>Who</th><th>Date</th><th class="n">Paid</th><th class="n">Your 80%</th></tr></thead><tbody>';
+ rows.forEach(function(r){h+='<tr><td>'+esc(r.b)+'</td><td>'+esc(r.w)+'</td><td>Oct '+r.day+', 2026</td><td class="n">'+fmt(r.amt)+'</td><td class="n">'+fmt(r.share)+'</td></tr>'});
+ h+='<tr class="tot"><td colspan="3">Total ('+rows.length+' sample sales)</td><td class="n">'+fmt(ty)+'</td><td class="n">'+fmt(tx)+'</td></tr>';
+ h+='</tbody></table>';
+ h+='<p class="totline">You made '+fmt(tx)+' of '+fmt(ty)+' — your 80%.</p>';
+ h+='</div></article>';
+ return h}
+var out=$("slist");
+if(!mine.length){
+ out.innerHTML='<div class="empty2"><b>No plugins yet.</b><br/>When you build a plugin, its sales show up here.<br/><a href="plugin-builder.html">+ Build your first plugin</a></div>'+card({id:"example",slug:"",name:"Your first plugin (example)",p:9,pk:"once",status:"draft",statusTxt:"Example"});
+}else{
+ out.innerHTML=mine.map(card).join("");
+}
+try{var hid=decodeURIComponent((location.hash||"").replace(/^#/,""));
+ if(hid){var el=document.getElementById("sale-"+hid);if(el){el.classList.add("hl");el.scrollIntoView({block:"start"})}}}catch(e){}
+})();
+</script>
+<script>
+(function(){
+var open=document.getElementById("maxopen"),chat=document.getElementById("maxchat"),log=document.getElementById("maxlog"),form=document.getElementById("maxform"),q=document.getElementById("maxq"),badge=document.getElementById("maxbadge"),started=false;
+function add(t,who){var d=document.createElement("div");d.className="mxm "+who;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight}
+function answer(s){
+ s=" "+s.toLowerCase()+" ";
+ if(/payout|pay out|paid|get paid|money|earn|80%|share|minimum/.test(s))return "You keep 80% of every sale \u2014 the site keeps 20%. Payouts go out monthly, and the minimum payout is $10: once your share reaches $10, it is paid in the next monthly payout.";
+ if(/refund|money back/.test(s))return "Buyers have 14 days to ask for a refund. If a sale is refunded, that sale comes off your totals here, and its 80% share comes out of your next payout.";
+ if(/update|edit|change|fix my/.test(s))return "To update your plugin, go to My Plugins, pick your plugin, and tap \u201CUpdate your plugin.\u201D The Checker reviews updates before they show in the store.";
+ if(/store|sell|post|publish|search/.test(s))return "How the store works: you build a plugin in the builder, the Checker reviews it, and it posts in the Plugin Store. Buyers find it by topic, grade, or name \u2014 and every sale shows up right here on this page.";
+ if(/sale|bought|buyers|selling/.test(s))return "This page is your sales tracker: each of your plugins gets a card showing who bought it, when, what they paid, and your 80% on the \u201CYou made\u201D line. Rows marked Sample are examples until the store goes live.";
+ if(/hi|hello|hey|help/.test(s))return "Hi! I'm Otto, the Builder. Ask me about payouts, refunds, updating your plugin, or how the store works.";
+ return "I can help with payouts, refunds, updating your plugin, and how the store works. Try asking: \u201CHow do payouts work?\u201D";
+}
+if(open&&chat){open.addEventListener("click",function(){
+ var show=chat.hidden;chat.hidden=!show;open.setAttribute("aria-expanded",String(show));
+ document.body.classList.toggle("maxopen",show);chat.parentNode.classList.toggle("mxopen",show);
+ if(show&&badge)badge.hidden=false;
+ if(show&&!started){started=true;add("Hi, I'm Otto. Ask me about your sales \u2014 payouts, refunds, updating your plugin, or how the store works.","bot")}
+ if(show&&q)q.focus();
+});}
+if(form){form.addEventListener("submit",function(e){e.preventDefault();var v=(q.value||"").trim();if(!v)return;add(v,"me");q.value="";add(answer(v),"bot")})}
+})();
+</script>
+<script>(function(){var img=document.getElementById("ssavimg"),ph=document.getElementById("ssavph"),nm=document.getElementById("ssavname");var usr=null;try{usr=(window.PX&&PX.user)?PX.user():JSON.parse(localStorage.getItem("aiedume_demo_account")||"null")}catch(e){}if(nm)nm.textContent=(usr&&usr.name)||"Guest";var av=null;try{av=localStorage.getItem("aiedume_avatar")}catch(e){}if(av&&img){img.src=av;img.hidden=false;if(ph)ph.hidden=true}var pv=document.getElementById("ssprev");if(pv)pv.addEventListener("click",function(){if(window.history&&history.length>1){history.back()}else{location.href="plugin-market.html"}})})();</script>
+<script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script>
+<script src="nav-tabs.js?v=1793242697" defer></script>
+</body></html>

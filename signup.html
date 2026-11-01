@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Free sign-up (demo) | Fred Noseit</title><meta name="description" content="Demo sign-up page. Free to use. Anyone can build a plugin."/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon.png" rel="icon" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><meta content="#0f172a" name="theme-color"/><link href="manifest.json" rel="manifest"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="yes" name="mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="Fred Noseit" name="apple-mobile-web-app-title"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#0b1220;color:#e8eefc;font:500 18px/1.35 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+.app{max-width:480px;margin:0 auto;padding:8px 14px 16px}
+.card{display:flex;flex-direction:column;gap:8px;padding:14px 18px 12px;border-radius:20px;background:#101a30;border:1px solid #263553;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.card h1{margin:0;font:800 1.45rem/1.15 Poppins,Inter,sans-serif;text-align:center}
+.sub{margin:0;text-align:center;color:#9fb0d3;font-size:.95rem}
+.fld{display:block}.lbl{display:block;font-weight:800;font-size:.95rem;color:#cfe0ff;margin:0 0 2px}
+.fld input,.fld select{width:100%;height:48px;border-radius:14px;background:#0b1220;border:2px solid #2dd4bf;padding:0 14px;font-size:18px}
+.fld input:focus,.fld select:focus{outline:3px solid #fff;outline-offset:1px}
+.fld input:disabled,.fld select:disabled{opacity:.55}
+.go{min-height:56px;border:0;border-radius:16px;background:linear-gradient(180deg,#34e0cc,#1fbfab);color:#05302a;font-weight:800;font-size:1.3rem;cursor:pointer;box-shadow:0 5px 16px rgba(45,212,191,.25);width:100%}
+.go:hover{filter:brightness(1.08)}
+.goog{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;width:100%;border-radius:14px;background:#fff;color:#1f2937;border:0;font-weight:800;font-size:1.05rem;cursor:pointer}
+.goog svg{width:22px;height:22px}
+.apple{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;width:100%;border-radius:14px;background:#000;color:#fff;border:1px solid #263553;font-weight:800;font-size:1.05rem;cursor:pointer}
+.apple svg{width:20px;height:20px;fill:#fff}
+.or{display:flex;align-items:center;gap:10px;color:#7d8fb3;font-size:.85rem;margin:-2px 0}.or:before,.or:after{content:"";flex:1;height:1px;background:#263553}
+.err{margin:0;color:#ffb4b4;font-weight:700;font-size:1rem;min-height:0}.err:empty{display:none}
+.fine{margin:0;text-align:center;font-size:.8rem;color:#8fa1c6}
+.fred{display:block;height:128px;width:auto;margin:2px auto 4px}
+.msg{margin:0;text-align:center;color:#7ef0c5;font-weight:700;font-size:.98rem}.msg:empty{display:none}
+.modes{display:flex;gap:8px}
+.mtab{flex:1;min-height:44px;border-radius:12px;background:#0b1220;border:1px solid #263553;color:#cfe0ff;font-weight:800;font-size:1rem;cursor:pointer}
+.mtab.on{background:linear-gradient(180deg,#34e0cc,#1fbfab);color:#05302a;border-color:#2dd4bf}
+.fglink{display:block;text-align:center;margin-top:2px;color:#2dd4bf;font-weight:700;font-size:.95rem}
+.honest{margin:0;text-align:center;font-size:.85rem;color:#8fa1c6}
+[hidden]{display:none!important}
+</style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/><link rel="stylesheet" href="mobile.css"/>
+</head>
+<body>
+<nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" decoding="async" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t" href="plugin-market.html">Plugin Store</a><a class="t" href="my-plugins.html">My Plugins</a><a class="t tin" href="signup.html?signin=1">Sign in</a></div></nav><div class="app">
+ <main class="card">
+  <img class="fred" src="media/fred-v81.webp" alt="Fred Noseit"/>
+  <h1 id="ttl">Welcome to Fred Noseit</h1>
+  <p class="sub" id="sub">Log in or join free.</p>
+  <button type="button" class="goog" id="gg"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continue with Google</button>
+  <button type="button" class="apple" id="ap"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Continue with Apple</button>
+  <p class="or">or</p>
+  <div class="modes" role="tablist" aria-label="Sign up or sign in">
+   <button type="button" class="mtab on" id="tabUp" role="tab">Sign up</button>
+   <button type="button" class="mtab" id="tabIn" role="tab">Sign in</button>
+  </div>
+  <form id="f" novalidate autocomplete="off" style="display:flex;flex-direction:column;gap:8px">
+   <label class="fld"><span class="lbl">Name</span><input id="nm" type="text" maxlength="60" placeholder="Your name" autocomplete="name"/></label>
+   <label class="fld"><span class="lbl">Email</span><input id="em" type="email" maxlength="80" placeholder="you@example.com" autocomplete="email"/></label>
+   <label class="fld"><span class="lbl">I am a</span><select id="rl"><option>Teacher</option><option>Parent</option><option>Para</option><option>Student</option><option>Other</option></select></label>
+   <label class="fld"><span class="lbl">ZIP code</span><input id="zp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="e.g. 11223"/></label>
+   <label class="fld"><span class="lbl">Password</span><input id="pw" type="password" maxlength="80" placeholder="At least 6 characters" autocomplete="new-password"/></label>
+   <p class="err" id="err" role="alert" aria-live="assertive"></p>
+   <button class="go" type="submit" id="go">Continue</button>
+  </form>
+  <form id="fIn" novalidate autocomplete="off" style="display:flex;flex-direction:column;gap:8px" hidden>
+   <label class="fld"><span class="lbl">Email</span><input id="em2" type="email" maxlength="80" placeholder="you@example.com" autocomplete="email"/></label>
+   <label class="fld"><span class="lbl">Password</span><input id="pw2" type="password" maxlength="80" placeholder="Your password" autocomplete="current-password"/></label>
+   <p class="err" id="errIn" role="alert" aria-live="assertive"></p>
+   <button class="go" type="submit" id="goIn">Sign in</button>
+   <a class="fglink" href="#" id="fgLink">Forgot password?</a>
+  </form>
+  <form id="fFg" novalidate autocomplete="off" style="display:flex;flex-direction:column;gap:8px" hidden>
+   <p class="sub">Reset your password</p>
+   <label class="fld"><span class="lbl">Email</span><input id="em3" type="email" maxlength="80" placeholder="you@example.com" autocomplete="email"/></label>
+   <label class="fld"><span class="lbl">New password</span><input id="pw3" type="password" maxlength="80" placeholder="At least 6 characters" autocomplete="new-password"/></label>
+   <p class="honest">On the real site, this reset comes by email. Here it stays on this device.</p>
+   <p class="err" id="errFg" role="alert" aria-live="assertive"></p>
+   <button class="go" type="submit" id="goFg">Reset password</button>
+   <a class="fglink" href="#" id="bkLink">Back to sign in</a>
+  </form>
+  <p class="msg" id="msg" aria-live="polite"></p>
+ </main>
+ <p class="fine" style="margin-top:12px">Your account is saved on this device.</p>
+</div>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var upDone=false,inDone=false;
+function loadAcct(){try{var a=JSON.parse(localStorage.getItem("aiedume_demo_account")||"null");return a&&typeof a==="object"?a:null}catch(x){return null}}
+function save(o){var a=loadAcct()||{};for(var k in o)a[k]=o[k];a.demo=true;try{localStorage.setItem("aiedume_demo_account",JSON.stringify(a))}catch(x){}}
+function msg(t){$("msg").textContent=t}
+function fnv(s){s="fred-noseit::"+s;var h1=0x811c9dc5,h2=0x811c9dc5,i;for(i=0;i<s.length;i++){h1^=s.charCodeAt(i);h1=Math.imul(h1,0x01000193)>>>0}for(i=s.length-1;i>=0;i--){h2^=s.charCodeAt(i);h2=Math.imul(h2,0x01000193)>>>0}return "h1:"+("0000000"+h1.toString(16)).slice(-8)+("0000000"+h2.toString(16)).slice(-8)}
+function hashPw(pw,cb){var fb=function(){cb(fnv(pw))};try{
+ if(window.crypto&&crypto.subtle&&crypto.subtle.digest&&window.TextEncoder){
+  crypto.subtle.digest("SHA-256",new TextEncoder().encode("fred-noseit::"+pw)).then(function(buf){var b=new Uint8Array(buf),hex="",i;for(i=0;i<b.length;i++)hex+=("0"+b[i].toString(16)).slice(-2);cb("s256:"+hex)},fb);return}
+ }catch(e){}fb()}
+function nxDest(){var nx="my-plugins.html";try{var t=localStorage.getItem("aiedume_next");if(t==="build-plugin.html"||t==="plugin-builder.html")nx=t;localStorage.removeItem("aiedume_next")}catch(x){}return nx}
+function armGo(btn){var nx=nxDest();btn.setAttribute("data-next",nx);btn.type="button";btn.textContent="Continue";btn.addEventListener("click",function(){location.href=nx});setTimeout(function(){location.href=nx},900)}
+function showMode(m){
+ $("f").hidden=m!=="up";$("fIn").hidden=m!=="in";$("fFg").hidden=true;
+ $("tabUp").className="mtab"+(m==="up"?" on":"");$("tabIn").className="mtab"+(m==="in"?" on":"");
+ $("err").textContent="";$("errIn").textContent="";$("errFg").textContent="";msg("")}
+$("tabUp").addEventListener("click",function(){showMode("up")});
+$("tabIn").addEventListener("click",function(){showMode("in")});
+$("fgLink").addEventListener("click",function(e){e.preventDefault();$("fIn").hidden=true;$("fFg").hidden=false;$("errFg").textContent="";msg("");var a=loadAcct();if($("em2").value.trim())$("em3").value=$("em2").value.trim();$("em3").focus()});
+$("bkLink").addEventListener("click",function(e){e.preventDefault();$("fFg").hidden=true;$("fIn").hidden=false;$("errIn").textContent="";msg("")});
+$("gg").addEventListener("click",function(){msg("Demo \u2014 this button is not connected yet.")});
+$("ap").addEventListener("click",function(){msg("Demo \u2014 this button is not connected yet.")});
+function emOK(em){return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)}
+$("f").addEventListener("submit",function(e){e.preventDefault();if(upDone){location.href=$("go").getAttribute("data-next")||"my-plugins.html";return}
+ var nm=$("nm").value.trim(),em=$("em").value.trim(),rl=$("rl").value,pw=$("pw").value,zp=$("zp").value.trim();
+ if(!nm){$("err").textContent="Please type your name.";$("nm").focus();return}
+ if(!emOK(em)){$("err").textContent="Please type an email like you@example.com.";$("em").focus();return}
+ if(pw.length<6){$("err").textContent="Your password needs at least 6 characters.";$("pw").focus();return}
+ if(zp&&!/^\d{5}$/.test(zp)){$("err").textContent="Please type a 5-digit ZIP code, or leave it blank.";$("zp").focus();return}
+ $("err").textContent="";
+ hashPw(pw,function(h){save({name:nm,email:em,role:rl,zip:zp,pw:h});try{localStorage.removeItem("aiedume_signed_out")}catch(x){}msg("Your account is saved on this device.");upDone=true;
+  $("nm").disabled=true;$("em").disabled=true;$("rl").disabled=true;$("zp").disabled=true;$("pw").disabled=true;armGo($("go"))})});
+$("fIn").addEventListener("submit",function(e){e.preventDefault();if(inDone){location.href=$("goIn").getAttribute("data-next")||"my-plugins.html";return}
+ var em=$("em2").value.trim(),pw=$("pw2").value,a=loadAcct();
+ if(!a||!a.email){$("errIn").textContent="No account on this device yet \u2014 sign up first.";return}
+ if(a.email.toLowerCase()!==em.toLowerCase()){$("errIn").textContent="No account with that email on this device.";return}
+ if(!a.pw){$("errIn").textContent="This account has no password yet \u2014 tap Forgot password below to set one.";return}
+ $("errIn").textContent="";
+ hashPw(pw,function(h){if(h===a.pw){try{localStorage.removeItem("aiedume_signed_out")}catch(x){}msg("You are signed in.");inDone=true;$("em2").disabled=true;$("pw2").disabled=true;armGo($("goIn"))}
+  else{$("errIn").textContent="That password does not match this device's account.";$("pw2").focus()}})});
+$("fFg").addEventListener("submit",function(e){e.preventDefault();
+ var em=$("em3").value.trim(),pw=$("pw3").value,a=loadAcct();
+ if(!emOK(em)){$("errFg").textContent="Please type an email like you@example.com.";$("em3").focus();return}
+ if(!a||!a.email||a.email.toLowerCase()!==em.toLowerCase()){$("errFg").textContent="No account with that email on this device.";return}
+ if(pw.length<6){$("errFg").textContent="Your password needs at least 6 characters.";$("pw3").focus();return}
+ $("errFg").textContent="";
+ hashPw(pw,function(h){save({pw:h});showMode("in");$("em2").value=em;$("pw2").value="";msg("Your new password is saved on this device.");$("pw2").focus()})});
+showMode(/[?&]signin=1(&|$)/.test(location.search)?"in":"up");
+})();
+</script>
+<script src="buildcta.js?v=1793242697" defer></script><script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script>
+<script src="nav-tabs.js?v=1793242697" defer></script></body></html>

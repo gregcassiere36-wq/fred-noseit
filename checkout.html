@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Checkout | Fred Noseit</title><meta name="description" content="Demo checkout for a Fred Noseit plugin. No real payment is taken."/><link href="favicon.ico" rel="icon" sizes="any"/><link href="favicon.png" rel="icon" type="image/png"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><meta content="#0f172a" name="theme-color"/><link href="manifest.json" rel="manifest"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="yes" name="mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="Fred Noseit" name="apple-mobile-web-app-title"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#0b1220;color:#e8eefc;font:500 16px/1.3 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+.app{display:flex;flex-direction:column;max-width:760px;margin:0 auto;padding:8px 14px 16px;gap:10px}
+h1.ptitle{margin:0;font:800 1.35rem Poppins,Inter,system-ui,sans-serif;color:#fff}
+.demo{font-size:.92rem;font-weight:800;color:#ffd27a;background:rgba(255,176,32,.16);border:2px dashed #ffb020;padding:6px 12px;border-radius:10px;line-height:1.3}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:12px;border:1px solid #2dd4bf;background:rgba(45,212,191,.12);color:#9ff5e6;font-weight:700;cursor:pointer;white-space:nowrap}
+.card{display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:16px;background:linear-gradient(180deg,#14213b,#101a30);border:1px solid #263553}
+.prod{display:flex;gap:12px;align-items:center}
+.prod img{width:56px;height:56px;border-radius:14px;object-fit:cover;border:2px solid #2dd4bf;background:#12414d;flex:none}
+.prod h2{margin:0;font:800 1.12rem/1.2 Poppins,Inter,sans-serif}
+.by{margin:2px 0 0;color:#9fb0d3;font-size:.88rem}
+.prc{margin-left:auto;font:800 .95rem Inter,sans-serif;color:#7ef0c5;background:#223458;border:1px solid #2dd4bf;border-radius:999px;padding:4px 14px;white-space:nowrap}
+.fld{display:block;margin:0 0 8px}
+.fld span{display:block;font-size:.8rem;font-weight:700;color:#9fb0d3;margin-bottom:3px}
+.fld input{width:100%;height:48px;border-radius:12px;background:#0b1220;border:2px solid #2dd4bf;padding:0 12px;font-size:1.05rem;color:#e8eefc}
+.fld input:focus{outline:2px solid #5eead4;outline-offset:1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.err{margin:0;color:#ffb4b4;font-weight:700;font-size:.9rem;min-height:0}
+.go{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:0;border-radius:14px;background:linear-gradient(180deg,#34e0cc,#1fbfab);color:#05302a;font-weight:800;font-size:1.1rem;cursor:pointer;box-shadow:0 6px 18px rgba(45,212,191,.25)}
+.go:hover{background:#5eead4}
+.fine{margin:0;font-size:.8rem;color:#9fb0d3;text-align:center;line-height:1.3}
+.own{display:flex;flex-direction:column;gap:10px;text-align:center;align-items:stretch}
+.own p{margin:0;font-size:1.02rem;line-height:1.35}
+.own .big{font-size:2rem;line-height:1}
+.nf{text-align:center;padding:26px 10px}
+.nf a{display:inline-flex;margin-top:12px}
+@media(max-width:700px){.two{grid-template-columns:1fr 1fr}.prod h2{font-size:1rem}}
+</style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/><link rel="stylesheet" href="mobile.css"/>
+</head>
+<body>
+<nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" decoding="async" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t" href="plugin-market.html">Plugin Store</a><a class="t" href="my-plugins.html">My Plugins</a><a class="t tin" href="signup.html">Sign in</a></div></nav><div class="app">
+ <h1 class="ptitle">Checkout</h1>
+ <div class="demo" role="note">Demo checkout — no real charge. Real payments turn on when the site goes live.</div>
+ <a class="pill" href="plugin-market.html" style="align-self:flex-start">← Back to the Plugin Store</a>
+ <main class="card" id="card" hidden aria-label="Buy this plugin">
+  <div class="prod"><img id="face" alt=""/><div><h2 id="pname"></h2><p class="by" id="by"></p></div><span class="prc" id="price"></span></div>
+  <form id="pf" novalidate>
+   <label class="fld"><span>Name on card</span><input id="cn" autocomplete="cc-name" placeholder="Your name"/></label>
+   <label class="fld"><span>Card number</span><input id="cc" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456"/></label>
+   <div class="two"><label class="fld"><span>Expiry (MM/YY)</span><input id="ex" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY"/></label><label class="fld"><span>CVC</span><input id="cv" inputmode="numeric" autocomplete="cc-csc" placeholder="123"/></label></div>
+   <p class="err" id="err" role="alert"></p>
+   <button type="submit" class="go" id="pay">Pay</button>
+   <p class="fine">Demo only. No real payment. No card data is collected, stored or sent.</p>
+  </form>
+  <div class="own" id="own" hidden>
+   <div class="big" aria-hidden="true">🎉</div>
+   <p id="ownmsg"></p>
+   <a class="go" href="my-plugins.html">Open your plugin</a>
+   <a class="pill" href="plugin-market.html" style="align-self:center">← Back to the Plugin Store</a>
+  </div>
+ </main>
+ <div class="nf" id="nf" hidden><h2>We could not find that plugin</h2><p>The link may be old. Pick one from the store.</p><a class="pill" href="plugin-market.html">← Back to the Plugin Store</a></div>
+</div>
+<script src="plugin-data.js?v=1793242697"></script><script src="plugx.js?v=1793242697"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function jget(k,d){try{var v=JSON.parse(localStorage.getItem(k)||"null");return v==null?d:v}catch(e){return d}}
+var id=new URLSearchParams(location.search).get("plugin"),x=null;
+(window.PLUGINS||[]).forEach(function(p){if(p.slug===id)x=p});
+if(!x){$("nf").hidden=false;return}
+document.title="Checkout \u00B7 "+x.n+" | Fred Noseit";
+function bought(){return jget("aiedume_bought",[])}
+function own(){var B=bought();if(B.indexOf(x.slug)<0){B.push(x.slug);try{localStorage.setItem("aiedume_bought",JSON.stringify(B))}catch(e){}}try{localStorage.removeItem("aiedume_trial_"+x.slug)}catch(e){}}
+$("card").hidden=false;
+var face=$("face");face.src=x.f==="mine"?"media/logo-mark-128.webp":"img/faces/"+x.f+".webp";face.alt="Portrait of "+x.cn;face.onerror=function(){this.onerror=null;this.src="media/logo-mark-128.webp"};
+$("pname").textContent=x.n;$("by").textContent="by "+x.cn+" \u00B7 "+x.role;
+$("price").textContent=x.p>0?(window.priceLabel?priceLabel(x):"$"+x.p):"FREE";
+function showOwn(html){$("pf").hidden=true;$("ownmsg").innerHTML=html;$("own").hidden=false}
+if(bought().indexOf(x.slug)>-1){showOwn("<b>You already have this plugin.</b> It is in My Plugins, ready to open.");return}
+if(!(x.p>0)){own();showOwn("<b>You got it \u2014 it's free!</b> "+esc(x.n)+" is now in My Plugins.");return}
+$("pay").textContent="Pay "+(window.priceLabel?priceLabel(x):"$"+x.p);
+var cc=$("cc");cc.addEventListener("input",function(){var d=cc.value.replace(/\D/g,"").slice(0,19);cc.value=d.replace(/(\d{4})(?=\d)/g,"$1 ")});
+var ex=$("ex");ex.addEventListener("input",function(){var d=ex.value.replace(/\D/g,"").slice(0,4);ex.value=d.length>2?d.slice(0,2)+"/"+d.slice(2):d});
+var cv=$("cv");cv.addEventListener("input",function(){cv.value=cv.value.replace(/\D/g,"").slice(0,4)});
+$("pf").addEventListener("submit",function(e){
+ e.preventDefault();
+ if(!$("cn").value.trim()&&!cc.value.trim()&&!ex.value.trim()&&!cv.value.trim()){$("err").textContent="Fill in the card fields first — this is a demo, no real charge.";return}
+ var miss=[];
+ if(!$("cn").value.trim())miss.push("your name on the card");
+ if(cc.value.replace(/\D/g,"").length<15)miss.push("a card number with at least 15 digits");
+ var m=/^(\d{2})\/(\d{2})$/.exec(ex.value.trim());if(!m||+m[1]<1||+m[1]>12)miss.push("the expiry as MM/YY");
+ if(cv.value.trim().length<3)miss.push("the 3-digit CVC");
+ if(miss.length){$("err").textContent="Please add "+miss.join(", ")+".";return}
+ $("err").textContent="";own();
+ showOwn("<b>You bought it!</b> "+esc(x.n)+" is now in My Plugins.");
+});
+})();
+</script>
+<script src="buildcta.js?v=1793242697" defer></script><script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script>
+<script src="nav-tabs.js?v=1793242697" defer></script></body></html>

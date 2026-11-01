@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson Plan Builder | Fred Noseit plugin</title><meta name="description" content="Writes a full one-page plan: objective, materials, hook, direct teaching, guided and independent practice, check for understanding, differentiation and wrap-up, with timings."><link rel="icon" href="../../../favicon.ico"><style>body{font-family:Poppins,system-ui,sans-serif;max-width:720px;margin:0 auto;padding:24px 20px;line-height:1.6;background:#0f172a;color:#e2e8f0}a{color:#5eead4}h1{margin:.2em 0;font-size:1.8rem}.one{font-size:1.1rem}.pr{font-weight:800;color:#fde68a}.bb{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.b{display:inline-flex;align-items:center;min-height:48px;padding:10px 18px;border-radius:12px;background:#2dd4bf;color:#0f172a;font-weight:800;text-decoration:none;border:0;font-size:16px;cursor:pointer;font-family:inherit}.g{background:transparent;color:#5eead4;border:2px solid #2dd4bf}details{background:#1e293b;border-radius:14px;padding:12px 16px;margin:16px 0}summary{cursor:pointer;font-weight:800;min-height:44px;display:flex;align-items:center}pre{white-space:pre-wrap;background:#0b1220;padding:14px;border-radius:10px;font-size:15px}@media print{body{background:#fff;color:#000}.bb,nav{display:none}pre{background:#f3f3f3}}.smp{display:inline-block;background:#fde68a;color:#0f172a;font-weight:800;border-radius:999px;padding:2px 12px;margin:0}details details{background:#0f172a}</style></head><body><div style="display:flex;justify-content:flex-end;gap:8px;margin:0 0 12px"><a href="../../../signup.html?signin=1" style="display:inline-flex;align-items:center;height:38px;padding:0 14px;border:1px solid #334155;border-radius:8px;color:#e2e8f0;text-decoration:none;font:600 14px Poppins,system-ui,sans-serif">Sign in</a><a href="../../../signup.html" style="display:inline-flex;align-items:center;height:38px;padding:0 14px;border:1px solid #334155;border-radius:8px;color:#e2e8f0;text-decoration:none;font:600 14px Poppins,system-ui,sans-serif">Sign up</a></div><main id="main"><p><a href="../../../store.html">← Back to the Plugin Store</a></p><p class="smp">Sample listing</p><h1>Lesson Plan Builder</h1><p class="one">Writes a full one-page plan: objective, materials, hook, direct teaching, guided and independent practice, check for understanding, differentiation and wrap-up, with timings.</p><p class="pr">Pricing to be announced</p><h2>How to use</h2><ol><li>Paste the plugin into Gemini/ChatGPT/Grok custom instructions.</li><li>Give topic, grade, minutes.</li><li>Copy the result into the Fred Noseit lesson-plan template and adjust.</li></ol><div class="bb"><button class="b" type="button" onclick="cpp(this)">📋 Copy plugin</button><a class="b g" href="../../../downloads/plugins/lesson-plan-builder/lesson-plan-builder-plugin.txt" download>⬇️ Free sample</a><button class="b g" type="button" onclick="print()">🖨️ Print</button><a class="b" href="../../../plugin-market.html">Get this plugin</a></div><details open><summary>See the full plugin</summary><p><strong>Who it's for:</strong> K-12 teachers who need a complete one-page lesson plan fast.</p><h2>Plugin instructions (paste these)</h2><pre id="ptxt">You are Lesson Plan Builder, a planning assistant for teachers.
+GOAL: Produce a complete, realistic one-page lesson plan.
+FIRST ask (if not given): topic, grade, lesson length in minutes, and any standard.
+THEN produce with minute timings that add up to the lesson length:
+- Objective (&quot;Students will be able to...&quot;) and success criteria.
+- Materials.
+- Hook (3-5 min).
+- Direct teaching (key points, one worked example).
+- Guided practice.
+- Independent practice.
+- Check for understanding (2 questions).
+- Differentiation: support, on-level, challenge.
+- Wrap-up and homework (optional).
+RULES: Activities must be doable in a normal classroom with no special tech unless the teacher asks. Accurate content. No student names. Mark anything the teacher should verify.</pre><h2>Example</h2><p><strong>You type:</strong> Grade 8 science, Newton&#x27;s first law, 45 minutes.</p><pre>Objective: SWBAT explain inertia using everyday examples.
+Hook (5): coin-on-card flick demo...
+Direct (10): define inertia; worked example: seatbelts...
+Check: 1) Why does a ball keep rolling on ice? ...</pre><h2>Safety notes</h2><ul><li>Check facts and fit with your curriculum.</li><li>Adjust for students&#x27; IEP/504 needs yourself - don&#x27;t share those details with AI.</li><li>Use school-approved tools.</li></ul><h2>Use it with code (API)</h2><p><em>Most teachers won't need this — the copy-paste version works without code.</em></p><details><summary>JavaScript (fetch)</summary><pre id="js-lesson-plan-builder">// Lesson Plan Builder - Fred Noseit plugin via an OpenAI-compatible chat API
+// Works with OpenAI, or Gemini / Grok OpenAI-compatible endpoints: change BASE_URL and MODEL.
+const BASE_URL = &quot;https://api.openai.com/v1&quot;; // Gemini: https://generativelanguage.googleapis.com/v1beta/openai  Grok: https://api.x.ai/v1
+const MODEL = &quot;YOUR_MODEL_NAME&quot;;
+const API_KEY = &quot;YOUR_API_KEY&quot;; // never share or publish your key
+const INSTRUCTIONS = &quot;You are Lesson Plan Builder, a planning assistant for teachers.\nGOAL: Produce a complete, realistic one-page lesson plan.\nFIRST ask (if not given): topic, grade, lesson length in minutes, and any standard.\nTHEN produce with minute timings that add up to the lesson length:\n- Objective (\&quot;Students will be able to...\&quot;) and success criteria.\n- Materials.\n- Hook (3-5 min).\n- Direct teaching (key points, one worked example).\n- Guided practice.\n- Independent practice.\n- Check for understanding (2 questions).\n- Differentiation: support, on-level, challenge.\n- Wrap-up and homework (optional).\nRULES: Activities must be doable in a normal classroom with no special tech unless the teacher asks. Accurate content. No student names. Mark anything the teacher should verify.&quot;;
+
+async function runPlugin(request) {
+  const res = await fetch(BASE_URL + &quot;/chat/completions&quot;, {
+    method: &quot;POST&quot;,
+    headers: { &quot;Content-Type&quot;: &quot;application/json&quot;, &quot;Authorization&quot;: &quot;Bearer &quot; + API_KEY },
+    body: JSON.stringify({ model: MODEL, messages: [
+      { role: &quot;system&quot;, content: INSTRUCTIONS },
+      { role: &quot;user&quot;, content: request }
+    ] })
+  });
+  const data = await res.json();
+  return data.choices[0].message.content;
+}
+
+runPlugin(&quot;PUT YOUR REQUEST HERE&quot;).then(console.log);
+</pre><button class="b g" type="button" onclick="cpx(this,'js-lesson-plan-builder')">📋 Copy code</button></details><details><summary>Python</summary><pre id="py-lesson-plan-builder"># Lesson Plan Builder - Fred Noseit plugin via an OpenAI-compatible chat API
+# Works with OpenAI, or Gemini / Grok OpenAI-compatible endpoints: change BASE_URL and MODEL.
+import requests
+
+BASE_URL = &quot;https://api.openai.com/v1&quot;  # Gemini: https://generativelanguage.googleapis.com/v1beta/openai  Grok: https://api.x.ai/v1
+MODEL = &quot;YOUR_MODEL_NAME&quot;
+API_KEY = &quot;YOUR_API_KEY&quot;  # never share or publish your key
+INSTRUCTIONS = &quot;You are Lesson Plan Builder, a planning assistant for teachers.\nGOAL: Produce a complete, realistic one-page lesson plan.\nFIRST ask (if not given): topic, grade, lesson length in minutes, and any standard.\nTHEN produce with minute timings that add up to the lesson length:\n- Objective (\&quot;Students will be able to...\&quot;) and success criteria.\n- Materials.\n- Hook (3-5 min).\n- Direct teaching (key points, one worked example).\n- Guided practice.\n- Independent practice.\n- Check for understanding (2 questions).\n- Differentiation: support, on-level, challenge.\n- Wrap-up and homework (optional).\nRULES: Activities must be doable in a normal classroom with no special tech unless the teacher asks. Accurate content. No student names. Mark anything the teacher should verify.&quot;
+
+def run_plugin(request):
+    r = requests.post(BASE_URL + &quot;/chat/completions&quot;,
+        headers={&quot;Authorization&quot;: &quot;Bearer &quot; + API_KEY},
+        json={&quot;model&quot;: MODEL, &quot;messages&quot;: [
+            {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: INSTRUCTIONS},
+            {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: request}]})
+    r.raise_for_status()
+    return r.json()[&quot;choices&quot;][0][&quot;message&quot;][&quot;content&quot;]
+
+print(run_plugin(&quot;PUT YOUR REQUEST HERE&quot;))
+</pre><button class="b g" type="button" onclick="cpx(this,'py-lesson-plan-builder')">📋 Copy code</button></details><p>Downloads: <a href="../../../downloads/plugins/lesson-plan-builder/plugin.json" download>plugin.json</a> · <a href="../../../downloads/plugins/lesson-plan-builder/api-example.js" download>api-example.js</a> · <a href="../../../downloads/plugins/lesson-plan-builder/api-example.py" download>api-example.py</a></p></details><div class="vslot" data-v="../../../media/how-to-use-plugin-v19.mp4" data-p="../../../media/how-to-use-plugin-poster-v19j.webp" data-t="../../../media/how-to-use-plugin.vtt" data-l="How to use a plugin (video)"></div></main><script>function cpp(b){var t=document.getElementById('ptxt').textContent;function ok(){b.textContent='✅ Copied!';setTimeout(function(){b.textContent='📋 Copy plugin'},1800)}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,function(){fb()});else fb();function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){b.textContent='Select the text and copy'}a.remove()}}</script><script>function cpx(b,id){var t=document.getElementById(id).textContent;function ok(){var o=b.textContent;b.textContent='✅ Copied!';setTimeout(function(){b.textContent=o},1500)}function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){}a.remove()}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,fb);else fb()}</script><script>document.querySelectorAll('.vslot').forEach(function(d){fetch(d.dataset.v,{method:'HEAD'}).then(function(r){if(!r.ok)return;d.innerHTML='<h2>'+d.dataset.l+'</h2><video controls preload="none" playsinline poster="'+d.dataset.p+'" style="width:100%;max-width:640px;border-radius:12px"><source src="'+d.dataset.v+'" type="video/mp4"><track kind="captions" src="'+d.dataset.t+'" srclang="en" label="English" default></video>'}).catch(function(){})})</script><script src="../../../nav-tabs.js?v=1793242697" defer></script></body></html>

@@ -1,0 +1,62 @@
+/* Clean text tabs: one nav for every page */
+html body nav.tnav{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:4px!important;box-sizing:border-box;width:100%;height:52px;min-height:52px;margin:0!important;padding:0 max(12px,calc((100vw - 1240px)/2))!important;background:#0b1220!important;border:0!important;border-bottom:1px solid #243049!important;position:sticky;top:0;z-index:60;flex:0 0 auto;white-space:nowrap;overflow:visible;backdrop-filter:none;font:600 14px/1.2 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+html body:has(.secwrap)>nav.tnav,html body:has(main.pack)>nav.tnav{position:relative!important}
+html body nav.tnav .brand{display:inline-flex!important;align-items:center;gap:8px;flex:0 0 auto;margin:0 10px 0 0;padding:0!important;min-height:0!important;color:#fff!important;font:800 15px Poppins,Inter,system-ui,sans-serif;letter-spacing:.2px;text-decoration:none}
+html body nav.tnav .brand img{width:28px;height:28px;border-radius:7px;object-fit:cover}
+html body nav.tnav .tabs{display:flex;align-items:center;gap:2px;min-width:0;flex:1 1 auto}
+html body nav.tnav .tabs a.t,html body nav.tnav .tabs .more>button{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 auto;height:36px;min-height:36px!important;padding:0 10px!important;border:0;border-radius:8px;background:transparent!important;color:#cbd5e1!important;font:600 14px/1 Inter,system-ui,sans-serif!important;text-decoration:none;cursor:pointer;white-space:nowrap;position:relative;box-sizing:border-box}
+html body nav.tnav .tabs a.t:hover,html body nav.tnav .tabs .more>button:hover{background:#1c2740!important;color:#fff!important}
+html body nav.tnav .tabs a.t.cur,html body nav.tnav .tabs .more.cur>button{background:rgba(45,212,191,.16)!important;color:#5eead4!important;font-weight:800!important}
+html body nav.tnav .tabs a.t.cur::after,html body nav.tnav .tabs .more.cur>button::after{content:"";position:absolute;left:10px;right:10px;bottom:-8px;height:3px;border-radius:3px;background:#2dd4bf}
+html body nav.tnav .tabs a.t:focus-visible,html body nav.tnav .tabs .more>button:focus-visible{outline:2px solid #5eead4;outline-offset:1px}
+html body nav.tnav .tabs .more{position:relative;flex:0 0 auto;margin-left:auto}
+html body nav.tnav .tabs .more>button::after{content:" \25BE";font-size:11px;margin-left:5px;position:static;background:none;height:auto;display:inline}
+html body nav.tnav .tabs .more .mm{display:none;position:absolute;right:0;top:44px;min-width:200px;padding:6px;background:#111a2e;border:1px solid #2b3a5a;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.5);flex-direction:column;gap:2px}
+html body nav.tnav .tabs .more.open .mm{display:flex}
+html body nav.tnav .tabs .more .mm a{display:flex!important;align-items:center;justify-content:flex-start!important;text-align:left;height:40px;min-height:40px!important;padding:0 12px!important;border-radius:8px;color:#e2e8f0!important;font:600 14px Inter,system-ui,sans-serif!important;text-decoration:none;background:transparent!important;white-space:nowrap}
+html body nav.tnav .tabs .more .mm a:hover{background:#1c2740!important}
+html body nav.tnav .tabs .more .mm a.cur{background:rgba(45,212,191,.16)!important;color:#5eead4!important}
+html body nav.tnav .vh,html body .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* old bottom emoji bar and old pill header are gone */
+html body nav.tabbar{display:none!important}
+html body{padding-bottom:0}
+/* one-screen pages: header replaced by nav, keep the app height right */
+html body>nav.tnav~.app{height:calc(100vh - 52px)!important;height:calc(100dvh - 52px)!important}
+@media(max-width:1180px){html body nav.tnav .tabs a.t,html body nav.tnav .tabs .more>button{padding:0 7px!important;font-size:13px!important}html body nav.tnav .brand{margin-right:4px}}
+@media(max-width:900px){
+ html body nav.tnav{height:56px;min-height:56px;padding:0 0 0 10px!important;gap:6px!important}
+ html body>nav.tnav~.app{height:calc(100vh - 56px)!important;height:calc(100dvh - 56px)!important}
+ html body nav.tnav .brand{margin:0!important;font-size:0!important;gap:0!important}
+ html body nav.tnav .brand img{width:34px;height:34px}
+ html body nav.tnav .tabs{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-snap-type:x proximity;padding:0 12px 0 0;height:100%;gap:4px;mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+ html body nav.tnav .tabs::-webkit-scrollbar{display:none}
+ html body nav.tnav .tabs a.t,html body nav.tnav .tabs .more .mm a{height:44px;min-height:44px!important;padding:0 14px!important;font-size:15px!important;scroll-snap-align:center;color:#cbd5e1!important;border-radius:10px}
+ html body nav.tnav .tabs a.t.cur::after{bottom:0}
+ html body nav.tnav .tabs .more,html body nav.tnav .tabs .more .mm{display:contents!important;position:static}
+ html body nav.tnav .tabs .more>button{display:none!important}
+ html body nav.tnav .tabs .more .mm a{display:inline-flex!important;flex:0 0 auto}
+}
+
+/* Minimal nav: Home, Plugin Store, My Plugins, Sign in */
+html body nav.tnav .tabs a.t.tin{margin-left:auto;border:1px solid #334155;color:#e2e8f0!important}
+html body nav.tnav .tabs a.t.tin:hover{border-color:#2dd4bf}
+@media(max-width:480px){html body nav.tnav .brand{font-size:0;gap:0;margin-right:6px}html body nav.tnav .tabs a.t{padding:0 8px!important;font-size:13px!important}}
+
+/* v17 visible scrollbars: ~14px, bright teal thumb on a dark track (all scrollable areas) */
+*{scrollbar-width:auto;scrollbar-color:#2dd4bf #0b1424}
+@supports selector(::-webkit-scrollbar){*{scrollbar-width:auto;scrollbar-color:auto}
+*::-webkit-scrollbar{width:14px;height:14px}
+*::-webkit-scrollbar-track{background:#0b1424;border-radius:999px;box-shadow:inset 0 0 0 1px #24405a}
+*::-webkit-scrollbar-thumb{background:#2dd4bf;border-radius:999px;border:2px solid #0b1424;min-height:44px;min-width:44px}
+*::-webkit-scrollbar-thumb:hover{background:#5eead4}
+*::-webkit-scrollbar-thumb:active{background:#99f6e4}
+*::-webkit-scrollbar-corner{background:#0b1424}}
+
+/* mobileaudit 2026-10-31: two-row phone nav. The mobilefit pass moved the account bar out of the tab strip into the nav row, where its ~183px squeezed the strip to ~150px and sat on top of the My Plugins tab (taps there hit the account name). Row 1: brand + account. Row 2: the tab strip gets the full width, uncovered, no fade mask. */
+@media (max-width:760px){
+ html body nav.tnav{flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding:0 10px!important;column-gap:6px!important;row-gap:0!important}
+ html body nav.tnav .brand{order:1;min-height:40px!important}
+ html body nav.tnav .acctbar{order:2;margin-left:auto}
+ html body nav.tnav .tabs{order:3;flex:1 1 100%!important;width:100%;height:48px;padding:0!important;mask-image:none!important;-webkit-mask-image:none!important}
+ html body>nav.tnav~.app{height:calc(100vh - 89px)!important;height:calc(100dvh - 89px)!important}
+}

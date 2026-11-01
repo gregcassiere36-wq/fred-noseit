@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><title>Track your sales | Fred Noseit</title><meta name="description" content="See how many of your plugins sold. Browser demo."/><meta content="#0f172a" name="theme-color"/><link href="manifest.json" rel="manifest"/>
+<link rel="icon" href="favicon.png" type="image/png"/>
+<link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/><link rel="stylesheet" href="mobile.css"/>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#0b1220;color:#e8eefc;font:500 16px/1.35 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}select,button{font:inherit;color:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:10px 14px 28px}
+.head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.head h1{margin:0;font:800 1.5rem Poppins,Inter,system-ui,sans-serif}
+.back{min-height:40px;padding:0 14px;border-radius:12px;border:1px solid #2dd4bf;background:rgba(45,212,191,.12);color:#9ff5e6;font-weight:700;display:inline-flex;align-items:center}
+#langhost{margin-left:auto}
+.zlangbar{display:flex;align-items:center;gap:8px;padding:4px 10px;border:1px solid #263553;border-radius:12px;background:#101a30}
+.zlanglab{display:inline-flex;align-items:center;gap:6px;line-height:1;white-space:nowrap;font-size:.85rem;font-weight:700;color:#fff}
+.zlangsel{font:inherit;font-size:.9rem;padding:6px 8px;border-radius:10px;border:1px solid #2dd4bf;background:#16222f;color:#fff;min-height:36px;height:36px}
+.demo{margin:0 0 12px;font-size:.9rem;font-weight:800;color:#ffd27a;background:rgba(255,176,32,.18);border:2px dashed #ffb020;padding:8px 12px;border-radius:10px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.tile{background:#101a30;border:1px solid #263553;border-radius:16px;padding:12px 14px}
+.tile small{display:block;color:#9fb0d3;font-weight:700;font-size:.8rem}
+.tile b{display:block;font:800 1.8rem Poppins,Inter,sans-serif;color:#7ef0c5;margin-top:2px}
+.tile span{font-size:.75rem;color:#9fb0d3}
+.panel{background:#101a30;border:1px solid #263553;border-radius:16px;padding:14px;margin-bottom:12px}
+.panel h2{margin:0 0 10px;font:800 1.1rem Poppins,Inter,sans-serif}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #263553}
+th{color:#9fb0d3;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em}
+td.n{font-weight:800}
+.later{display:inline-block;font:800 .75rem Inter,sans-serif;color:#ffd27a;background:#3b3320;border-radius:999px;padding:2px 10px}
+.pr5{display:inline-block;font:800 .75rem Inter,sans-serif;color:#062a26;background:#7ef0c5;border-radius:999px;padding:2px 10px}
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:200px 1fr 40px;gap:10px;align-items:center;font-size:.88rem}
+.bar .t{height:22px;border-radius:8px;background:#0b1220;border:1px solid #263553;overflow:hidden}
+.bar .t i{display:block;height:100%;background:linear-gradient(90deg,#1fbfab,#34e0cc);border-radius:7px}
+.week{display:flex;align-items:flex-end;gap:10px;height:150px;padding:6px 4px 0;border-bottom:2px solid #3d5a80}
+.week div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:100%;font-size:.75rem;color:#9fb0d3}
+.week div i{display:block;width:100%;max-width:56px;background:linear-gradient(180deg,#34e0cc,#1fbfab);border-radius:8px 8px 0 0}
+.labels{display:flex;gap:10px;padding:4px 4px 0;font-size:.75rem;color:#9fb0d3}.labels span{flex:1;text-align:center}
+.fine{font-size:.82rem;color:#9fb0d3;margin:6px 0 0}
+.go{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:14px;border:2px solid #2dd4bf;background:linear-gradient(180deg,#34e0cc,#1fbfab);color:#05302a;font:800 1rem Poppins,Inter,sans-serif}
+@media(max-width:700px){.tiles{grid-template-columns:1fr}.bar{grid-template-columns:110px 1fr 32px}th:nth-child(4),td:nth-child(4){display:none}}
+</style></head>
+<body>
+<nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t" href="plugin-market.html">Plugin Store</a><a class="t cur" href="my-plugins.html" aria-current="page">My Plugins</a><a class="t tin" href="signup.html">Sign in</a></div></nav>
+<div class="wrap">
+ <div class="head"><a class="back" href="my-plugins.html">&larr; <span data-t="back">Back to My Plugins</span></a><h1 data-t="sales">Track your sales</h1><div id="langhost"></div></div>
+ <p class="demo" role="note" id="demobanner" data-t="demodata" hidden>Demo data</p>
+ <div class="tiles">
+  <div class="tile"><small data-t="sold">Plugins sold</small><b id="tSold">0</b><span>all your plugins</span></div>
+  <div class="tile"><small data-t="buyers">Buyers</small><b id="tBuy">0</b><span>different people</span></div>
+  <div class="tile"><small data-t="earn">Earnings</small><b id="tEarn">$0</b><span data-t="fine">Fine</span></div>
+ </div>
+ <div class="panel">
+  <h2 data-t="each">Each plugin</h2>
+  <table><thead><tr><th data-t="plugins">Plugin</th><th data-t="price">Price</th><th data-t="sold">Sold</th><th data-t="buyers">Buyers</th><th data-t="earn">Earnings</th></tr></thead><tbody id="rows"></tbody></table>
+  
+ </div>
+ <div class="panel"><h2 data-t="byplug">By plugin</h2><div class="bars" id="bars"></div></div>
+ <div class="panel"><h2 data-t="byweek">By week</h2><div class="week" id="week"></div><div class="labels" id="wl"></div></div>
+ <a class="go" href="plugin-builder.html" id="t_upd" data-t="update">Update your plugin</a>
+ <p class="fine">Browser demo &mdash; nothing here is sent anywhere.</p>
+</div>
+<script src="plugin-data.js?v=1793242697"></script><script src="plugx.js?v=1793242697"></script><script src="mplang.js?v=20261030"></script>
+<script>
+(function(){
+"use strict";
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function jget(k,d){try{var v=JSON.parse(localStorage.getItem(k)||"null");return v==null?d:v}catch(e){return d}}
+function fmt(v){v=Math.round(v*100)/100;return "$"+(v%1?v.toFixed(2):String(v))}
+/* Real numbers from this browser (same sources as the sales card in My Plugins): your plugins, purchases, and seeded demo sales. */
+var B=jget("aiedume_bought",[]),SS=jget("aiedume_seed_sales",{}),list=(window.PX&&PX.list)?PX.list():[],D=[],demo=false;
+list.forEach(function(d){
+ var slug="my-"+d.id,n=0,p=parseFloat(d.p)||0;
+ B.forEach(function(s){if(s===slug)n++});n+=(SS[slug]||0);
+ /* Prices are not set yet (Joy\u2019s The Promoter, $10/month, is the only price), so no price or earnings are shown for your plugins. */
+ if(n>0)D.push({n:d.n||"Untitled plugin",price:null,sold:n,buyers:n,earn:null})});
+if(!D.length){demo=true;
+ D=[{n:"My Fractions Game Maker",price:null,sold:14,buyers:11,earn:null},{n:"Exit Ticket Maker",price:null,sold:9,buyers:8,earn:null},{n:"Joy\u2019s The Promoter",price:"$10/month",sold:12,buyers:12,earn:120}]}
+var W=demo?[["1",3],["2",5],["3",8],["4",6],["5",10],["6",9],["7",12],["8",14]]:[];
+var sold=0,buy=0,max=1,earn=0;D.forEach(function(d){sold+=d.sold;buy+=d.buyers;earn+=d.earn||0;max=Math.max(max,d.sold)});
+$("tSold").textContent=sold;$("tBuy").textContent=buy;$("tEarn").textContent=earn?fmt(earn):"\u2014";
+$("demobanner").hidden=!demo;
+function draw(){
+ var later=MPLANG.t("later");
+ $("rows").innerHTML=D.map(function(d){return '<tr><td class="n">'+esc(d.n)+'</td><td>'+(d.price?'<span class="pr5">'+esc(d.price)+'</span>':'<span class="later">'+esc(later)+'</span>')+'</td><td>'+d.sold+'</td><td>'+d.buyers+'</td><td>'+(d.earn!=null?fmt(d.earn):'<span class="later">'+esc(later)+'</span>')+'</td></tr>'}).join("");
+}
+$("bars").innerHTML=D.map(function(d){return '<div class="bar"><span>'+esc(d.n)+'</span><span class="t"><i style="width:'+Math.round(d.sold/max*100)+'%"></i></span><b>'+d.sold+'</b></div>'}).join("");
+var wm=1;W.forEach(function(w){wm=Math.max(wm,w[1])});
+if(W.length){$("week").innerHTML=W.map(function(w){return '<div>'+w[1]+'<i style="height:'+Math.round(w[1]/wm*110)+'px"></i></div>'}).join("");$("wl").innerHTML=W.map(function(w){return '<span>'+w[0]+'</span>'}).join("")}
+else{$("week").parentNode.hidden=true}
+/* Update your plugin -> Plugin Builder with the saved draft */
+try{if(list.length)$("t_upd").href="plugin-builder.html?draft="+encodeURIComponent(list[0].id)}catch(e){}
+draw();window.addEventListener("mplang",draw);
+})();
+</script>
+<script src="buildcta.js?v=1793242697" defer></script><script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script><script src="nav-tabs.js?v=1793242697" defer></script></body></html>
