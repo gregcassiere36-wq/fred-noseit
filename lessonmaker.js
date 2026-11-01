@@ -6,7 +6,9 @@
    Everything runs in the browser. Nothing is uploaded anywhere.
    Self-contained: own styles (lm- classes), own flow state per chat surface.
    Surfaces found on this site: zippy #zbox (helpers, sections, bot pages, plugins),
-   the home #pin Fred panel, onechat #occhat (My Plugins), Joy page chat (#log/#ask). */
+   onechat #occhat (My Plugins), Joy page chat (#log/#ask).
+   NOT the home #pin Fred panel (Greg, 2026-11-01): the Lesson Maker is a feature
+   of the avatar/helper chats only, not Fred's home chat. */
 ;(function () {
   "use strict";
   if (window.__lessonMaker) return;
@@ -360,14 +362,8 @@
     try {
       var zb = document.querySelector("#zbox .zbody");
       if (zb) wireOne("zbox", zb.querySelector(".zlog"), zb.querySelector("form.zf"), zb);
-      var pin = document.getElementById("pin");
-      if (pin) {
-        var pf = pin.querySelector("form.pf");
-        if (pf) {
-          if (!pin.__lmLog) { var lg = document.createElement("div"); lg.className = "lm-pinlog"; pin.appendChild(lg); pin.__lmLog = lg; }
-          wireOne("pin", pin.__lmLog, pf, pin);
-        }
-      }
+      /* Home #pin Fred panel intentionally NOT wired (Greg, 2026-11-01):
+         no Lesson Maker button in Fred's home chat — avatar/helper chats only. */
       var oc = document.getElementById("occhat");
       if (oc) wireOne("onechat", oc.querySelector(".clog"), oc.querySelector("form"), oc);
       var jlog = document.getElementById("log"), jask = document.getElementById("ask");
