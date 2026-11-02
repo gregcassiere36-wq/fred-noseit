@@ -191,6 +191,6 @@ if(form){form.addEventListener("submit",function(e){e.preventDefault();var v=(q.
 })();
 </script>
 <script>(function(){var img=document.getElementById("ssavimg"),ph=document.getElementById("ssavph"),nm=document.getElementById("ssavname");var usr=null;try{usr=(window.PX&&PX.user)?PX.user():JSON.parse(localStorage.getItem("aiedume_demo_account")||"null")}catch(e){}if(nm)nm.textContent=(usr&&usr.name)||"Guest";var av=null;try{av=localStorage.getItem("aiedume_avatar")}catch(e){}if(av&&img){img.src=av;img.hidden=false;if(ph)ph.hidden=true}var pv=document.getElementById("ssprev");if(pv)pv.addEventListener("click",function(){if(window.history&&history.length>1){history.back()}else{location.href="plugin-market.html"}})})();</script>
-<script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script>
+<script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).catch(function(){})}catch(e){}})}</script>
 <script src="nav-tabs.js?v=1793242697" defer></script>
 </body></html>

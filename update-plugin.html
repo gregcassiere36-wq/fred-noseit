@@ -183,7 +183,7 @@ ol.outline[hidden]{display:none}
 
 <script src="plugin-data.js?v=1793242697"></script>
 <script src="plugx.js?v=1793242697"></script>
-<script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script>
+<script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).catch(function(){})}catch(e){}})}</script>
 <script src="nav-tabs.js?v=1793242697" defer></script>
 <script>
 (function(){

@@ -288,7 +288,7 @@ $("fbtn").addEventListener("click",function(){fb.classList.toggle("open")});
 $("ff2").addEventListener("submit",function(e){e.preventDefault();var t=$("fq2").value.trim();if(!t)return;$("fq2").value="";$("gq").value=t;$("guide").classList.add("on");fb.classList.remove("open");fire($("gform"),"submit")});
 })();
 </script>
-<script src="buildcta.js?v=1793242697" defer></script><script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}})}</script>
+<script src="buildcta.js?v=1793242697" defer></script><script>if("serviceWorker"in navigator){addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).catch(function(){})}catch(e){}})}</script>
 <script>
 /* Fred Noseit payment wiring (demo): free Gets are recorded as owned, and plugins
    already in aiedume_bought show "Open" instead of "Get". */
