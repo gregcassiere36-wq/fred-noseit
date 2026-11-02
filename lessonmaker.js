@@ -5,10 +5,14 @@
    vendor/pptxgen.bundle.js, MIT) or a clean print view to save as PDF.
    Everything runs in the browser. Nothing is uploaded anywhere.
    Self-contained: own styles (lm- classes), own flow state per chat surface.
-   Surfaces found on this site: zippy #zbox (helpers, sections, bot pages, plugins),
-   onechat #occhat (My Plugins), Joy page chat (#log/#ask).
-   NOT the home #pin Fred panel (Greg, 2026-11-01): the Lesson Maker is a feature
-   of the avatar/helper chats only, not Fred's home chat. */
+   WHERE THE BUTTON LIVES (Greg, 2026-11-01, extended same day): ONLY in the
+   avatar/helper chats — the chats that open from the helper cards on the section
+   pages (sec-k5, sec-6-8, sec-9-12, sec-parents, sec-adults, paras,
+   teacher-support), inside the zippy #zbox while a helper (ZA agent) is open.
+   NOT in the family/door hosts' own chats (Tim, Rebecca, Ben, Fred, Ellie, Rose,
+   Walter), NOT in Fred's chats anywhere (home #pin panel, topic/info page-chats,
+   My Plugins Fred support #occhat, bot pages, plugin pages, "make" pages),
+   NOT in Joy's chat. The avatars can do this; nobody else gets the button. */
 ;(function () {
   "use strict";
   if (window.__lessonMaker) return;
@@ -347,28 +351,61 @@
     }
   }
 
-  /* ---------- surfaces: find each chat on the page and give it the button ---------- */
-  var wired = new WeakSet();
-  function wireOne(key, log, anchor, barParent) {
-    if (!log || !anchor || wired.has(log)) return;
-    wired.add(log);
-    var bar = el('<div class="lm-bar"><button type="button" class="lm-open">\uD83D\uDCCA Make a PowerPoint or PDF from my lesson</button></div>');
-    if (anchor.parentNode) anchor.parentNode.insertBefore(bar, anchor);
-    else if (barParent) barParent.appendChild(bar);
-    var surface = { key: key, log: log };
-    bar.querySelector(".lm-open").addEventListener("click", function () { startFlow(surface); });
+  /* ---------- surfaces: the button exists ONLY inside an open helper chat ----------
+     Greg's rule (2026-11-01): the Lesson Maker belongs to the avatar/helper chats.
+     The section pages share one #zbox: by default it is the door host's own chat
+     (Tim/Rebecca/Ben/Fred/Ellie/Rose/Walter — the family), and it becomes a helper
+     chat only while a helper card is open (zippy sets a ZA agent and adds .zfull).
+     So the bar is BUILT only while a helper chat is open on a section page, and is
+     REMOVED the moment the chat goes back to the host. Every other page (bot pages,
+     topic/info pages, plugin pages, "make" pages, home) never builds it at all.
+     My Plugins #occhat (Fred support) and the Joy page chat are NOT wired at all —
+     they are Fred's/Joy's chats, not avatar chats. No CSS hiding anywhere: the
+     button element simply is not built outside a helper chat. */
+  var KEEP_PAGES = {
+    "sec-k5.html": 1, "sec-6-8.html": 1, "sec-9-12.html": 1, "sec-parents.html": 1,
+    "sec-adults.html": 1, "paras.html": 1, "teacher-support.html": 1
+  };
+  function pageFile() {
+    var p = String(location.pathname || "").split("/").pop();
+    return p || "index.html";
+  }
+  function helperChatOpen(box) {
+    try { if (window.ZA && ZA.cur && ZA.cur()) return true; } catch (e) {}
+    return !!(box && box.classList && box.classList.contains("zfull"));
+  }
+  var zbar = null;
+  function syncZbox() {
+    var box = document.getElementById("zbox");
+    if (!box) { zbar = null; return; }
+    var want = !!KEEP_PAGES[pageFile()] && helperChatOpen(box);
+    if (!want) {
+      if (zbar) { try { zbar.remove(); } catch (e) {} zbar = null; }
+      return;
+    }
+    if (zbar && document.contains(zbar)) return; /* already built for this helper chat */
+    var zb = box.querySelector(".zbody");
+    var form = zb ? zb.querySelector("form.zf") : null;
+    var log = zb ? zb.querySelector(".zlog") : null;
+    if (!form || !log || !form.parentNode) return;
+    zbar = el('<div class="lm-bar"><button type="button" class="lm-open">\uD83D\uDCCA Make a PowerPoint or PDF from my lesson</button></div>');
+    form.parentNode.insertBefore(zbar, form);
+    zbar.querySelector(".lm-open").addEventListener("click", function () {
+      var l = box.querySelector(".zlog");
+      if (l) startFlow({ key: "zbox", log: l });
+    });
+  }
+  var zObs = null;
+  function armZboxObserver() {
+    var box = document.getElementById("zbox");
+    if (!box || zObs) return;
+    try {
+      zObs = new MutationObserver(function () { syncZbox(); });
+      zObs.observe(box, { attributes: true, attributeFilter: ["class"], childList: true });
+    } catch (e) {}
   }
   function scan() {
-    try {
-      var zb = document.querySelector("#zbox .zbody");
-      if (zb) wireOne("zbox", zb.querySelector(".zlog"), zb.querySelector("form.zf"), zb);
-      /* Home #pin Fred panel intentionally NOT wired (Greg, 2026-11-01):
-         no Lesson Maker button in Fred's home chat — avatar/helper chats only. */
-      var oc = document.getElementById("occhat");
-      if (oc) wireOne("onechat", oc.querySelector(".clog"), oc.querySelector("form"), oc);
-      var jlog = document.getElementById("log"), jask = document.getElementById("ask");
-      if (jlog && jask && !document.getElementById("occhat")) wireOne("joy", jlog, jask, jlog.parentNode);
-    } catch (e) {}
+    try { syncZbox(); armZboxObserver(); } catch (e) {}
   }
   scan();
   var n = 0;

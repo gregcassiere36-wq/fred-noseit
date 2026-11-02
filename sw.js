@@ -1,6 +1,6 @@
 /* AIEDUME service worker: cache-first app shell, network-first pages.
    Fails safe: every step is guarded, so a worker problem can never break a page. */
-var CACHE = "aiedume-shell-v175";
+var CACHE = "aiedume-shell-v176";
 var SHELL = [
   "./",
   "./index.html",
