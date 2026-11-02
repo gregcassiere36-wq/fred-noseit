@@ -26,8 +26,10 @@
 
   /* ---------- styles ---------- */
   var css = [
-    ".lm-bar{display:flex;padding:8px 10px}",
-    ".lm-open{flex:1;min-height:52px;border-radius:14px;border:2px solid #2dd4bf;background:#12303b;color:#eafffb;font-size:1.08rem;font-weight:700;cursor:pointer;padding:10px 12px;line-height:1.35}",
+    ".lm-bar{display:flex;box-sizing:border-box;min-width:0;margin:0;padding:8px 10px;position:relative}",
+    "@media(max-width:800px){.lm-bar{grid-column:1;grid-row:4;margin:0 10px;padding:8px 0}}",
+    "@media(min-width:801px){#zbox.zchat .lm-bar{grid-column:2;grid-row:3}}",
+    ".lm-open{flex:1;min-width:0;min-height:52px;border-radius:14px;border:2px solid #2dd4bf;background:#12303b;color:#eafffb;font-size:1.08rem;font-weight:700;cursor:pointer;padding:10px 12px;line-height:1.35}",
     ".lm-open:hover{background:#17424f}",
     ".lm-flow{margin:10px 0;padding:4px 2px}",
     ".lm-msg{background:#101a30;border:1px solid #22345a;color:#e8eefc;border-radius:14px;padding:12px 14px;margin:8px 0;font-size:1.06rem;line-height:1.6}",
@@ -361,7 +363,15 @@
      topic/info pages, plugin pages, "make" pages, home) never builds it at all.
      My Plugins #occhat (Fred support) and the Joy page chat are NOT wired at all —
      they are Fred's/Joy's chats, not avatar chats. No CSS hiding anywhere: the
-     button element simply is not built outside a helper chat. */
+     button element simply is not built outside a helper chat.
+     PLACEMENT (Greg, 2026-11-01, "its uneven — all of them"): in the helper view
+     .zbody is a CSS grid, and an auto-placed bar landed in the header-card
+     column on desktop — wider than the card's contents and ON TOP of the
+     "Check the Plugin Store" button. The .lm-bar styles in the CSS block above
+     therefore pin the bar explicitly: phone (single column) grid-row 4 with
+     the header card's own 10px side margins, so the button is flush with the
+     card; desktop (two-column zchat) grid-column 2 / grid-row 3, its own row
+     under the form in the chat column. Always normal flow, never overlapping. */
   var KEEP_PAGES = {
     "sec-k5.html": 1, "sec-6-8.html": 1, "sec-9-12.html": 1, "sec-parents.html": 1,
     "sec-adults.html": 1, "paras.html": 1, "teacher-support.html": 1
@@ -387,7 +397,11 @@
     var zb = box.querySelector(".zbody");
     var form = zb ? zb.querySelector("form.zf") : null;
     var log = zb ? zb.querySelector(".zlog") : null;
-    if (!form || !log || !form.parentNode) return;
+    /* Only build when the form sits directly in .zbody (its settled home).
+       During zippy's rebuild the form can pass through wrapper elements;
+       inserting then could strand the bar in the wrong container. The
+       observer/scan retries and builds it once the DOM settles. */
+    if (!form || !log || form.parentNode !== zb) return;
     zbar = el('<div class="lm-bar"><button type="button" class="lm-open">\uD83D\uDCCA Make a PowerPoint or PDF from my lesson</button></div>');
     form.parentNode.insertBefore(zbar, form);
     zbar.querySelector(".lm-open").addEventListener("click", function () {
