@@ -7,7 +7,7 @@
    browser always checks the network for a new worker.)
    Fails safe: every step is guarded, so a worker problem can never break
    a page. */
-var CACHE = "aiedume-shell-v181";
+var CACHE = "aiedume-shell-v182";
 var SHELL = [
   "./",
   "./index.html",
