@@ -3,3 +3,17 @@
 html body #zbox.zchat:not(.zfull):not(.float) #zbody .zwho img[src*="fred-v81"],html body #zbox.zchat.float.open #zbody .zwho img[src*="fred-v81"]{border-radius:10px!important;object-fit:contain!important;object-position:50% 50%!important;background:#16222f!important}
 html body #zbox.zchat #zbody .zlog .zma .zav .zface:has(img[src*="fred-v81"]){border-radius:8px!important;background:#16222f!important}
 html body #zbox.zchat #zbody .zlog .zma .zav .zface img[src*="fred-v81"],html body #zbox.zchat #zbody .zahead .zah .zface img[src*="fred-v81"]{object-fit:contain!important;object-position:50% 50%!important}
+
+/* LAYOUT FIX 2026-11-03 (Greg: "uneven wasted space in all sections"): the helper
+   picture panel (.zahead in zfull chat view) hugs its content instead of stretching
+   full height; no flex-grown empty areas inside it; the helper picture shows the
+   full head + upper body (contain, never cropped); panel margins even with the
+   chat panel. Layout only - no motion, no content changes. */
+html body #zbox.zbox.zbox.zchat.zfull #zbody .zahead{align-self:start!important;position:static!important;top:auto!important;margin:0!important;height:auto!important;contain:none!important;max-height:100%}
+html body #zbox.zbox.zbox.zchat.zfull #zbody .zahead .zdocs{flex:none!important;min-height:0!important}
+html body #zbox.zbox.zbox.zchat.zfull #zbody .zahead .zdocs .zstore2{flex:none!important;margin-top:10px!important;justify-content:flex-start!important}
+html body #zbox.zbox.zbox.zchat.zfull #zbody .zahead .zdocs .zivid{flex:none!important;aspect-ratio:16/9!important;height:auto!important;min-height:0!important;max-height:none!important;width:100%!important}
+html body #zbox.zbox.zbox.zchat.zfull #zbody .zahead .zah{flex-direction:column!important;align-items:stretch!important}
+html body #zbox.zbox.zbox.zchat.zfull #zbody .zahead .zah .zface{width:100%!important;height:200px!important;flex:none!important}
+html body #zbox.zbox.zbox.zchat.zfull #zbody .zahead .zah .zface img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:50% 50%!important;display:block!important}
+@media (max-width:800px){html body #zbox.zbox.zbox.zchat.zfull #zbody .zahead .zah .zface{height:170px!important}}
