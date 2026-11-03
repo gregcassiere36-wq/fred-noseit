@@ -75,7 +75,7 @@ grid.appendChild(bl);grid.appendChild(chat);
 main.insertBefore(grid,main.firstChild);hid.appendChild(bmc);main.appendChild(hid);main.classList.add("bmode");
 /* saved indicator mirror */
 var sv=$("savd");if(sv&&window.MutationObserver){var mo=new MutationObserver(function(){$("savd2").textContent=sv.textContent});mo.observe(sv,{childList:true,characterData:true,subtree:true})}
-/* cast intro videos (2026-10-29, Greg's builderv2 design): the TV screen beside the chat is deleted - a card's play button selects that helper and plays the video right in the card's own picture spot - see the cv block at the end of this file */
+/* cast intro videos (2026-10-29, Greg's builderv2 design): the TV screen beside the chat is deleted - a card's play button selects that helper and played the video in the card's picture spot (superseded 2026-11-02: video now plays in the chatbox) - see the cv block at the end of this file */
 /* ---- chat engine ---- */
 var act="p",PEND={p:null,c:null,m:null},PROG={p:null,c:null,m:null};
 function say(k,h,c){var e=mkEl("div","m"+(c?" "+c:""),h);LOG[k].appendChild(e);LOG[k].scrollTop=LOG[k].scrollHeight;return e}
@@ -96,7 +96,7 @@ cinp.addEventListener("input",grow);
 cinp.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();form.requestSubmit?form.requestSubmit():form.dispatchEvent(new Event("submit",{cancelable:true}))}});
 form.addEventListener("submit",function(e){e.preventDefault();var t=cinp.value.trim();if(!t)return;cinp.value="";grow();var P=PEND[act];
  if(P&&P.onText)P.onText(t);else{usr(act,t);say(act,"Tap one of the buttons below, or ask me about price or your own material.")}});
-function pick(k){if(k!=="a"&&avExitCam)avExitCam();act=k;chat.dataset.m=k;[].forEach.call(bl.children,function(b){var on=b.dataset.k===k;b.classList.toggle("on",on);b.querySelector(".sel").textContent=on?"● Active":"Select";b.querySelector(".sel").setAttribute("aria-pressed",on)});
+function pick(k){cvStop();if(k!=="a"&&avExitCam)avExitCam();act=k;chat.dataset.m=k;[].forEach.call(bl.children,function(b){var on=b.dataset.k===k;b.classList.toggle("on",on);b.querySelector(".sel").textContent=on?"● Active":"Select";b.querySelector(".sel").setAttribute("aria-pressed",on)});
  var a=AV[k];$("phimg").src=a.img;$("phn").textContent=a.n;$("phr").textContent=a.r;
  KEYS.forEach(function(x){LOG[x].classList.toggle("on",x===k)});
  if(k==="p")pnEnter();if(k==="a")avEnter();if(k==="c")gkEnter();if(k==="m")bzEnter();
@@ -381,23 +381,22 @@ function bzText(t){usr("m",t);var l=t.toLowerCase();
 f.removeAttribute("onsubmit");f.addEventListener("submit",function(e){e.preventDefault()});
 function go0(){d0=window.BLDX&&BLDX.get();loadAns();pick("p")}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go0);else go0();
-/* in-card cast videos + full-width chat (2026-10-29, Greg's builderv2 design: "delete that tv screen - when they do the play button u can have the avatar box where they sit talk" and "for the chatbox make it bigger to take away that right black space"): the side screen beside the conversation is gone, the chat takes the whole width, and each cast member's intro video plays in that member's own card */
+/* in-card cast videos + full-width chat (2026-10-29, Greg's builderv2 design: "delete that tv screen - when they do the play button u can have the avatar box where they sit talk" and "for the chatbox make it bigger to take away that right black space"): the side screen beside the conversation is gone, the chat takes the whole width, and each cast member's intro video played in that member's own card (superseded 2026-11-02, Greg: videos play IN THE CHATBOX - see cvPlay below) */
 var cvSt=document.createElement("style");cvSt.id="bcv-css";
-cvSt.textContent="@media(min-width:900px) and (min-height:540px){.bchat .clog{flex:1 1 auto;min-width:0}.bchat .clog .m{max-width:min(97%,1150px)}}.bgrid .av video.ai{background:#000}.bgrid .av.playing .ov,.bgrid .av.playing .pl{display:none}.bgrid .av.playing::after{display:none}.cin .tlk{height:auto;min-height:96px;align-self:stretch;padding:0 16px;border-radius:14px;border:2px solid #3d5a80;background:#16223a;color:#e8eefc;font:800 .95rem Inter,sans-serif;cursor:pointer;flex:none}.cin .tlk.on{background:#2dd4bf;color:#062a26;border-color:#2dd4bf}@media(max-width:899px){.cin .tlk{padding:0 10px;font-size:.85rem}}";
+cvSt.textContent="@media(min-width:900px) and (min-height:540px){.bchat .clog{flex:1 1 auto;min-width:0}.bchat .clog .m{max-width:min(97%,1150px)}}.clog .m.cvstage{max-width:min(97%,640px)}.clog .m.cvstage video.cvvid{display:block;width:100%;height:auto;max-height:52vh;object-fit:contain;background:#000;border-radius:12px}.cin .tlk{height:auto;min-height:96px;align-self:stretch;padding:0 16px;border-radius:14px;border:2px solid #3d5a80;background:#16223a;color:#e8eefc;font:800 .95rem Inter,sans-serif;cursor:pointer;flex:none}.cin .tlk.on{background:#2dd4bf;color:#062a26;border-color:#2dd4bf}@media(max-width:899px){.cin .tlk{padding:0 10px;font-size:.85rem}}";
 document.head.appendChild(cvSt);
-var cvCard=null,cvImg=null,cvVid=null;
-function cvStop(){if(cvVid){try{cvVid.pause()}catch(e){}}
- if(cvCard){if(cvVid)cvCard.replaceChild(cvImg,cvVid);cvCard.classList.remove("playing")}
- cvCard=null;cvImg=null;cvVid=null}
+var cvVid=null;
+function cvStop(){if(cvVid){try{cvVid.pause()}catch(e){}var w=cvVid.closest?cvVid.closest(".cvstage"):null;if(w)w.remove();cvVid=null}}
+function cvWords(k,a){try{fetch(a.vid+".vtt").then(function(r){return r.ok?r.text():""}).then(function(txt){if(!txt)return;var ls=String(txt).split(/\r?\n/),out=[];for(var i=0;i<ls.length;i++){var L9=ls[i].trim();if(!L9||/^WEBVTT/i.test(L9)||/-->/.test(L9)||/^\d+$/.test(L9))continue;out.push(L9)}var w=out.join(" ").replace(/\s+/g," ").trim();if(w)say(k,"<p>"+esc(w)+"</p>")}).catch(function(){})}catch(e){}}
 function cvPlay(k){var a=AV[k];if(!a||!a.vid)return;cvStop();
- var card=null;[].forEach.call(bl.children,function(b){if(b.dataset.k===k)card=b});if(!card)return;
- var img=card.querySelector(".ai");if(!img||img.tagName!=="IMG")return;
- var v=mkEl("video","ai");v.setAttribute("controls","");v.setAttribute("playsinline","");v.setAttribute("preload","auto");
+ var log=LOG[k];if(!log)return;
+ var wrap=mkEl("div","m cvstage");
+ var v=mkEl("video","cvvid");v.setAttribute("controls","");v.setAttribute("playsinline","");v.setAttribute("preload","auto");
  v.poster=a.vid+".jpg";v.src=a.vid+".mp4";
  var tr=document.createElement("track");tr.kind="captions";tr.label="English captions";tr.srclang="en";tr.src=a.vid+".vtt";v.appendChild(tr);
- card.replaceChild(v,img);card.classList.add("playing");
- cvCard=card;cvImg=img;cvVid=v;
- v.addEventListener("ended",function(){if(cvVid===v)cvStop()});
+ wrap.appendChild(v);log.appendChild(wrap);log.scrollTop=log.scrollHeight;
+ try{if(v.textTracks&&v.textTracks[0])v.textTracks[0].mode="hidden"}catch(e){}
+ cvVid=v;cvWords(k,a);
  v.addEventListener("error",function(){if(cvVid===v)cvStop()});
  var p=v.play();if(p&&p.catch)p.catch(function(){})}
 /* ---- Release / Delete bar (2026-10-30, Greg's order): persistent controls in the builder chat box for the draft being built. Release runs the EXISTING path: it hands the draft to Sam the Checker (gkEnter review -> store preview -> publish()). Delete uses PX.del, the same deletion My Plugins uses. ---- */
