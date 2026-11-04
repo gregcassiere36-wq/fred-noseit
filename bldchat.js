@@ -383,7 +383,7 @@ function go0(){d0=window.BLDX&&BLDX.get();loadAns();pick("p")}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go0);else go0();
 /* in-card cast videos + full-width chat (2026-10-29, Greg's builderv2 design: "delete that tv screen - when they do the play button u can have the avatar box where they sit talk" and "for the chatbox make it bigger to take away that right black space"): the side screen beside the conversation is gone, the chat takes the whole width, and each cast member's intro video played in that member's own card (superseded 2026-11-02, Greg: videos play IN THE CHATBOX - see cvPlay below) */
 var cvSt=document.createElement("style");cvSt.id="bcv-css";
-cvSt.textContent="@media(min-width:900px) and (min-height:540px){.bchat .clog{flex:1 1 auto;min-width:0}.bchat .clog .m{max-width:min(97%,1150px)}}.clog .m.cvstage{max-width:min(97%,640px)}.clog .m.cvstage video.cvvid{display:block;width:100%;height:auto;max-height:52vh;object-fit:contain;background:#000;border-radius:12px}.cin .tlk{height:auto;min-height:96px;align-self:stretch;padding:0 16px;border-radius:14px;border:2px solid #3d5a80;background:#16223a;color:#e8eefc;font:800 .95rem Inter,sans-serif;cursor:pointer;flex:none}.cin .tlk.on{background:#2dd4bf;color:#062a26;border-color:#2dd4bf}@media(max-width:899px){.cin .tlk{padding:0 10px;font-size:.85rem}}";
+cvSt.textContent="@media(min-width:900px) and (min-height:540px){.bchat .clog{flex:1 1 auto;min-width:0}.bchat .clog .m{max-width:min(97%,1150px)}}.clog .m.cvstage{max-width:min(97%,640px)}.clog .m.cvstage video.cvvid{display:block;width:100%;height:auto;max-height:52vh;object-fit:contain;background:#000;border-radius:12px}.clog .m.cvstage img.cvpic{display:block;width:100%;height:auto;max-height:52vh;object-fit:contain;background:#000;border-radius:12px}.clog .m.cvstage audio.cvaud{display:block;width:100%;margin-top:8px}.cin .tlk{height:auto;min-height:96px;align-self:stretch;padding:0 16px;border-radius:14px;border:2px solid #3d5a80;background:#16223a;color:#e8eefc;font:800 .95rem Inter,sans-serif;cursor:pointer;flex:none}.cin .tlk.on{background:#2dd4bf;color:#062a26;border-color:#2dd4bf}@media(max-width:899px){.cin .tlk{padding:0 10px;font-size:.85rem}}";
 document.head.appendChild(cvSt);
 var cvVid=null;
 function cvStop(){if(cvVid){try{cvVid.pause()}catch(e){}var w=cvVid.closest?cvVid.closest(".cvstage"):null;if(w)w.remove();cvVid=null}}
@@ -391,13 +391,12 @@ function cvWords(k,a){try{fetch(a.vid+".vtt").then(function(r){return r.ok?r.tex
 function cvPlay(k){var a=AV[k];if(!a||!a.vid)return;cvStop();
  var log=LOG[k];if(!log)return;
  var wrap=mkEl("div","m cvstage");
- var v=mkEl("video","cvvid");v.setAttribute("controls","");v.setAttribute("playsinline","");v.setAttribute("preload","auto");
- v.poster=a.vid+".jpg";v.src=a.vid+".mp4";
- var tr=document.createElement("track");tr.kind="captions";tr.label="English captions";tr.srclang="en";tr.src=a.vid+".vtt";v.appendChild(tr);
- wrap.appendChild(v);log.appendChild(wrap);log.scrollTop=log.scrollHeight;
- try{if(v.textTracks&&v.textTracks[0])v.textTracks[0].mode="hidden"}catch(e){}
+ var pic=mkEl("img","cvpic");pic.src=a.img;pic.alt="";
+ var v=mkEl("audio","cvaud");v.setAttribute("controls","");v.setAttribute("preload","auto");
+ v.src=a.vid+".m4a";
+ wrap.appendChild(pic);wrap.appendChild(v);log.appendChild(wrap);log.scrollTop=log.scrollHeight;
  cvVid=v;cvWords(k,a);
- v.addEventListener("error",function(){if(cvVid===v)cvStop()});
+ v.addEventListener("error",function(){if(cvVid!==v)return;if(/\.m4a$/.test(v.src)){v.src=a.vid+".mp4";var pp=v.play();if(pp&&pp.catch)pp.catch(function(){})}else cvStop()});
  var p=v.play();if(p&&p.catch)p.catch(function(){})}
 /* ---- Release / Delete bar (2026-10-30, Greg's order): persistent controls in the builder chat box for the draft being built. Release runs the EXISTING path: it hands the draft to Sam the Checker (gkEnter review -> store preview -> publish()). Delete uses PX.del, the same deletion My Plugins uses. ---- */
 if(!document.getElementById("rdcss")){var rdst=document.createElement("style");rdst.id="rdcss";rdst.textContent=".rdbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:9px 12px;border-top:2px solid #263553;background:#0d1730;flex:none}.rdbar[hidden]{display:none}.rdlab{font:700 .92rem Inter,system-ui,sans-serif;color:#cfe0ff}.rdlab b{color:#fff}.rdpub{font:800 .78rem Inter,system-ui,sans-serif;color:#062a26;background:#7ef0c5;border-radius:999px;padding:3px 10px}.rdsp{flex:1}.rdbtn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:6px 16px;border-radius:999px;border:2px solid #2dd4bf;background:#2dd4bf;color:#062a26;font:800 .92rem Inter,system-ui,sans-serif;cursor:pointer}.rdbtn.danger{background:transparent;border-color:#f87171;color:#fca5a5}.rdbtn.ghosty{background:transparent;border-color:#3d5a80;color:#c8d6f5}.rdconf{display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%;font:700 .92rem Inter,system-ui,sans-serif;color:#fecaca}.rdconf[hidden]{display:none}.rddone{width:100%;font:700 .92rem Inter,system-ui,sans-serif;color:#7ef0c5}.rddone[hidden]{display:none}";document.head.appendChild(rdst)}
