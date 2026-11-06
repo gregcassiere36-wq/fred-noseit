@@ -313,7 +313,7 @@ function review(o){var L=[],bad=0;function add(ok,t,fix,soft){L.push('<li>'+(ok?
  L.push('<li>➕ <span>'+((o.iap||[]).length?(o.iap.length+" in-plugin purchase"+(o.iap.length>1?"s":"")):"No in-plugin purchases (optional)")+'</span></li>');
  return{html:'<ul class="ck">'+L.join("")+'</ul>',bad:bad}}
 function gkEnter(){
- if(!introC){introC=true;say("c","<p><b>I'm Sam, your avatar helper to check it over.</b></p><p>Here is what I'll do next, one step at a time:</p><ol class=\"stl\"><li>Review each piece of your plugin</li><li>Show you how it will look in the Store</li><li>Ask <b>Ready to publish?</b></li><li>Publish it only when you say yes</li></ol><p><small>Demo only. Saved in this browser.</small></p>")}
+ if(!introC){introC=true;say("c","<p><b>I'm Sam, the Checker. I check your plugin over before it posts.</b></p><p>Here is what I'll do next, one step at a time:</p><ol class=\"stl\"><li>Review each piece of your plugin</li><li>Show you how it will look in the Store</li><li>Ask <b>Ready to publish?</b></li><li>Publish it only when you say yes</li></ol><p><small>Demo only. Saved in this browser.</small></p>")}
  if(window.BLDX)BLDX.save();var o=val();var sig=JSON.stringify([o.n,o.a,o.s,o.h,o.r,o.wm,o.p,o.iap,pubd]);
  if(sig===lastSig)return;
  if(!(o.n||o.h||o.r)){lastSig="";prog("c",0,4,"Waiting for your plugin");say("c","I don't see a plugin yet. Tap <b>"+AV.p.n+"</b> and answer a few steps, then come back to me.");setQ("c",[{t:"Go to "+AV.p.n+"",c:"go",f:function(){pick("p")}}],"Tap a button");return}
