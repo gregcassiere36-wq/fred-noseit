@@ -169,6 +169,23 @@ body{min-height:100vh;min-height:100dvh}
  .cols{overflow:visible;align-items:stretch}
  .chat{position:static;height:70vh;min-height:0}
 }
+
+/* mpfit 2026-11-05 (Greg: My Plugins page runs off the right edge, big empty
+   middle, right side cut off): the shell can never exceed the viewport, the
+   grid tracks can never be forced wider by their content, and long unbroken
+   strings (API codes, links, plugin names) wrap inside their boxes instead
+   of spilling. Layout only - every element and function stays as it was. */
+html,body{max-width:100%;overflow-x:hidden;overflow-x:clip}
+.app.mpflow{width:100%;max-width:1240px;margin-left:auto;margin-right:auto}
+.cols{width:100%;max-width:100%;grid-template-columns:minmax(0,18fr) minmax(0,60fr) minmax(0,22fr);gap:12px}
+.cols>.leftcol,.cols>.chat,.cols>.side{min-width:0;max-width:100%}
+.cb,.fb{overflow-wrap:anywhere}
+.clog,.flog{max-width:100%}
+.prow,.fredcard{max-width:100%}
+.prow .pw b{overflow-wrap:anywhere}
+@media(max-width:820px){
+ .cols>.leftcol,.cols>.chat,.cols>.side{width:100%}
+}
 </style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/><link rel="stylesheet" href="mobile.css"/>
 </head>
 <body>
