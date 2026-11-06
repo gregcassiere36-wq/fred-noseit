@@ -17,10 +17,10 @@ var price="Get";
 var prod=document.querySelector(".prod>div:last-child");
 if(prod){
  var tags=(x.gd||[]).map(function(g){return GL[g]}).concat((x.fo||[]).map(function(f){return FL[f]})).concat(x.tp||[]);
- if(x.p>0&&window.priceLabel)tags.push(priceLabel(x));
+ var shownP=window.storePriceShown?storePriceShown(x):"";if(x.p>0&&shownP)tags.push(shownP);
  if(x.zip)tags.push("\uD83D\uDCCD ZIP "+x.zip);
  var tg=document.createElement("div");tg.className="apptags";tg.innerHTML=tags.map(function(t){return"<span>"+esc(t)+"</span>"}).join("");
- var gb=document.createElement("button");gb.type="button";gb.className="getbtn";gb.id="getbtn";gb.innerHTML=x.p>0?"<span>Buy</span><small>"+(window.priceLabel?priceLabel(x):"$"+x.p)+" · demo</small>":"<span>"+price+"</span><small>Free · demo</small>";
+ var gb=document.createElement("button");gb.type="button";gb.className="getbtn";gb.id="getbtn";gb.innerHTML=x.p>0?"<span>Buy</span><small>"+(shownP?shownP+" · ":"")+"demo</small>":"<span>"+price+"</span><small>Free · demo</small>";
  var rq=$("rq");prod.insertBefore(gb,rq); /* Checkout-B layout (2026-10-30): tag pills cut (Greg's wordiness order) - tg is built but never inserted. */
  function jget(k,d){try{var v=JSON.parse(localStorage.getItem(k)||"null");return v==null?d:v}catch(e){return d}}
  var OWNED=jget("aiedume_bought",[]).indexOf(x.slug)>-1;
@@ -41,7 +41,7 @@ if(prod){
  var pchat=null,clog=null,cin=null,ptag=null,clock=null,chatMode="owned",chatLeft=0,replyN=0;
  function buildChat(){
   pchat=document.createElement("div");pchat.className="pchat";pchat.id="pchat";pchat.hidden=true;
-  pchat.innerHTML='<div class="pch"><img alt="" src="img/faces/'+x.f+'.webp"/><div class="pwho"><b>'+esc(x.cn)+'</b><small>'+esc(x.role)+' \u00B7 plugin chat (demo)</small></div><span class="ptag"></span><button type="button" class="px2" aria-label="Close chat">\u2715</button></div><div class="clog" aria-live="polite"></div><div class="clock" hidden><p><b>Your free sample is done.</b> Buy this plugin to keep chatting with '+esc(x.cn)+' \u2014 no limits once it is yours.</p><a class="getbtn" href="checkout.html?plugin='+encodeURIComponent(x.slug)+'">Buy \u00B7 '+(window.priceLabel?priceLabel(x):"$"+x.p)+'</a></div><form class="cform"><input placeholder="Ask '+esc(x.cn.split(" ").pop())+' anything..." aria-label="Type your message" autocomplete="off"/><button type="button" class="cmic" aria-label="Talk">\u{1F3A4} Talk</button><button type="submit">Send</button></form>';
+  pchat.innerHTML='<div class="pch"><img alt="" src="img/faces/'+x.f+'.webp"/><div class="pwho"><b>'+esc(x.cn)+'</b><small>'+esc(x.role)+' \u00B7 plugin chat (demo)</small></div><span class="ptag"></span><button type="button" class="px2" aria-label="Close chat">\u2715</button></div><div class="clog" aria-live="polite"></div><div class="clock" hidden><p><b>Your free sample is done.</b> Buy this plugin to keep chatting with '+esc(x.cn)+' \u2014 no limits once it is yours.</p><a class="getbtn" href="checkout.html?plugin='+encodeURIComponent(x.slug)+'">Buy'+(shownP?' \u00B7 '+esc(shownP):'')+'</a></div><form class="cform"><input placeholder="Ask '+esc(x.cn.split(" ").pop())+' anything..." aria-label="Type your message" autocomplete="off"/><button type="button" class="cmic" aria-label="Talk">\u{1F3A4} Talk</button><button type="submit">Send</button></form>';
   var host=document.getElementById("chatmount");
   if(host)host.appendChild(pchat);else prod.parentNode.appendChild(pchat);
   clog=pchat.querySelector(".clog");cin=pchat.querySelector("input");ptag=pchat.querySelector(".ptag");clock=pchat.querySelector(".clock");

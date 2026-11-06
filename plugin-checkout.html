@@ -108,9 +108,10 @@ document.title=x.n+" | Fred Noseit";
 $("h1").textContent=x.n;
 $("name").textContent=x.n;
 var amt=$("amt");
-if(x.p>0){var pl=window.priceLabel?priceLabel(x):"$"+x.p;var rest=pl.replace("$"+x.p,"").trim();
-amt.textContent="$"+x.p+(rest.charAt(0)==="/"?"":" ");var sm=document.createElement("small");sm.textContent=rest;amt.appendChild(sm)}
-else amt.textContent="Free";
+var shown=window.storePriceShown?storePriceShown(x):"";
+if(!(x.p>0))amt.textContent="Free";
+else if(shown)amt.textContent=shown;
+else amt.hidden=true;
 $("sface").src="img/faces/"+x.f+".webp";$("sface").alt="Portrait of "+x.cn+" (fictional)";
 $("sname2").textContent=x.cn;$("srole").textContent=x.role;$("sone").textContent=x.d||"";
 function jget(k,d){try{var v=JSON.parse(localStorage.getItem(k)||"null");return v==null?d:v}catch(e){return d}}
