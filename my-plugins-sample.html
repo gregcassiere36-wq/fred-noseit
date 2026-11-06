@@ -140,11 +140,28 @@ h1,h2,h3{font-family:Poppins,Inter,system-ui,sans-serif}
  .cform button{flex:1}
  .sform input{flex:1 1 auto}
 }
+
+/* mpfit 2026-11-05 (Greg: My Plugins page runs off the right edge, big empty
+   middle, right side cut off): the shell can never exceed the viewport, the
+   grid tracks can never be forced wider by their content, and long unbroken
+   strings (API codes, links, plugin names) wrap inside their boxes instead
+   of spilling. Layout only - every element and function stays as it was. */
+html,body{max-width:100%;overflow-x:hidden;overflow-x:clip}
+.app.mpflow{width:100%;max-width:1240px;margin-left:auto;margin-right:auto}
+.cols{width:100%;max-width:100%;grid-template-columns:minmax(0,18fr) minmax(0,60fr) minmax(0,22fr);gap:12px}
+.cols>.leftcol,.cols>.chat,.cols>.side{min-width:0;max-width:100%}
+.cb,.fb{overflow-wrap:anywhere}
+.clog,.flog{max-width:100%}
+.prow,.fredcard{max-width:100%}
+.prow .pw b{overflow-wrap:anywhere}
+@media(max-width:820px){
+ .cols>.leftcol,.cols>.chat,.cols>.side{width:100%}
+}
 </style><link rel="stylesheet" href="css/nav-tabs.css?v=1793242697"/><link rel="stylesheet" href="css/scrollbars.css?v=1793242697"/><link rel="stylesheet" href="mobile.css"/>
 </head>
 <body>
 <nav class="tnav" aria-label="Main"><a class="brand" href="index.html"><img alt="" decoding="async" height="28" width="28" src="media/logo-mark-128.webp"/>Fred Noseit</a><div class="tabs"><a class="t" href="index.html">Home</a><a class="t" href="plugin-market.html">Plugin Store</a><a class="t cur" href="my-plugins.html" aria-current="page">My Plugins</a><a class="t tin" href="signup.html">Sign in</a></div></nav>
-<div class="app">
+<div class="app mpflow">
  <div class="samplebar" role="note">SAMPLE — demo plugins, not real. This page is filled in to show how My Plugins looks with plugins in it.</div>
  <div class="headrow"><h1>My Plugins</h1><span class="demo" role="note"><b>Demo only.</b> Your plugins are saved in this browser.</span></div>
 
