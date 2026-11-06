@@ -229,12 +229,13 @@ html body:has(#pin)>main#main.pack{display:block!important}
 <div class="hmcols"><div class="hmcol hmcol-l">
 <section class="hmhero"><div><h1 id="h1">Free AI help for <span>parents and teachers.</span></h1><span class="hmpill">All the AI helpers are FREE.</span><p class="hmsub">For teachers, parents, paras, recent grads, adult learners, and anyone studying or working in education.</p></div></section>
 <h2 class="hmpick">Pick who you are.</h2>
-<div class="hmrow" role="navigation" aria-label="Grade and role doors"><a href="sec-k5.html"><img src="media/fred-k5-v17.webp" alt="Pip the Turtle" loading="lazy" style="border:3px solid #2dd4bf"/>PreK-5th Teachers</a><a href="sec-6-8.html"><img src="media/fred-68-v17.webp" alt="Calcutron" loading="lazy" style="border:3px solid #38bdf8"/>6th-8th Teachers</a><a href="sec-9-12.html"><img src="media/fred-912-v19.webp" alt="Shiora" loading="lazy" style="border:3px solid #a78bfa"/>9th-12th Teachers</a><a href="sec-parents.html"><img src="media/ellie-v1.webp" alt="Ellie" loading="lazy" style="border:3px solid #fb923c"/>Parents</a><a href="sec-adults.html"><img src="media/rose-v1.webp" alt="School Support Staff" loading="lazy" style="border:3px solid #f472b6"/>School Support Staff</a><a href="teacher-support.html"><img src="media/walter-v1.webp" alt="Recent Grads" loading="lazy" style="border:3px solid #94a3b8"/>Recent Grads</a></div>
+<div class="hmrow" role="navigation" aria-label="Grade and role doors"><a href="sec-k5.html"><img src="media/fred-k5-v17.webp" alt="Pip the Turtle" loading="lazy" style="border:3px solid #2dd4bf"/>PreK-5th Teachers</a><a href="sec-6-8.html"><img src="media/fred-68-v17.webp" alt="Calcutron" loading="lazy" style="border:3px solid #38bdf8"/>6th-8th Teachers</a><a href="sec-9-12.html"><img src="media/fred-912-v19.webp" alt="Shiora" loading="lazy" style="border:3px solid #a78bfa"/>9th-12th Teachers</a><a href="sec-parents.html"><img src="media/ellie-v1.webp" onerror="this.onerror=null;this.src='media/ellie-v1.svg'" alt="Ellie" loading="lazy" style="border:3px solid #fb923c"/>Parents</a><a href="sec-adults.html"><img src="media/rose-v1.webp" onerror="this.onerror=null;this.src='media/rose-v1.svg'" alt="School Support Staff" loading="lazy" style="border:3px solid #f472b6"/>School Support Staff</a><a href="teacher-support.html"><img src="media/walter-v1.webp" onerror="this.onerror=null;this.src='media/walter-v1.svg'" alt="Recent Grads" loading="lazy" style="border:3px solid #94a3b8"/>Recent Grads</a></div>
 <section class="hmhow" aria-label="How it works"><h2>How it works</h2><div class="hmsteps"><div class="hmstep"><div class="hmic" aria-hidden="true">👆</div><b>1. Pick your helper</b><span>Choose from the helpers above</span></div><div class="hmstep"><div class="hmic" aria-hidden="true">💬</div><b>2. Ask or watch</b><span>Get answers or watch videos</span></div><div class="hmstep"><div class="hmic" aria-hidden="true">🧩</div><b>3. Build and sell</b><span>Create plugins &amp; earn</span></div></div></section>
 <section class="hmbar" aria-label="Plugin Store"><span class="hb-ic" aria-hidden="true">🛍️</span><div class="hb-mid"><h2>The Plugin Store</h2><p class="hb-money">The Plugin Store is where you make money.</p><p class="hb-sub">Build a plugin. Sell what you know. Buy personalized expertise from real teachers and parents.</p></div><a class="hb-btn" href="plugin-market.html">Visit the Plugin Store</a></section>
 </div>
 <div class="hmcol hmcol-r">
 <figure class="hmvid"><video controls preload="none" poster="media/fred-v81.webp" src="media/fred-overview.mp4"><track kind="captions" label="English" srclang="en" src="media/fred-overview.vtt"/></video><figcaption>Fred Noseit • Video Overview</figcaption></figure>
+<figure class="hmvid hmexpl"><video controls preload="none" poster="media/plugin-store-explainer-poster.jpg" src="media/plugin-store-explainer.mp4"></video><figcaption>🧩 What is a plugin? Otto explains the Plugin Store</figcaption></figure>
 <div class="pin" id="pin" aria-label="Ask Fred Noseit"><p class="pn"><img src="media/fred-v81.webp" alt="" width="44" height="55"/><span>Fred Noseit</span></p><p class="pg">Hi, I’m Fred! Having trouble finding what you’re looking for? Ask me and I’ll take you right there.</p><p class="pw"></p><p class="pq"></p><div class="pc"><button type="button" data-d="nycps">NYC Public Schools (NYCPS)</button><button type="button" data-d="other">My district isn't listed</button><button type="button" data-l="es">Español</button></div><p class="pr" aria-live="polite"></p><form class="pf"><textarea rows="4" aria-label="Type a question" placeholder="Type here and ask me anything…"></textarea><button aria-label="Send">➤</button></form></div>
 </div>
 </div>
@@ -544,6 +545,25 @@ html body .hmrow a img{width:100%!important;max-width:230px!important;height:aut
 @media (min-width:1100px){html body .hmrow{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:14px!important}html body .hmrow a{font-size:1.08rem!important}}
 @media (min-width:701px) and (max-width:1099px){html body .hmrow{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}html body .hmrow a{font-size:1.02rem!important}}
 @media (max-width:700px){html body .hmrow{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}html body .hmrow a{font-size:.95rem!important}}
+</style>
+<style id="homefit-v191">/* 2026-11-06 v191 (Greg): (1) the Plugin Store explainer sits directly above the Fred chat in the home right column and the Fred chat shrinks a little to make room; (2) fit hardening - the chat row (input + Send + host tile) can never stick out past its panel edge again: min-width:0 down the column chain, the input may shrink, the buttons keep their size, nothing exceeds the panel; (3) the explainer keeps its true 16:9 frame (the Fred overview figure keeps its own portrait crop). Layout only - no content changes, doors and avatars stay still. */
+.hmcols>*{min-width:0}
+.hmcol-r{min-width:0;max-width:100%}
+.hmvid{max-width:100%}
+figure.hmexpl video{aspect-ratio:16/9!important;object-fit:contain!important;object-position:50% 50%!important;height:auto!important}
+html body .hmcols figure.hmvid.hmexpl video{aspect-ratio:16/9!important;object-fit:contain!important;object-position:50% 50%!important;width:100%!important;height:auto!important}
+#pin{max-width:100%;box-sizing:border-box}
+#pin .pf{min-width:0}
+#pin .pf textarea{flex:1 1 auto!important;min-width:0!important;min-height:60px!important}
+html body main#main.pack>div#pin .pf textarea{min-height:60px!important}
+html body .hmcols .hmcol-r #pin .pf textarea{min-height:60px!important;height:84px!important;flex:1 1 auto!important}
+#pin .pf button{flex:0 0 auto}
+#zbox{max-width:100%;box-sizing:border-box}
+#zbox .zf{min-width:0}
+#zbox #zin{flex:1 1 auto!important;min-width:0!important;width:auto!important}
+#zbox .zsend{flex:0 0 auto}
+.pdoors a{min-width:0}
+.pdoors a img{max-width:100%}
 </style>
 <!-- 2026-10-30 doorstill: the doorloops puppet-layer script was removed at Greg's word - door pictures stay completely still. -->
 </body></html>
