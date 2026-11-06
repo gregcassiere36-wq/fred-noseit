@@ -606,3 +606,52 @@ document.head.appendChild(st)})();
    message inside the chat log (.zlog); the header picture stays still.
    Sizing only for the new stage elements - panel geometry untouched. */
 ;(function(){var st=document.createElement("style");st.id="zchatstage-css";st.textContent="#zbox .zlog .zvstagewrap .zb{flex:1 1 auto;min-width:0}"+"#zbox .zlog video.zvstage{display:block;width:100%;height:auto;max-height:54vh;object-fit:contain;background:#0b1220;border-radius:12px}"+"#zbox .zlog img.zvstage{display:block;width:100%;height:auto;max-height:54vh;object-fit:contain;background:#0b1220;border-radius:12px}"+"#zbox .zlog audio.zvaud{display:block;width:100%;margin-top:8px}"+"#zbox .zvid img.zvpic{display:block;width:100%;height:auto;border-radius:12px}"+"#zbox .zvid audio.zvaud{display:block;width:100%;margin-top:8px}"+"#zbox .zlog .zvstagewrap{max-width:100%}";document.head.appendChild(st)})();
+
+/* zevenfix 2026-11-05: Greg — the open helper view "looks all uneven and
+   lopsided" (Bruno screenshot, 2026-11-05 9:39 PM). Four layout faults,
+   one shared fix for every helper page (this block loads site-wide):
+   (1) The fixed Back/Home pill was anchored to the VIEWPORT's top-left
+   (left:12px) while the view itself is a centered max-1180px layout, so
+   on any wide screen the pill floated off on its own and overlapped the
+   helper card's top-left corner (pill bottom ~70px, card top 48px).
+   The pill is now anchored to the layout's own left edge, and the grid
+   gets 36px of top padding (border-box, so nothing overflows) so BOTH
+   columns start together at 84px, clear below the pill.
+   (2) The helper card (.zahead) was align-self:start — it ended ~290px
+   above the bottom of the chat column, leaving a dead dark void under
+   it. It now stretches the full height of the grid like the chat
+   column, and its docs block spreads its groups evenly (space-evenly,
+   store block no longer a flex-grow spacer) so the taller card reads
+   balanced instead of hollow.
+   (3) The staged picture+voice message (.zvstagewrap) sized itself to
+   the helper art's intrinsic width (Bruno's SVG is 376px), so the big
+   picture panel sat narrow and left-aligned in the wide chat column
+   with a large dead space at its right. The stage now spans the full
+   column width and the picture is contained and centered in it; the
+   audio bar stays full width under the picture.
+   (4) The Language pill (fullscreen, top-right) gets the same layout
+   anchoring as Back/Home (right edge = layout's right edge), and the
+   chat log's 44px top padding (a leftover clearance for the old
+   overlap) drops to 16px so the first bubble lines up with the card's
+   own content top. On phones (<=800px) the language pill hangs at
+   top:78px over the card's top edge and picture; the grid's top
+   padding grows so the card starts clear below it.
+   Nothing else changes: no content, helpers, voices, pictures or
+   controls are touched, and doors/avatars stay still. */
+;(function(){var st=document.createElement("style");st.id="zevenfix-css";st.textContent=
+ "@media(min-width:801px){"
+ +"html body #zbox.zchat.zfull:has(.zahead:not([hidden])) #zbody{padding-top:36px!important}"
+ +"html body #zbox#zbox.zchat.zfull #zbody .zahead{align-self:stretch!important;grid-row:1/4!important}"
+ +"html body #zbox#zbox.zchat.zfull #zbody .zahead .zdocs{justify-content:space-evenly!important;flex:1 1 auto!important}"
+ +"html body #zbox#zbox.zchat.zfull #zbody .zahead .zdocs .zstore2{flex:none!important}"
+ +"html body #zbox.zchat.zfull #zbody .zlog{padding-top:16px!important}"
+ +"#zbox.zfull .zahead>p{left:max(12px,calc(50% - 590px))!important}"
+ +"#zbox#zbox.zfull .zbody .zlangbar{right:max(12px,calc(50% - 590px))!important}"
+ +"}"
+ +"#zbox .zlog .zvstagewrap{align-self:stretch!important;width:100%!important}"
+ +"#zbox .zlog .zvstagewrap img.zvpic{width:100%!important;height:auto!important;max-height:54vh!important;object-fit:contain!important;margin:0 auto!important}"
+ +"#zbox .zlog .zvstagewrap video.zvstage{margin:0 auto!important}"
+ +"@media(max-width:800px){"
+ +"html body #zbox.zchat.zfull:has(.zahead:not([hidden])) #zbody{padding-top:98px!important}"
+ +"}";
+ document.head.appendChild(st)})();
