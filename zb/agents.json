@@ -927,7 +927,7 @@
           "AI art and copyright lesson",
           "Music video for cell parts"
         ],
-        "intro": "Hi, I'm Bassbloop. I help with art and music. Ask me for a rap about the Constitution — or ask me anything.",
+        "intro": "Hi, I'm Bassbloop. I help with art and music. Ask me for a rap about the Constitution — or ask me anything. One heads-up: a video from me is slides with captions — no vocals and no instruments. For a song with real singing, I'll point you to a music tool like Suno.",
         "resources": [
           [
             "Chrome Music Lab",
@@ -2770,7 +2770,7 @@
         "chips": [
           "Give me a 10-minute reading and math game for [grade] at home"
         ],
-        "intro": "Hi, I'm Inkfox. I share short reading and math practice you can do together at home. Ask me to give you a 10-minute reading and math game for [grade] at home — or ask me anything.",
+        "intro": "Hi, I'm Inkfox. I share short reading and math practice you can do together at home. Ask me to give you a 10-minute reading and math game for [grade] at home — or ask me anything. Tip: swap [grade] for your child's grade, like 'for 3rd grade'.",
         "can": [
           "10-minute practice ideas",
           "Book and reading tips",
