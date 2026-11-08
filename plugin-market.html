@@ -172,11 +172,11 @@ h1.ptitle{flex:none;margin:0;font:800 1.35rem Poppins,Inter,system-ui,sans-serif
    <div class="panels">
     <section class="panel panelL">
      <h2>Find a plugin</h2>
-     <div class="filters" id="filters" role="group" aria-label="Filter plugins"><label><span>Grade</span><select id="fg" aria-label="Grade"></select></label><label><span>For</span><select id="ff" aria-label="Who it is for"></select></label><label><span>Topic</span><select id="ft" aria-label="Topic: what do you need it for"></select></label></div>
+     <div class="filters" id="filters" role="group" aria-label="Filter plugins"><label><span>Grade</span><select id="fg" aria-label="Grade"></select></label><label><span>For</span><select id="ff" aria-label="Who it is for"></select></label><label><span>Topic</span><select id="ft" aria-label="Topic: what do you need it for"></select></label></div><p class="anote">Pick a grade, who it's for, and a topic — the list updates as you choose. The search box at the top finds plugins by name or word.</p>
     </section>
     <section class="panel panelR">
      <h2>Plugins near you</h2>
-     <p>Find plugins from teachers and parents in your area — enter your ZIP code.</p>
+     <p>Find plugins from teachers and parents in your area — enter your ZIP code. Your ZIP only decides which plugins show first; every plugin works anywhere. ZIP codes are US postal codes, and store listings are US-based for now.</p>
      <div class="arearow zr"><label for="fzip">Your ZIP code:</label><input id="fzip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="e.g. 11223" aria-label="Your ZIP code"/><button type="button" id="zipsave">Save</button><span class="anote" id="anote" hidden></span></div>
     </section>
    </div>
@@ -185,7 +185,7 @@ h1.ptitle{flex:none;margin:0;font:800 1.35rem Poppins,Inter,system-ui,sans-serif
   </main>
   <aside class="guide" id="guide" aria-label="Store guide">
    <div class="gh"><img alt="" src="media/fred-v81.webp"/><div>Fred Noseit</div><button class="pill gx" id="gclose" type="button" aria-label="Close guide">✕</button></div>
-   <div class="log" id="log"><div class="b f">If you still need help, maybe I can find the right plugin for you.</div></div>
+   <div class="log" id="log"><div class="b f">Hi, I'm Fred — in the store I'm your guide. Tell me the grade and what you need, and I'll search the plugins for you. The round Fred button in the corner does the same thing: it brings your question right here.</div></div>
    <form class="gi" id="gform"><input id="gq" placeholder="Example: 3rd grade reading help" aria-label="Tell Fred your grade and what you need" autocomplete="off"/><button type="submit">Send</button></form>
   </aside>
   <div id="fbox"><div id="fpanel"><div class="fh"><img alt="" src="media/fred-v81.webp"/><span>Fred Noseit — need help?</span></div><form id="ff2"><input id="fq2" placeholder="Ask Fred..." aria-label="Ask Fred" autocomplete="off"/><button type="submit">Send</button></form></div><button id="fbtn" type="button" aria-label="Ask Fred"><img alt="" src="media/fred-v81.webp"/></button></div>
@@ -226,7 +226,7 @@ function draw(){
  if(myzip&&L.length){var A=[],B=[];L.forEach(function(x){(x.zip&&(x.zip===myzip||x.zip.slice(0,3)===myzip.slice(0,3))?A:B).push(x)});
   if(A.length&&B.length){$("grid").innerHTML='<div class="ghead">From your area (ZIP '+esc(myzip)+')</div>'+A.map(card).join("")+'<div class="ghead">Everywhere else</div>'+B.map(card).join("");$("grid").scrollTop=0;return}
   if(A.length){$("grid").innerHTML='<div class="ghead">From your area (ZIP '+esc(myzip)+')</div>'+A.map(card).join("");$("grid").scrollTop=0;return}}
- $("grid").innerHTML=L.length?L.map(card).join(""):'<div class="empty">No plugins match. Try another grade or word.</div>';
+ $("grid").innerHTML=L.length?L.map(card).join(""):'<div class="empty">No plugins match yet. Try a different grade or search word — or tap Ask the guide and Fred will help you find one.</div>';
  $("grid").scrollTop=0}
 window.AIEDUME_setZip=function(z){myzip=z||"";draw()};
 function opt(sel,arr,cur){sel.innerHTML=arr.map(function(o){return '<option value="'+(o[0]==="all"?"":o[0])+'"'+((o[0]==="all"?"":o[0])===cur?" selected":"")+'>'+o[1]+'</option>'}).join("")}
